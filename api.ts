@@ -521,6 +521,18 @@ export interface Study {
      */
     'population'?: string;
     /**
+     * Sample size of the study
+     * @type {number}
+     * @memberof Study
+     */
+    'sample_size'?: number;
+    /**
+     * Summary of the study
+     * @type {string}
+     * @memberof Study
+     */
+    'summary'?: string;
+    /**
      * Number of times study was cited by another study
      * @type {number}
      * @memberof Study
@@ -1033,7 +1045,7 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
          * @summary Get relationship studies
          * @param {string} relationshipId 
          * @param {string} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
-         * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, cited_by.
+         * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
          * @param {string} [search] Field to search within. Supported fields for searching: title.
          * @param {string} [fields] Comma-separated list of fields to include in the response.
          * @param {number} [offset] Offset
@@ -1201,7 +1213,7 @@ export const RelationshipsApiFp = function(configuration?: Configuration) {
          * @summary Get relationship studies
          * @param {string} relationshipId 
          * @param {string} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
-         * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, cited_by.
+         * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
          * @param {string} [search] Field to search within. Supported fields for searching: title.
          * @param {string} [fields] Comma-separated list of fields to include in the response.
          * @param {number} [offset] Offset
@@ -1270,7 +1282,7 @@ export const RelationshipsApiFactory = function (configuration?: Configuration, 
          * @summary Get relationship studies
          * @param {string} relationshipId 
          * @param {string} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
-         * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, cited_by.
+         * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
          * @param {string} [search] Field to search within. Supported fields for searching: title.
          * @param {string} [fields] Comma-separated list of fields to include in the response.
          * @param {number} [offset] Offset
@@ -1341,7 +1353,7 @@ export class RelationshipsApi extends BaseAPI {
      * @summary Get relationship studies
      * @param {string} relationshipId 
      * @param {string} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
-     * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, cited_by.
+     * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
      * @param {string} [search] Field to search within. Supported fields for searching: title.
      * @param {string} [fields] Comma-separated list of fields to include in the response.
      * @param {number} [offset] Offset
@@ -1683,7 +1695,7 @@ export const StudiesApiAxiosParamCreator = function (configuration?: Configurati
          * Get a list of studies.
          * @summary Get studies
          * @param {string} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
-         * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, cited_by.
+         * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
          * @param {string} [search] Field to search within. Supported fields for searching: title.
          * @param {string} [fields] Comma-separated list of fields to include in the response.
          * @param {number} [offset] Offset
@@ -1860,7 +1872,7 @@ export const StudiesApiFp = function(configuration?: Configuration) {
          * Get a list of studies.
          * @summary Get studies
          * @param {string} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
-         * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, cited_by.
+         * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
          * @param {string} [search] Field to search within. Supported fields for searching: title.
          * @param {string} [fields] Comma-separated list of fields to include in the response.
          * @param {number} [offset] Offset
@@ -1914,7 +1926,7 @@ export const StudiesApiFactory = function (configuration?: Configuration, basePa
          * Get a list of studies.
          * @summary Get studies
          * @param {string} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
-         * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, cited_by.
+         * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
          * @param {string} [search] Field to search within. Supported fields for searching: title.
          * @param {string} [fields] Comma-separated list of fields to include in the response.
          * @param {number} [offset] Offset
@@ -1965,7 +1977,7 @@ export class StudiesApi extends BaseAPI {
      * Get a list of studies.
      * @summary Get studies
      * @param {string} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
-     * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, cited_by.
+     * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
      * @param {string} [search] Field to search within. Supported fields for searching: title.
      * @param {string} [fields] Comma-separated list of fields to include in the response.
      * @param {number} [offset] Offset
