@@ -24,6 +24,43 @@ import type { RequestArgs } from './base';
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError } from './base';
 
 /**
+ * Cluster.
+ * @export
+ * @interface Cluster
+ */
+export interface Cluster {
+    /**
+     * 
+     * @type {string}
+     * @memberof Cluster
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Cluster
+     */
+    'cluster_label_1': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Cluster
+     */
+    'cluster_label_2': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Cluster
+     */
+    'summary': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Cluster
+     */
+    'finding_ids': Array<string>;
+}
+/**
  * Flag.
  * @export
  * @interface Flag
@@ -123,6 +160,25 @@ export interface Link {
      * @memberof Link
      */
     'target': string;
+}
+/**
+ * List response.
+ * @export
+ * @interface ListResponseCluster
+ */
+export interface ListResponseCluster {
+    /**
+     * 
+     * @type {Array<Cluster>}
+     * @memberof ListResponseCluster
+     */
+    'data': Array<Cluster>;
+    /**
+     * 
+     * @type {number}
+     * @memberof ListResponseCluster
+     */
+    'total': number;
 }
 /**
  * List response.
@@ -308,6 +364,19 @@ export interface Node {
     'label'?: string;
 }
 /**
+ * Pubmed search synthesis input.
+ * @export
+ * @interface PubmedSearchSynthesisInput
+ */
+export interface PubmedSearchSynthesisInput {
+    /**
+     * 
+     * @type {string}
+     * @memberof PubmedSearchSynthesisInput
+     */
+    'query': string;
+}
+/**
  * Relationship.
  * @export
  * @interface Relationship
@@ -375,6 +444,35 @@ export interface Relationship {
     'target_topic': Topic;
 }
 /**
+ * Statistic type.
+ * @export
+ * @enum {string}
+ */
+
+export const StatisticType = {
+    OddsRatio: 'odds_ratio',
+    AdjustedOddsRatio: 'adjusted_odds_ratio',
+    HazardRatio: 'hazard_ratio',
+    AdjustedHazardRatio: 'adjusted_hazard_ratio',
+    RelativeRiskRatio: 'relative_risk_ratio',
+    Coefficient: 'coefficient',
+    PearsonR: 'pearson_r',
+    IncidentRateRatio: 'incident_rate_ratio',
+    PrevalenceRatio: 'prevalence_ratio',
+    SpearmanCorrelation: 'spearman_correlation',
+    MeanDifferenceStandardized: 'mean_difference_standardized',
+    MeanDifferenceUnstandardized: 'mean_difference_unstandardized',
+    RiskDifference: 'risk_difference',
+    CoefficientOfDetermination: 'coefficient_of_determination',
+    TTest: 't_test',
+    Elasticity: 'elasticity',
+    GiniCoefficient: 'gini_coefficient'
+} as const;
+
+export type StatisticType = typeof StatisticType[keyof typeof StatisticType];
+
+
+/**
  * Statistical finding.
  * @export
  * @interface StatisticalFinding
@@ -435,11 +533,11 @@ export interface StatisticalFinding {
      */
     'study'?: NestedStudy;
     /**
-     * Type of statistic
-     * @type {string}
+     * 
+     * @type {StatisticType}
      * @memberof StatisticalFinding
      */
-    'statistic_type'?: string;
+    'statistic_type'?: StatisticType;
     /**
      * Value of statistic
      * @type {number}
@@ -2018,6 +2116,493 @@ export class StudiesApi extends BaseAPI {
      */
     public getStudyStatisticalFindings(studyId: string, filter?: string, sort?: string, search?: string, fields?: string, offset?: number, limit?: number, options?: AxiosRequestConfig) {
         return StudiesApiFp(this.configuration).getStudyStatisticalFindings(studyId, filter, sort, search, fields, offset, limit, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * SynthesisApi - axios parameter creator
+ * @export
+ */
+export const SynthesisApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Get clusters from pubmed search synthesis.
+         * @summary Get clusters from pubmed search synthesis
+         * @param {string} jobId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getClustersFromPubmedSearch: async (jobId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'jobId' is not null or undefined
+            assertParamExists('getClustersFromPubmedSearch', 'jobId', jobId)
+            const localVarPath = `/v0/synthesis/pubmed_search/{job_id}/clusters`
+                .replace(`{${"job_id"}}`, encodeURIComponent(String(jobId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication APIKeyHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get statistical findings from pubmed search synthesis.
+         * @summary Get statistical findings from pubmed search synthesis
+         * @param {string} jobId 
+         * @param {string} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {string} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {string} [search] Field to search within. Supported fields for searching: none.
+         * @param {string} [fields] Comma-separated list of fields to include in the response.
+         * @param {number} [offset] Offset
+         * @param {number} [limit] Limit
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getStatisticalFindingsFromPubmedSearch: async (jobId: string, filter?: string, sort?: string, search?: string, fields?: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'jobId' is not null or undefined
+            assertParamExists('getStatisticalFindingsFromPubmedSearch', 'jobId', jobId)
+            const localVarPath = `/v0/synthesis/pubmed_search/{job_id}/statistical_findings`
+                .replace(`{${"job_id"}}`, encodeURIComponent(String(jobId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication APIKeyHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (fields !== undefined) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get studies from pubmed search synthesis.
+         * @summary Get studies from pubmed search synthesis
+         * @param {string} jobId 
+         * @param {string} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+         * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
+         * @param {string} [search] Field to search within. Supported fields for searching: title.
+         * @param {string} [fields] Comma-separated list of fields to include in the response.
+         * @param {number} [offset] Offset
+         * @param {number} [limit] Limit
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getStudiesFromPubmedSearch: async (jobId: string, filter?: string, sort?: string, search?: string, fields?: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'jobId' is not null or undefined
+            assertParamExists('getStudiesFromPubmedSearch', 'jobId', jobId)
+            const localVarPath = `/v0/synthesis/pubmed_search/{job_id}/studies`
+                .replace(`{${"job_id"}}`, encodeURIComponent(String(jobId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication APIKeyHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (fields !== undefined) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get synthesis from pubmed search synthesis.
+         * @summary Get synthesis from pubmed search synthesis
+         * @param {string} jobId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSynthesisFromPubmedSearch: async (jobId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'jobId' is not null or undefined
+            assertParamExists('getSynthesisFromPubmedSearch', 'jobId', jobId)
+            const localVarPath = `/v0/synthesis/pubmed_search/{job_id}/synthesis`
+                .replace(`{${"job_id"}}`, encodeURIComponent(String(jobId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication APIKeyHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Initiate pubmed search synthesis.
+         * @summary Initiate pubmed search synthesis
+         * @param {PubmedSearchSynthesisInput} pubmedSearchSynthesisInput 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        synthesizePubmedSearch: async (pubmedSearchSynthesisInput: PubmedSearchSynthesisInput, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'pubmedSearchSynthesisInput' is not null or undefined
+            assertParamExists('synthesizePubmedSearch', 'pubmedSearchSynthesisInput', pubmedSearchSynthesisInput)
+            const localVarPath = `/v0/synthesis/pubmed_search`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication APIKeyHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(pubmedSearchSynthesisInput, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * SynthesisApi - functional programming interface
+ * @export
+ */
+export const SynthesisApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = SynthesisApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Get clusters from pubmed search synthesis.
+         * @summary Get clusters from pubmed search synthesis
+         * @param {string} jobId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getClustersFromPubmedSearch(jobId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseCluster>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getClustersFromPubmedSearch(jobId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Get statistical findings from pubmed search synthesis.
+         * @summary Get statistical findings from pubmed search synthesis
+         * @param {string} jobId 
+         * @param {string} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {string} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {string} [search] Field to search within. Supported fields for searching: none.
+         * @param {string} [fields] Comma-separated list of fields to include in the response.
+         * @param {number} [offset] Offset
+         * @param {number} [limit] Limit
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getStatisticalFindingsFromPubmedSearch(jobId: string, filter?: string, sort?: string, search?: string, fields?: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getStatisticalFindingsFromPubmedSearch(jobId, filter, sort, search, fields, offset, limit, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Get studies from pubmed search synthesis.
+         * @summary Get studies from pubmed search synthesis
+         * @param {string} jobId 
+         * @param {string} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+         * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
+         * @param {string} [search] Field to search within. Supported fields for searching: title.
+         * @param {string} [fields] Comma-separated list of fields to include in the response.
+         * @param {number} [offset] Offset
+         * @param {number} [limit] Limit
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getStudiesFromPubmedSearch(jobId: string, filter?: string, sort?: string, search?: string, fields?: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getStudiesFromPubmedSearch(jobId, filter, sort, search, fields, offset, limit, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Get synthesis from pubmed search synthesis.
+         * @summary Get synthesis from pubmed search synthesis
+         * @param {string} jobId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSynthesisFromPubmedSearch(jobId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSynthesisFromPubmedSearch(jobId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Initiate pubmed search synthesis.
+         * @summary Initiate pubmed search synthesis
+         * @param {PubmedSearchSynthesisInput} pubmedSearchSynthesisInput 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async synthesizePubmedSearch(pubmedSearchSynthesisInput: PubmedSearchSynthesisInput, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.synthesizePubmedSearch(pubmedSearchSynthesisInput, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * SynthesisApi - factory interface
+ * @export
+ */
+export const SynthesisApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = SynthesisApiFp(configuration)
+    return {
+        /**
+         * Get clusters from pubmed search synthesis.
+         * @summary Get clusters from pubmed search synthesis
+         * @param {string} jobId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getClustersFromPubmedSearch(jobId: string, options?: any): AxiosPromise<ListResponseCluster> {
+            return localVarFp.getClustersFromPubmedSearch(jobId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get statistical findings from pubmed search synthesis.
+         * @summary Get statistical findings from pubmed search synthesis
+         * @param {string} jobId 
+         * @param {string} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {string} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {string} [search] Field to search within. Supported fields for searching: none.
+         * @param {string} [fields] Comma-separated list of fields to include in the response.
+         * @param {number} [offset] Offset
+         * @param {number} [limit] Limit
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getStatisticalFindingsFromPubmedSearch(jobId: string, filter?: string, sort?: string, search?: string, fields?: string, offset?: number, limit?: number, options?: any): AxiosPromise<ListResponseStatisticalFinding> {
+            return localVarFp.getStatisticalFindingsFromPubmedSearch(jobId, filter, sort, search, fields, offset, limit, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get studies from pubmed search synthesis.
+         * @summary Get studies from pubmed search synthesis
+         * @param {string} jobId 
+         * @param {string} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+         * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
+         * @param {string} [search] Field to search within. Supported fields for searching: title.
+         * @param {string} [fields] Comma-separated list of fields to include in the response.
+         * @param {number} [offset] Offset
+         * @param {number} [limit] Limit
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getStudiesFromPubmedSearch(jobId: string, filter?: string, sort?: string, search?: string, fields?: string, offset?: number, limit?: number, options?: any): AxiosPromise<ListResponseStudy> {
+            return localVarFp.getStudiesFromPubmedSearch(jobId, filter, sort, search, fields, offset, limit, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get synthesis from pubmed search synthesis.
+         * @summary Get synthesis from pubmed search synthesis
+         * @param {string} jobId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSynthesisFromPubmedSearch(jobId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.getSynthesisFromPubmedSearch(jobId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Initiate pubmed search synthesis.
+         * @summary Initiate pubmed search synthesis
+         * @param {PubmedSearchSynthesisInput} pubmedSearchSynthesisInput 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        synthesizePubmedSearch(pubmedSearchSynthesisInput: PubmedSearchSynthesisInput, options?: any): AxiosPromise<string> {
+            return localVarFp.synthesizePubmedSearch(pubmedSearchSynthesisInput, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * SynthesisApi - object-oriented interface
+ * @export
+ * @class SynthesisApi
+ * @extends {BaseAPI}
+ */
+export class SynthesisApi extends BaseAPI {
+    /**
+     * Get clusters from pubmed search synthesis.
+     * @summary Get clusters from pubmed search synthesis
+     * @param {string} jobId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SynthesisApi
+     */
+    public getClustersFromPubmedSearch(jobId: string, options?: AxiosRequestConfig) {
+        return SynthesisApiFp(this.configuration).getClustersFromPubmedSearch(jobId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get statistical findings from pubmed search synthesis.
+     * @summary Get statistical findings from pubmed search synthesis
+     * @param {string} jobId 
+     * @param {string} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+     * @param {string} [sort] Field to sort the response by. Supported fields for sorting: none.
+     * @param {string} [search] Field to search within. Supported fields for searching: none.
+     * @param {string} [fields] Comma-separated list of fields to include in the response.
+     * @param {number} [offset] Offset
+     * @param {number} [limit] Limit
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SynthesisApi
+     */
+    public getStatisticalFindingsFromPubmedSearch(jobId: string, filter?: string, sort?: string, search?: string, fields?: string, offset?: number, limit?: number, options?: AxiosRequestConfig) {
+        return SynthesisApiFp(this.configuration).getStatisticalFindingsFromPubmedSearch(jobId, filter, sort, search, fields, offset, limit, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get studies from pubmed search synthesis.
+     * @summary Get studies from pubmed search synthesis
+     * @param {string} jobId 
+     * @param {string} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+     * @param {string} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
+     * @param {string} [search] Field to search within. Supported fields for searching: title.
+     * @param {string} [fields] Comma-separated list of fields to include in the response.
+     * @param {number} [offset] Offset
+     * @param {number} [limit] Limit
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SynthesisApi
+     */
+    public getStudiesFromPubmedSearch(jobId: string, filter?: string, sort?: string, search?: string, fields?: string, offset?: number, limit?: number, options?: AxiosRequestConfig) {
+        return SynthesisApiFp(this.configuration).getStudiesFromPubmedSearch(jobId, filter, sort, search, fields, offset, limit, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get synthesis from pubmed search synthesis.
+     * @summary Get synthesis from pubmed search synthesis
+     * @param {string} jobId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SynthesisApi
+     */
+    public getSynthesisFromPubmedSearch(jobId: string, options?: AxiosRequestConfig) {
+        return SynthesisApiFp(this.configuration).getSynthesisFromPubmedSearch(jobId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Initiate pubmed search synthesis.
+     * @summary Initiate pubmed search synthesis
+     * @param {PubmedSearchSynthesisInput} pubmedSearchSynthesisInput 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SynthesisApi
+     */
+    public synthesizePubmedSearch(pubmedSearchSynthesisInput: PubmedSearchSynthesisInput, options?: AxiosRequestConfig) {
+        return SynthesisApiFp(this.configuration).synthesizePubmedSearch(pubmedSearchSynthesisInput, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
