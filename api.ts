@@ -361,7 +361,7 @@ export interface Node {
      * @type {string}
      * @memberof Node
      */
-    'label': string | null;
+    'label'?: string | null;
 }
 /**
  * Pubmed search synthesis input.
