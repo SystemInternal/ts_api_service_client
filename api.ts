@@ -143,6 +143,29 @@ export interface HTTPValidationError {
     'detail'?: Array<ValidationError>;
 }
 /**
+ * Status of a pubmed search synthesis job.
+ * @export
+ * @enum {string}
+ */
+
+export const JobStatus = {
+    Accepted: 'accepted',
+    Clustering: 'clustering',
+    ClusteringFailed: 'clustering_failed',
+    Synthesizing: 'synthesizing',
+    SynthesisNotExists: 'synthesis_not_exists',
+    SynthesisSubmitted: 'synthesis_submitted',
+    SynthesisRunning: 'synthesis_running',
+    SynthesisSuccess: 'synthesis_success',
+    SynthesisFailed: 'synthesis_failed',
+    SynthesisFailedNoCitations: 'synthesis_failed_no_citations',
+    SynthesisFailedValidation: 'synthesis_failed_validation'
+} as const;
+
+export type JobStatus = typeof JobStatus[keyof typeof JobStatus];
+
+
+/**
  * Link.
  * @export
  * @interface Link
@@ -376,6 +399,63 @@ export interface PubmedSearchSynthesisInput {
      */
     'query': string;
 }
+/**
+ * Pubmed search synthesis job.
+ * @export
+ * @interface PubmedSearchSynthesisJob
+ */
+export interface PubmedSearchSynthesisJob {
+    /**
+     * Unique identifier of a Pubmed search synthesis job
+     * @type {string}
+     * @memberof PubmedSearchSynthesisJob
+     */
+    'id': string;
+    /**
+     * 
+     * @type {JobStatus}
+     * @memberof PubmedSearchSynthesisJob
+     */
+    'status': JobStatus;
+    /**
+     * Date job was created
+     * @type {string}
+     * @memberof PubmedSearchSynthesisJob
+     */
+    'created_at': string;
+    /**
+     * Date job was last updated
+     * @type {string}
+     * @memberof PubmedSearchSynthesisJob
+     */
+    'updated_at': string;
+    /**
+     * Initial user query
+     * @type {string}
+     * @memberof PubmedSearchSynthesisJob
+     */
+    'user_query': string;
+    /**
+     * Pubmed query the user query resolved to
+     * @type {string}
+     * @memberof PubmedSearchSynthesisJob
+     */
+    'pubmed_query': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PubmedSearchSynthesisJob
+     */
+    'clustering_finished'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PubmedSearchSynthesisJob
+     */
+    'synthesis_finished'?: string | null;
+}
+
+
 /**
  * Relationship.
  * @export
@@ -2165,6 +2245,43 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
+         * Get a pubmed search synthesis by its ID.
+         * @summary Get pubmed search synthesis
+         * @param {string} jobId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPubmedSearchSynthesisById: async (jobId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'jobId' is not null or undefined
+            assertParamExists('getPubmedSearchSynthesisById', 'jobId', jobId)
+            const localVarPath = `/v0/synthesis/pubmed_search/{job_id}`
+                .replace(`{${"job_id"}}`, encodeURIComponent(String(jobId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication APIKeyHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Get statistical findings from pubmed search synthesis.
          * @summary Get statistical findings from pubmed search synthesis
          * @param {string} jobId 
@@ -2396,6 +2513,17 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Get a pubmed search synthesis by its ID.
+         * @summary Get pubmed search synthesis
+         * @param {string} jobId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPubmedSearchSynthesisById(jobId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PubmedSearchSynthesisJob>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPubmedSearchSynthesisById(jobId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Get statistical findings from pubmed search synthesis.
          * @summary Get statistical findings from pubmed search synthesis
          * @param {string} jobId 
@@ -2472,6 +2600,16 @@ export const SynthesisApiFactory = function (configuration?: Configuration, base
             return localVarFp.getClustersFromPubmedSearch(jobId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Get a pubmed search synthesis by its ID.
+         * @summary Get pubmed search synthesis
+         * @param {string} jobId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPubmedSearchSynthesisById(jobId: string, options?: any): AxiosPromise<PubmedSearchSynthesisJob> {
+            return localVarFp.getPubmedSearchSynthesisById(jobId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Get statistical findings from pubmed search synthesis.
          * @summary Get statistical findings from pubmed search synthesis
          * @param {string} jobId 
@@ -2543,6 +2681,18 @@ export class SynthesisApi extends BaseAPI {
      */
     public getClustersFromPubmedSearch(jobId: string, options?: AxiosRequestConfig) {
         return SynthesisApiFp(this.configuration).getClustersFromPubmedSearch(jobId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get a pubmed search synthesis by its ID.
+     * @summary Get pubmed search synthesis
+     * @param {string} jobId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SynthesisApi
+     */
+    public getPubmedSearchSynthesisById(jobId: string, options?: AxiosRequestConfig) {
+        return SynthesisApiFp(this.configuration).getPubmedSearchSynthesisById(jobId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
