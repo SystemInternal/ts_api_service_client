@@ -59,6 +59,18 @@ export interface Cluster {
      * @memberof Cluster
      */
     'finding_ids': Array<string>;
+    /**
+     * 
+     * @type {number}
+     * @memberof Cluster
+     */
+    'score': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Cluster
+     */
+    'type': string;
 }
 /**
  * Flag.
@@ -206,6 +218,25 @@ export interface ListResponseCluster {
 /**
  * 
  * @export
+ * @interface ListResponseMechanisticFinding
+ */
+export interface ListResponseMechanisticFinding {
+    /**
+     * 
+     * @type {Array<MechanisticFinding>}
+     * @memberof ListResponseMechanisticFinding
+     */
+    'data': Array<MechanisticFinding>;
+    /**
+     * 
+     * @type {number}
+     * @memberof ListResponseMechanisticFinding
+     */
+    'total': number;
+}
+/**
+ * 
+ * @export
  * @interface ListResponseRelationship
  */
 export interface ListResponseRelationship {
@@ -317,6 +348,80 @@ export interface ListResponseVariable {
      */
     'total': number;
 }
+/**
+ * Mechanistic finding.
+ * @export
+ * @interface MechanisticFinding
+ */
+export interface MechanisticFinding {
+    /**
+     * Unique identifier
+     * @type {string}
+     * @memberof MechanisticFinding
+     */
+    'id': string;
+    /**
+     * Whether finding is flagged
+     * @type {boolean}
+     * @memberof MechanisticFinding
+     */
+    'flagged'?: boolean;
+    /**
+     * Type of finding
+     * @type {string}
+     * @memberof MechanisticFinding
+     */
+    'finding_type'?: MechanisticFindingFindingTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof MechanisticFinding
+     */
+    'summary'?: string | null;
+    /**
+     * 
+     * @type {NestedResource}
+     * @memberof MechanisticFinding
+     */
+    'topic_1'?: NestedResource | null;
+    /**
+     * 
+     * @type {NestedResource}
+     * @memberof MechanisticFinding
+     */
+    'topic_2'?: NestedResource | null;
+    /**
+     * 
+     * @type {NestedResource}
+     * @memberof MechanisticFinding
+     */
+    'variable_1'?: NestedResource;
+    /**
+     * 
+     * @type {NestedResource}
+     * @memberof MechanisticFinding
+     */
+    'variable_2'?: NestedResource;
+    /**
+     * 
+     * @type {NestedStudy}
+     * @memberof MechanisticFinding
+     */
+    'study'?: NestedStudy;
+    /**
+     * 
+     * @type {string}
+     * @memberof MechanisticFinding
+     */
+    'mechanism_type'?: string | null;
+}
+
+export const MechanisticFindingFindingTypeEnum = {
+    Mechanistic: 'mechanistic'
+} as const;
+
+export type MechanisticFindingFindingTypeEnum = typeof MechanisticFindingFindingTypeEnum[keyof typeof MechanisticFindingFindingTypeEnum];
+
 /**
  * Nested resource.
  * @export
@@ -1139,6 +1244,283 @@ export class GraphApi extends BaseAPI {
      */
     public getSubgraphByTopicId(requestParameters: GraphApiGetSubgraphByTopicIdRequest, options?: AxiosRequestConfig) {
         return GraphApiFp(this.configuration).getSubgraphByTopicId(requestParameters.topicId, requestParameters.upstream1Filter, requestParameters.upstream2Filter, requestParameters.downstream1Filter, requestParameters.downstream2Filter, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * MechanisticFindingsApi - axios parameter creator
+ * @export
+ */
+export const MechanisticFindingsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Get a mechanistic finding by its ID.
+         * @summary Get a mechanistic finding
+         * @param {string} findingId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMechanisticFindingById: async (findingId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'findingId' is not null or undefined
+            assertParamExists('getMechanisticFindingById', 'findingId', findingId)
+            const localVarPath = `/v0/mechanistic_findings/{finding_id}`
+                .replace(`{${"finding_id"}}`, encodeURIComponent(String(findingId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication APIKeyHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get a list of mechanistic findings.
+         * @summary Get mechanistic findings
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
+         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {number} [offset] Offset
+         * @param {number} [limit] Limit
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMechanisticFindings: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v0/mechanistic_findings`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication APIKeyHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (fields !== undefined) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * MechanisticFindingsApi - functional programming interface
+ * @export
+ */
+export const MechanisticFindingsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = MechanisticFindingsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Get a mechanistic finding by its ID.
+         * @summary Get a mechanistic finding
+         * @param {string} findingId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMechanisticFindingById(findingId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MechanisticFinding>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMechanisticFindingById(findingId, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['MechanisticFindingsApi.getMechanisticFindingById']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * Get a list of mechanistic findings.
+         * @summary Get mechanistic findings
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
+         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {number} [offset] Offset
+         * @param {number} [limit] Limit
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMechanisticFindings(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseMechanisticFinding>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMechanisticFindings(filter, sort, search, fields, offset, limit, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['MechanisticFindingsApi.getMechanisticFindings']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * MechanisticFindingsApi - factory interface
+ * @export
+ */
+export const MechanisticFindingsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = MechanisticFindingsApiFp(configuration)
+    return {
+        /**
+         * Get a mechanistic finding by its ID.
+         * @summary Get a mechanistic finding
+         * @param {MechanisticFindingsApiGetMechanisticFindingByIdRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMechanisticFindingById(requestParameters: MechanisticFindingsApiGetMechanisticFindingByIdRequest, options?: AxiosRequestConfig): AxiosPromise<MechanisticFinding> {
+            return localVarFp.getMechanisticFindingById(requestParameters.findingId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get a list of mechanistic findings.
+         * @summary Get mechanistic findings
+         * @param {MechanisticFindingsApiGetMechanisticFindingsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMechanisticFindings(requestParameters: MechanisticFindingsApiGetMechanisticFindingsRequest = {}, options?: AxiosRequestConfig): AxiosPromise<ListResponseMechanisticFinding> {
+            return localVarFp.getMechanisticFindings(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * Request parameters for getMechanisticFindingById operation in MechanisticFindingsApi.
+ * @export
+ * @interface MechanisticFindingsApiGetMechanisticFindingByIdRequest
+ */
+export interface MechanisticFindingsApiGetMechanisticFindingByIdRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof MechanisticFindingsApiGetMechanisticFindingById
+     */
+    readonly findingId: string
+}
+
+/**
+ * Request parameters for getMechanisticFindings operation in MechanisticFindingsApi.
+ * @export
+ * @interface MechanisticFindingsApiGetMechanisticFindingsRequest
+ */
+export interface MechanisticFindingsApiGetMechanisticFindingsRequest {
+    /**
+     * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
+     * @type {string}
+     * @memberof MechanisticFindingsApiGetMechanisticFindings
+     */
+    readonly filter?: string | null
+
+    /**
+     * Field to sort the response by. Supported fields for sorting: none.
+     * @type {string}
+     * @memberof MechanisticFindingsApiGetMechanisticFindings
+     */
+    readonly sort?: string | null
+
+    /**
+     * Field to search within. Supported fields for searching: none.
+     * @type {string}
+     * @memberof MechanisticFindingsApiGetMechanisticFindings
+     */
+    readonly search?: string | null
+
+    /**
+     * Comma-separated list of fields to include in the response.
+     * @type {string}
+     * @memberof MechanisticFindingsApiGetMechanisticFindings
+     */
+    readonly fields?: string | null
+
+    /**
+     * Offset
+     * @type {number}
+     * @memberof MechanisticFindingsApiGetMechanisticFindings
+     */
+    readonly offset?: number
+
+    /**
+     * Limit
+     * @type {number}
+     * @memberof MechanisticFindingsApiGetMechanisticFindings
+     */
+    readonly limit?: number
+}
+
+/**
+ * MechanisticFindingsApi - object-oriented interface
+ * @export
+ * @class MechanisticFindingsApi
+ * @extends {BaseAPI}
+ */
+export class MechanisticFindingsApi extends BaseAPI {
+    /**
+     * Get a mechanistic finding by its ID.
+     * @summary Get a mechanistic finding
+     * @param {MechanisticFindingsApiGetMechanisticFindingByIdRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MechanisticFindingsApi
+     */
+    public getMechanisticFindingById(requestParameters: MechanisticFindingsApiGetMechanisticFindingByIdRequest, options?: AxiosRequestConfig) {
+        return MechanisticFindingsApiFp(this.configuration).getMechanisticFindingById(requestParameters.findingId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get a list of mechanistic findings.
+     * @summary Get mechanistic findings
+     * @param {MechanisticFindingsApiGetMechanisticFindingsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MechanisticFindingsApi
+     */
+    public getMechanisticFindings(requestParameters: MechanisticFindingsApiGetMechanisticFindingsRequest = {}, options?: AxiosRequestConfig) {
+        return MechanisticFindingsApiFp(this.configuration).getMechanisticFindings(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -2611,6 +2993,73 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
+         * Get statistical findings from pubmed search synthesis.
+         * @summary Get mechanistic findings from pubmed search synthesis
+         * @param {string} jobId 
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
+         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {number} [offset] Offset
+         * @param {number} [limit] Limit
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMechanisticFindingsFromPubmedSearch: async (jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'jobId' is not null or undefined
+            assertParamExists('getMechanisticFindingsFromPubmedSearch', 'jobId', jobId)
+            const localVarPath = `/v0/synthesis/pubmed_search/{job_id}/mechanistic_findings`
+                .replace(`{${"job_id"}}`, encodeURIComponent(String(jobId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication APIKeyHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (fields !== undefined) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Get a pubmed search synthesis by its ID.
          * @summary Get pubmed search synthesis
          * @param {string} jobId 
@@ -2881,6 +3330,25 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
+         * Get statistical findings from pubmed search synthesis.
+         * @summary Get mechanistic findings from pubmed search synthesis
+         * @param {string} jobId 
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
+         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {number} [offset] Offset
+         * @param {number} [limit] Limit
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMechanisticFindingsFromPubmedSearch(jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseMechanisticFinding>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMechanisticFindingsFromPubmedSearch(jobId, filter, sort, search, fields, offset, limit, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['SynthesisApi.getMechanisticFindingsFromPubmedSearch']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
          * Get a pubmed search synthesis by its ID.
          * @summary Get pubmed search synthesis
          * @param {string} jobId 
@@ -2978,6 +3446,16 @@ export const SynthesisApiFactory = function (configuration?: Configuration, base
             return localVarFp.getClustersFromPubmedSearch(requestParameters.jobId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Get statistical findings from pubmed search synthesis.
+         * @summary Get mechanistic findings from pubmed search synthesis
+         * @param {SynthesisApiGetMechanisticFindingsFromPubmedSearchRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMechanisticFindingsFromPubmedSearch(requestParameters: SynthesisApiGetMechanisticFindingsFromPubmedSearchRequest, options?: AxiosRequestConfig): AxiosPromise<ListResponseMechanisticFinding> {
+            return localVarFp.getMechanisticFindingsFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Get a pubmed search synthesis by its ID.
          * @summary Get pubmed search synthesis
          * @param {SynthesisApiGetPubmedSearchSynthesisByIdRequest} requestParameters Request parameters.
@@ -3042,6 +3520,62 @@ export interface SynthesisApiGetClustersFromPubmedSearchRequest {
      * @memberof SynthesisApiGetClustersFromPubmedSearch
      */
     readonly jobId: string
+}
+
+/**
+ * Request parameters for getMechanisticFindingsFromPubmedSearch operation in SynthesisApi.
+ * @export
+ * @interface SynthesisApiGetMechanisticFindingsFromPubmedSearchRequest
+ */
+export interface SynthesisApiGetMechanisticFindingsFromPubmedSearchRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof SynthesisApiGetMechanisticFindingsFromPubmedSearch
+     */
+    readonly jobId: string
+
+    /**
+     * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
+     * @type {string}
+     * @memberof SynthesisApiGetMechanisticFindingsFromPubmedSearch
+     */
+    readonly filter?: string | null
+
+    /**
+     * Field to sort the response by. Supported fields for sorting: none.
+     * @type {string}
+     * @memberof SynthesisApiGetMechanisticFindingsFromPubmedSearch
+     */
+    readonly sort?: string | null
+
+    /**
+     * Field to search within. Supported fields for searching: none.
+     * @type {string}
+     * @memberof SynthesisApiGetMechanisticFindingsFromPubmedSearch
+     */
+    readonly search?: string | null
+
+    /**
+     * Comma-separated list of fields to include in the response.
+     * @type {string}
+     * @memberof SynthesisApiGetMechanisticFindingsFromPubmedSearch
+     */
+    readonly fields?: string | null
+
+    /**
+     * Offset
+     * @type {number}
+     * @memberof SynthesisApiGetMechanisticFindingsFromPubmedSearch
+     */
+    readonly offset?: number
+
+    /**
+     * Limit
+     * @type {number}
+     * @memberof SynthesisApiGetMechanisticFindingsFromPubmedSearch
+     */
+    readonly limit?: number
 }
 
 /**
@@ -3215,6 +3749,18 @@ export class SynthesisApi extends BaseAPI {
      */
     public getClustersFromPubmedSearch(requestParameters: SynthesisApiGetClustersFromPubmedSearchRequest, options?: AxiosRequestConfig) {
         return SynthesisApiFp(this.configuration).getClustersFromPubmedSearch(requestParameters.jobId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get statistical findings from pubmed search synthesis.
+     * @summary Get mechanistic findings from pubmed search synthesis
+     * @param {SynthesisApiGetMechanisticFindingsFromPubmedSearchRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SynthesisApi
+     */
+    public getMechanisticFindingsFromPubmedSearch(requestParameters: SynthesisApiGetMechanisticFindingsFromPubmedSearchRequest, options?: AxiosRequestConfig) {
+        return SynthesisApiFp(this.configuration).getMechanisticFindingsFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
