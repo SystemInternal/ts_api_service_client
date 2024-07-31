@@ -31,34 +31,34 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError } from './base';
 export interface Cluster {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Cluster
      */
-    'id': string;
+    'id': any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Cluster
      */
-    'cluster_label_1': string;
+    'cluster_label_1': any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Cluster
      */
-    'cluster_label_2': string;
+    'cluster_label_2': any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Cluster
      */
-    'summary': string;
+    'summary': any;
     /**
      * 
-     * @type {Array<string>}
+     * @type {any}
      * @memberof Cluster
      */
-    'finding_ids': Array<string>;
+    'finding_ids': any;
 }
 /**
  * Flag.
@@ -68,28 +68,28 @@ export interface Cluster {
 export interface Flag {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Flag
      */
-    'flagged_property': string;
+    'flagged_property': any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Flag
      */
-    'reason'?: string | null;
+    'reason'?: any | null;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Flag
      */
-    'resource_id': string;
+    'resource_id': any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Flag
      */
-    'system_id': string;
+    'system_id': any;
 }
 /**
  * Flag input.
@@ -99,16 +99,16 @@ export interface Flag {
 export interface FlagInput {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof FlagInput
      */
-    'flagged_property': string;
+    'flagged_property': any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof FlagInput
      */
-    'reason'?: string | null;
+    'reason'?: any | null;
 }
 /**
  * Graph response.
@@ -118,16 +118,16 @@ export interface FlagInput {
 export interface GraphResponse {
     /**
      * 
-     * @type {Array<Node>}
+     * @type {any}
      * @memberof GraphResponse
      */
-    'nodes': Array<Node>;
+    'nodes': any;
     /**
      * 
-     * @type {Array<Link>}
+     * @type {any}
      * @memberof GraphResponse
      */
-    'links': Array<Link>;
+    'links': any;
 }
 /**
  * 
@@ -137,34 +137,18 @@ export interface GraphResponse {
 export interface HTTPValidationError {
     /**
      * 
-     * @type {Array<ValidationError>}
+     * @type {any}
      * @memberof HTTPValidationError
      */
-    'detail'?: Array<ValidationError>;
+    'detail'?: any;
 }
 /**
  * Status of a pubmed search synthesis job.
  * @export
- * @enum {string}
+ * @interface JobStatus
  */
-
-export const JobStatus = {
-    Accepted: 'accepted',
-    Clustering: 'clustering',
-    ClusteringFailed: 'clustering_failed',
-    Synthesizing: 'synthesizing',
-    SynthesisNotExists: 'synthesis_not_exists',
-    SynthesisSubmitted: 'synthesis_submitted',
-    SynthesisRunning: 'synthesis_running',
-    SynthesisSuccess: 'synthesis_success',
-    SynthesisFailed: 'synthesis_failed',
-    SynthesisFailedNoCitations: 'synthesis_failed_no_citations',
-    SynthesisFailedValidation: 'synthesis_failed_validation'
-} as const;
-
-export type JobStatus = typeof JobStatus[keyof typeof JobStatus];
-
-
+export interface JobStatus {
+}
 /**
  * Link.
  * @export
@@ -173,16 +157,16 @@ export type JobStatus = typeof JobStatus[keyof typeof JobStatus];
 export interface Link {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Link
      */
-    'source': string;
+    'source': any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Link
      */
-    'target': string;
+    'target': any;
 }
 /**
  * 
@@ -192,16 +176,16 @@ export interface Link {
 export interface ListResponseCluster {
     /**
      * 
-     * @type {Array<Cluster>}
+     * @type {any}
      * @memberof ListResponseCluster
      */
-    'data': Array<Cluster>;
+    'data': any;
     /**
      * 
-     * @type {number}
+     * @type {any}
      * @memberof ListResponseCluster
      */
-    'total': number;
+    'total': any;
 }
 /**
  * 
@@ -211,16 +195,16 @@ export interface ListResponseCluster {
 export interface ListResponseRelationship {
     /**
      * 
-     * @type {Array<Relationship>}
+     * @type {any}
      * @memberof ListResponseRelationship
      */
-    'data': Array<Relationship>;
+    'data': any;
     /**
      * 
-     * @type {number}
+     * @type {any}
      * @memberof ListResponseRelationship
      */
-    'total': number;
+    'total': any;
 }
 /**
  * 
@@ -230,16 +214,16 @@ export interface ListResponseRelationship {
 export interface ListResponseStatisticalFinding {
     /**
      * 
-     * @type {Array<StatisticalFinding>}
+     * @type {any}
      * @memberof ListResponseStatisticalFinding
      */
-    'data': Array<StatisticalFinding>;
+    'data': any;
     /**
      * 
-     * @type {number}
+     * @type {any}
      * @memberof ListResponseStatisticalFinding
      */
-    'total': number;
+    'total': any;
 }
 /**
  * 
@@ -249,16 +233,16 @@ export interface ListResponseStatisticalFinding {
 export interface ListResponseStudy {
     /**
      * 
-     * @type {Array<Study>}
+     * @type {any}
      * @memberof ListResponseStudy
      */
-    'data': Array<Study>;
+    'data': any;
     /**
      * 
-     * @type {number}
+     * @type {any}
      * @memberof ListResponseStudy
      */
-    'total': number;
+    'total': any;
 }
 /**
  * 
@@ -268,16 +252,16 @@ export interface ListResponseStudy {
 export interface ListResponseTopic {
     /**
      * 
-     * @type {Array<Topic>}
+     * @type {any}
      * @memberof ListResponseTopic
      */
-    'data': Array<Topic>;
+    'data': any;
     /**
      * 
-     * @type {number}
+     * @type {any}
      * @memberof ListResponseTopic
      */
-    'total': number;
+    'total': any;
 }
 /**
  * 
@@ -287,16 +271,16 @@ export interface ListResponseTopic {
 export interface ListResponseTopicPath {
     /**
      * 
-     * @type {Array<TopicPath>}
+     * @type {any}
      * @memberof ListResponseTopicPath
      */
-    'data': Array<TopicPath>;
+    'data': any;
     /**
      * 
-     * @type {number}
+     * @type {any}
      * @memberof ListResponseTopicPath
      */
-    'total': number;
+    'total': any;
 }
 /**
  * 
@@ -306,16 +290,16 @@ export interface ListResponseTopicPath {
 export interface ListResponseVariable {
     /**
      * 
-     * @type {Array<Variable>}
+     * @type {any}
      * @memberof ListResponseVariable
      */
-    'data': Array<Variable>;
+    'data': any;
     /**
      * 
-     * @type {number}
+     * @type {any}
      * @memberof ListResponseVariable
      */
-    'total': number;
+    'total': any;
 }
 /**
  * Nested resource.
@@ -325,16 +309,16 @@ export interface ListResponseVariable {
 export interface NestedResource {
     /**
      * Unique identifier
-     * @type {string}
+     * @type {any}
      * @memberof NestedResource
      */
-    'id': string;
+    'id': any;
     /**
      * Name of the resource
-     * @type {string}
+     * @type {any}
      * @memberof NestedResource
      */
-    'name': string;
+    'name': any;
 }
 /**
  * Nested study.
@@ -344,28 +328,28 @@ export interface NestedResource {
 export interface NestedStudy {
     /**
      * Unique identifier
-     * @type {string}
+     * @type {any}
      * @memberof NestedStudy
      */
-    'id': string;
+    'id': any;
     /**
      * Digital Object Identifier (DOI)
-     * @type {string}
+     * @type {any}
      * @memberof NestedStudy
      */
-    'doi'?: string;
+    'doi'?: any;
     /**
      * Population studied
-     * @type {string}
+     * @type {any}
      * @memberof NestedStudy
      */
-    'population'?: string;
+    'population'?: any;
     /**
      * Sample size of the study
-     * @type {string}
+     * @type {any}
      * @memberof NestedStudy
      */
-    'sample_size'?: string;
+    'sample_size'?: any;
 }
 /**
  * Node.
@@ -375,16 +359,16 @@ export interface NestedStudy {
 export interface Node {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Node
      */
-    'id': string;
+    'id': any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Node
      */
-    'label'?: string | null;
+    'label'?: any | null;
 }
 /**
  * Pubmed search synthesis input.
@@ -394,10 +378,10 @@ export interface Node {
 export interface PubmedSearchSynthesisInput {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof PubmedSearchSynthesisInput
      */
-    'query': string;
+    'query': any;
 }
 /**
  * Pubmed search synthesis job.
@@ -407,10 +391,10 @@ export interface PubmedSearchSynthesisInput {
 export interface PubmedSearchSynthesisJob {
     /**
      * Unique identifier of a Pubmed search synthesis job
-     * @type {string}
+     * @type {any}
      * @memberof PubmedSearchSynthesisJob
      */
-    'id': string;
+    'id': any;
     /**
      * 
      * @type {JobStatus}
@@ -419,40 +403,40 @@ export interface PubmedSearchSynthesisJob {
     'status': JobStatus;
     /**
      * Date job was created
-     * @type {string}
+     * @type {any}
      * @memberof PubmedSearchSynthesisJob
      */
-    'created_at': string;
+    'created_at': any;
     /**
      * Date job was last updated
-     * @type {string}
+     * @type {any}
      * @memberof PubmedSearchSynthesisJob
      */
-    'updated_at': string;
+    'updated_at': any;
     /**
      * Initial user query
-     * @type {string}
+     * @type {any}
      * @memberof PubmedSearchSynthesisJob
      */
-    'user_query': string;
+    'user_query': any;
     /**
      * Pubmed query the user query resolved to
-     * @type {string}
+     * @type {any}
      * @memberof PubmedSearchSynthesisJob
      */
-    'pubmed_query': string;
+    'pubmed_query': any;
     /**
-     * 
-     * @type {string}
+     * Date clustering was finished
+     * @type {any}
      * @memberof PubmedSearchSynthesisJob
      */
-    'clustering_finished'?: string | null;
+    'clustering_finished'?: any | null;
     /**
-     * 
-     * @type {string}
+     * Date synthesis was finished
+     * @type {any}
      * @memberof PubmedSearchSynthesisJob
      */
-    'synthesis_finished'?: string | null;
+    'synthesis_finished'?: any | null;
 }
 
 
@@ -464,52 +448,52 @@ export interface PubmedSearchSynthesisJob {
 export interface Relationship {
     /**
      * Unique identifier of relationship.
-     * @type {string}
+     * @type {any}
      * @memberof Relationship
      */
-    'id': string;
+    'id': any;
     /**
      * Number of findings on relationship
-     * @type {number}
+     * @type {any}
      * @memberof Relationship
      */
-    'num_findings': number;
+    'num_findings': any;
     /**
      * Number of studies supporting relationship
-     * @type {number}
+     * @type {any}
      * @memberof Relationship
      */
-    'num_studies': number;
+    'num_studies': any;
     /**
      * Number of significant findings on relationship
-     * @type {number}
+     * @type {any}
      * @memberof Relationship
      */
-    'num_significant_findings': number;
+    'num_significant_findings': any;
     /**
      * Highest cited study supporting relationship
-     * @type {number}
+     * @type {any}
      * @memberof Relationship
      */
-    'highest_cited'?: number;
+    'highest_cited'?: any;
     /**
-     * 
-     * @type {number}
+     * Median effect size of findings on relationship
+     * @type {any}
      * @memberof Relationship
      */
-    'median_effect_size'?: number | null;
+    'median_effect_size'?: any | null;
     /**
      * Date relationship was last updated
-     * @type {string}
+     * @type {any}
      * @memberof Relationship
      */
-    'last_updated': string;
+    'last_updated': any;
     /**
      * Whether or not the relationship is supported by an experimental trial
-     * @type {boolean}
+     * @type {any}
      * @memberof Relationship
      */
-    'has_experimental_trial': boolean;
+    'has_experimental_trial': any;
     /**
      * 
      * @type {Topic}
@@ -526,32 +510,10 @@ export interface Relationship {
 /**
  * Statistic type.
  * @export
- * @enum {string}
+ * @interface StatisticType
  */
-
-export const StatisticType = {
-    OddsRatio: 'odds_ratio',
-    AdjustedOddsRatio: 'adjusted_odds_ratio',
-    HazardRatio: 'hazard_ratio',
-    AdjustedHazardRatio: 'adjusted_hazard_ratio',
-    RelativeRiskRatio: 'relative_risk_ratio',
-    Coefficient: 'coefficient',
-    PearsonR: 'pearson_r',
-    IncidentRateRatio: 'incident_rate_ratio',
-    PrevalenceRatio: 'prevalence_ratio',
-    SpearmanCorrelation: 'spearman_correlation',
-    MeanDifferenceStandardized: 'mean_difference_standardized',
-    MeanDifferenceUnstandardized: 'mean_difference_unstandardized',
-    RiskDifference: 'risk_difference',
-    CoefficientOfDetermination: 'coefficient_of_determination',
-    TTest: 't_test',
-    Elasticity: 'elasticity',
-    GiniCoefficient: 'gini_coefficient'
-} as const;
-
-export type StatisticType = typeof StatisticType[keyof typeof StatisticType];
-
-
+export interface StatisticType {
+}
 /**
  * Statistical finding.
  * @export
@@ -560,28 +522,28 @@ export type StatisticType = typeof StatisticType[keyof typeof StatisticType];
 export interface StatisticalFinding {
     /**
      * Unique identifier
-     * @type {string}
+     * @type {any}
      * @memberof StatisticalFinding
      */
-    'id': string;
+    'id': any;
     /**
      * Whether finding is flagged
-     * @type {boolean}
+     * @type {any}
      * @memberof StatisticalFinding
      */
-    'flagged'?: boolean;
+    'flagged'?: any;
     /**
      * Type of finding
-     * @type {string}
+     * @type {any}
      * @memberof StatisticalFinding
      */
     'finding_type'?: StatisticalFindingFindingTypeEnum;
     /**
-     * 
-     * @type {string}
+     * Summary of the finding
+     * @type {any}
      * @memberof StatisticalFinding
      */
-    'summary'?: string | null;
+    'summary'?: any | null;
     /**
      * 
      * @type {NestedResource}
@@ -619,29 +581,29 @@ export interface StatisticalFinding {
      */
     'statistic_type'?: StatisticType | null;
     /**
-     * 
-     * @type {number}
+     * Value of statistic
+     * @type {any}
      * @memberof StatisticalFinding
      */
-    'statistic_value'?: number | null;
+    'statistic_value'?: any | null;
     /**
-     * 
-     * @type {number}
+     * Upper bound of confidence interval
+     * @type {any}
      * @memberof StatisticalFinding
      */
-    'ci_upper'?: number | null;
+    'ci_upper'?: any | null;
     /**
-     * 
-     * @type {number}
+     * Lower bound of confidence interval
+     * @type {any}
      * @memberof StatisticalFinding
      */
-    'ci_lower'?: number | null;
+    'ci_lower'?: any | null;
     /**
-     * 
-     * @type {number}
+     * P-value
+     * @type {any}
      * @memberof StatisticalFinding
      */
-    'p_value'?: number | null;
+    'p_value'?: any | null;
 }
 
 export const StatisticalFindingFindingTypeEnum = {
@@ -658,76 +620,76 @@ export type StatisticalFindingFindingTypeEnum = typeof StatisticalFindingFinding
 export interface Study {
     /**
      * Unique identifier
-     * @type {string}
+     * @type {any}
      * @memberof Study
      */
-    'id': string;
+    'id': any;
     /**
-     * 
-     * @type {string}
+     * Digital Object Identifier (DOI)
+     * @type {any}
      * @memberof Study
      */
-    'doi'?: string | null;
+    'doi'?: any | null;
     /**
-     * 
-     * @type {string}
+     * Title of the study
+     * @type {any}
      * @memberof Study
      */
-    'title'?: string | null;
+    'title'?: any | null;
     /**
      * Authors of the study
-     * @type {}
+     * @type {any}
      * @memberof Study
      */
-    'authors'?:  | null;
+    'authors'?: any | null;
     /**
-     * 
-     * @type {string}
+     * Journal the study was published in
+     * @type {any}
      * @memberof Study
      */
-    'journal'?: string | null;
+    'journal'?: any | null;
     /**
-     * 
-     * @type {string}
+     * Year of publication
+     * @type {any}
      * @memberof Study
      */
-    'publish_date'?: string | null;
+    'publish_date'?: any | null;
     /**
-     * 
-     * @type {string}
+     * Population studied
+     * @type {any}
      * @memberof Study
      */
-    'population'?: string | null;
+    'population'?: any | null;
     /**
-     * 
-     * @type {number}
+     * Sample size of the study
+     * @type {any}
      * @memberof Study
      */
-    'sample_size'?: number | null;
+    'sample_size'?: any | null;
     /**
-     * 
-     * @type {string}
+     * Summary of the study
+     * @type {any}
      * @memberof Study
      */
-    'summary'?: string | null;
+    'summary'?: any | null;
     /**
-     * 
-     * @type {number}
+     * Number of times study was cited by another study
+     * @type {any}
      * @memberof Study
      */
-    'cited_by'?: number | null;
+    'cited_by'?: any | null;
     /**
-     * 
-     * @type {string}
+     * Type of study
+     * @type {any}
      * @memberof Study
      */
-    'study_type'?: string | null;
+    'study_type'?: any | null;
     /**
-     * 
-     * @type {string}
+     * Reason for retraction of study
+     * @type {any}
      * @memberof Study
      */
-    'retraction_reason'?: string | null;
+    'retraction_reason'?: any | null;
 }
 /**
  * Topic.
@@ -737,28 +699,28 @@ export interface Study {
 export interface Topic {
     /**
      * Unique identifier
-     * @type {string}
+     * @type {any}
      * @memberof Topic
      */
-    'id': string;
+    'id': any;
     /**
      * Name of the topic
-     * @type {string}
+     * @type {any}
      * @memberof Topic
      */
-    'name': string;
+    'name': any;
     /**
-     * 
-     * @type {string}
+     * Wikidata identifier for the topic
+     * @type {any}
      * @memberof Topic
      */
-    'wikidata_id'?: string | null;
+    'wikidata_id'?: any | null;
     /**
      * UMLS Concept Unique Identifiers (CUIs) for the topic
-     * @type {}
+     * @type {any}
      * @memberof Topic
      */
-    'umls_cuis'?:  | null;
+    'umls_cuis'?: any | null;
     /**
      * 
      * @type {TopicCategory}
@@ -767,65 +729,20 @@ export interface Topic {
     'category'?: TopicCategory | null;
     /**
      * Roles associated with the topic
-     * @type {}
+     * @type {any}
      * @memberof Topic
      */
-    'roles'?:  | null;
+    'roles'?: any | null;
 }
 
 
 /**
  * Topic category.
  * @export
- * @enum {string}
+ * @interface TopicCategory
  */
-
-export const TopicCategory = {
-    BiomedicalDiseasesDisorders: 'Biomedical - Diseases & Disorders',
-    BiomedicalHospitalization: 'Biomedical - Hospitalization',
-    BiomedicalMortalitySurvival: 'Biomedical - Mortality/survival',
-    BiomedicalPathogen: 'Biomedical - Pathogen',
-    BiomedicalEthnicity: 'Biomedical - Ethnicity',
-    BiomedicalOtherBiologicalFactors: 'Biomedical - Other Biological factors',
-    BiomedicalAnthropometry: 'Biomedical - Anthropometry',
-    BiomedicalAge: 'Biomedical - Age',
-    BiomedicalSex: 'Biomedical - Sex',
-    BiomedicalCarcinogen: 'Biomedical - Carcinogen',
-    BiomedicalGenetics: 'Biomedical - Genetics',
-    BehavioralPersonalHygiene: 'Behavioral - Personal hygiene',
-    BehavioralOtherDietaryFactors: 'Behavioral - Other dietary factors',
-    BehavioralStress: 'Behavioral - Stress',
-    BehavioralSubstanceUse: 'Behavioral - Substance Use',
-    BehavioralEatingBehaviors: 'Behavioral - Eating behaviors',
-    BehavioralSleep: 'Behavioral - Sleep',
-    BehavioralPhysicalActivity: 'Behavioral - Physical activity',
-    BehavioralOtherBehavioralFactors: 'Behavioral - Other behavioral factors',
-    BehavioralSexualBehavior: 'Behavioral - Sexual behavior',
-    EnvironmentalAirQuality: 'Environmental - Air quality',
-    EnvironmentalWaterQuality: 'Environmental - Water quality',
-    EnvironmentalWeatherAndClimateChange: 'Environmental - Weather and climate change',
-    EnvironmentalOtherEnvironmentalFactors: 'Environmental - Other Environmental factors',
-    SocialEducation: 'Social - Education',
-    SocialEconomicContext: 'Social - Economic context',
-    SocialOtherSocialFactors: 'Social - Other social factors',
-    SocialPhysicalInfrastructure: 'Social - Physical infrastructure',
-    SocialSocialContext: 'Social - Social context',
-    SocialHealthcareContext: 'Social - Healthcare context',
-    SocialOccupation: 'Social - Occupation',
-    SocialGeography: 'Social - Geography',
-    SocialOccupationalContext: 'Social - Occupational context',
-    Healing: 'Healing',
-    Preventative: 'Preventative',
-    Diagnostic: 'Diagnostic',
-    Preservative: 'Preservative',
-    Managing: 'Managing',
-    Therapeutic: 'Therapeutic',
-    Other: 'Other'
-} as const;
-
-export type TopicCategory = typeof TopicCategory[keyof typeof TopicCategory];
-
-
+export interface TopicCategory {
+}
 /**
  * Path to topic.
  * @export
@@ -834,52 +751,52 @@ export type TopicCategory = typeof TopicCategory[keyof typeof TopicCategory];
 export interface TopicPath {
     /**
      * Unique identifier of relationship.
-     * @type {string}
+     * @type {any}
      * @memberof TopicPath
      */
-    'id': string;
+    'id': any;
     /**
      * Number of findings on relationship
-     * @type {number}
+     * @type {any}
      * @memberof TopicPath
      */
-    'num_findings': number;
+    'num_findings': any;
     /**
      * Number of studies supporting relationship
-     * @type {number}
+     * @type {any}
      * @memberof TopicPath
      */
-    'num_studies': number;
+    'num_studies': any;
     /**
      * Number of significant findings on relationship
-     * @type {number}
+     * @type {any}
      * @memberof TopicPath
      */
-    'num_significant_findings': number;
+    'num_significant_findings': any;
     /**
      * Highest cited study supporting relationship
-     * @type {number}
+     * @type {any}
      * @memberof TopicPath
      */
-    'highest_cited'?: number;
+    'highest_cited'?: any;
     /**
-     * 
-     * @type {number}
+     * Median effect size of findings on relationship
+     * @type {any}
      * @memberof TopicPath
      */
-    'median_effect_size'?: number | null;
+    'median_effect_size'?: any | null;
     /**
      * Date relationship was last updated
-     * @type {string}
+     * @type {any}
      * @memberof TopicPath
      */
-    'last_updated': string;
+    'last_updated': any;
     /**
      * Whether or not the relationship is supported by an experimental trial
-     * @type {boolean}
+     * @type {any}
      * @memberof TopicPath
      */
-    'has_experimental_trial': boolean;
+    'has_experimental_trial': any;
     /**
      * 
      * @type {Topic}
@@ -890,19 +807,10 @@ export interface TopicPath {
 /**
  * Topic role.
  * @export
- * @enum {string}
+ * @interface TopicRole
  */
-
-export const TopicRole = {
-    Determinant: 'Determinant',
-    Intervention: 'Intervention',
-    Outcome: 'Outcome',
-    Agent: 'Agent'
-} as const;
-
-export type TopicRole = typeof TopicRole[keyof typeof TopicRole];
-
-
+export interface TopicRole {
+}
 /**
  * 
  * @export
@@ -911,29 +819,22 @@ export type TopicRole = typeof TopicRole[keyof typeof TopicRole];
 export interface ValidationError {
     /**
      * 
-     * @type {Array<ValidationErrorLocInner>}
+     * @type {any}
      * @memberof ValidationError
      */
-    'loc': Array<ValidationErrorLocInner>;
+    'loc': any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof ValidationError
      */
-    'msg': string;
+    'msg': any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof ValidationError
      */
-    'type': string;
-}
-/**
- * 
- * @export
- * @interface ValidationErrorLocInner
- */
-export interface ValidationErrorLocInner {
+    'type': any;
 }
 /**
  * Variable.
@@ -943,22 +844,22 @@ export interface ValidationErrorLocInner {
 export interface Variable {
     /**
      * Unique identifier
-     * @type {string}
+     * @type {any}
      * @memberof Variable
      */
-    'id': string;
+    'id': any;
     /**
-     * 
-     * @type {string}
+     * Name of the variable
+     * @type {any}
      * @memberof Variable
      */
-    'name'?: string | null;
+    'name'?: any | null;
     /**
-     * 
-     * @type {number}
+     * Number of studies the variable appears in
+     * @type {any}
      * @memberof Variable
      */
-    'num_studies'?: number | null;
+    'num_studies'?: any | null;
     /**
      * 
      * @type {NestedResource}
@@ -976,15 +877,15 @@ export const GraphApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Gets a subgraph of a topic by id.         The subgraph includes upstream and downstream relationships within two hops.         If the response takes too long or is too large, consider using filters to reduce the size of the response.
          * @summary Get subgraph by topic id
-         * @param {string} topicId 
-         * @param {string | null} [upstream1Filter] Fields and values to filter the first upstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-         * @param {string | null} [upstream2Filter] Fields and values to filter the second upstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-         * @param {string | null} [downstream1Filter] Fields and values to filter the first downstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-         * @param {string | null} [downstream2Filter] Fields and values to filter the second downstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
+         * @param {any} topicId 
+         * @param {any | null} [upstream1Filter] Fields and values to filter the first upstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
+         * @param {any | null} [upstream2Filter] Fields and values to filter the second upstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
+         * @param {any | null} [downstream1Filter] Fields and values to filter the first downstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
+         * @param {any | null} [downstream2Filter] Fields and values to filter the second downstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSubgraphByTopicId: async (topicId: string, upstream1Filter?: string | null, upstream2Filter?: string | null, downstream1Filter?: string | null, downstream2Filter?: string | null, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getSubgraphByTopicId: async (topicId: any, upstream1Filter?: any | null, upstream2Filter?: any | null, downstream1Filter?: any | null, downstream2Filter?: any | null, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getSubgraphByTopicId', 'topicId', topicId)
             const localVarPath = `/v0/graph/{topic_id}`
@@ -1043,15 +944,15 @@ export const GraphApiFp = function(configuration?: Configuration) {
         /**
          * Gets a subgraph of a topic by id.         The subgraph includes upstream and downstream relationships within two hops.         If the response takes too long or is too large, consider using filters to reduce the size of the response.
          * @summary Get subgraph by topic id
-         * @param {string} topicId 
-         * @param {string | null} [upstream1Filter] Fields and values to filter the first upstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-         * @param {string | null} [upstream2Filter] Fields and values to filter the second upstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-         * @param {string | null} [downstream1Filter] Fields and values to filter the first downstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-         * @param {string | null} [downstream2Filter] Fields and values to filter the second downstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
+         * @param {any} topicId 
+         * @param {any | null} [upstream1Filter] Fields and values to filter the first upstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
+         * @param {any | null} [upstream2Filter] Fields and values to filter the second upstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
+         * @param {any | null} [downstream1Filter] Fields and values to filter the first downstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
+         * @param {any | null} [downstream2Filter] Fields and values to filter the second downstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSubgraphByTopicId(topicId: string, upstream1Filter?: string | null, upstream2Filter?: string | null, downstream1Filter?: string | null, downstream2Filter?: string | null, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GraphResponse>> {
+        async getSubgraphByTopicId(topicId: any, upstream1Filter?: any | null, upstream2Filter?: any | null, downstream1Filter?: any | null, downstream2Filter?: any | null, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GraphResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSubgraphByTopicId(topicId, upstream1Filter, upstream2Filter, downstream1Filter, downstream2Filter, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -1086,38 +987,38 @@ export const GraphApiFactory = function (configuration?: Configuration, basePath
 export interface GraphApiGetSubgraphByTopicIdRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof GraphApiGetSubgraphByTopicId
      */
-    readonly topicId: string
+    readonly topicId: any
 
     /**
      * Fields and values to filter the first upstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-     * @type {string}
+     * @type {any}
      * @memberof GraphApiGetSubgraphByTopicId
      */
-    readonly upstream1Filter?: string | null
+    readonly upstream1Filter?: any | null
 
     /**
      * Fields and values to filter the second upstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-     * @type {string}
+     * @type {any}
      * @memberof GraphApiGetSubgraphByTopicId
      */
-    readonly upstream2Filter?: string | null
+    readonly upstream2Filter?: any | null
 
     /**
      * Fields and values to filter the first downstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-     * @type {string}
+     * @type {any}
      * @memberof GraphApiGetSubgraphByTopicId
      */
-    readonly downstream1Filter?: string | null
+    readonly downstream1Filter?: any | null
 
     /**
      * Fields and values to filter the second downstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-     * @type {string}
+     * @type {any}
      * @memberof GraphApiGetSubgraphByTopicId
      */
-    readonly downstream2Filter?: string | null
+    readonly downstream2Filter?: any | null
 }
 
 /**
@@ -1151,11 +1052,11 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
         /**
          * Get a relationship by its ID.
          * @summary Get a relationship
-         * @param {string} relationshipId 
+         * @param {any} relationshipId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRelationshipById: async (relationshipId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRelationshipById: async (relationshipId: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'relationshipId' is not null or undefined
             assertParamExists('getRelationshipById', 'relationshipId', relationshipId)
             const localVarPath = `/v0/relationships/{relationship_id}`
@@ -1188,17 +1089,17 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
         /**
          * Get a list of the statistical findings underlying a given relationship.
          * @summary Get relationship statistical findings
-         * @param {string} relationshipId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} relationshipId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRelationshipStatisticalFindings: async (relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRelationshipStatisticalFindings: async (relationshipId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'relationshipId' is not null or undefined
             assertParamExists('getRelationshipStatisticalFindings', 'relationshipId', relationshipId)
             const localVarPath = `/v0/relationships/{relationship_id}/statistical_findings`
@@ -1255,17 +1156,17 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
         /**
          * Get a list of the studies underlying a given relationship.
          * @summary Get relationship studies
-         * @param {string} relationshipId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: title.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} relationshipId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: title.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRelationshipStudies: async (relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRelationshipStudies: async (relationshipId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'relationshipId' is not null or undefined
             assertParamExists('getRelationshipStudies', 'relationshipId', relationshipId)
             const localVarPath = `/v0/relationships/{relationship_id}/studies`
@@ -1322,16 +1223,16 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
         /**
          * Get a list of relationships.
          * @summary Get relationships
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, source_topic.id, source_topic.wikidata_id, source_topic.category, source_topic.roles, target_topic.id, target_topic.wikidata_id, target_topic.category, target_topic.roles.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, source_topic.id, source_topic.wikidata_id, source_topic.category, source_topic.roles, target_topic.id, target_topic.wikidata_id, target_topic.category, target_topic.roles.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRelationships: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRelationships: async (filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v0/relationships`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1395,61 +1296,61 @@ export const RelationshipsApiFp = function(configuration?: Configuration) {
         /**
          * Get a relationship by its ID.
          * @summary Get a relationship
-         * @param {string} relationshipId 
+         * @param {any} relationshipId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRelationshipById(relationshipId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Relationship>> {
+        async getRelationshipById(relationshipId: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Relationship>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRelationshipById(relationshipId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get a list of the statistical findings underlying a given relationship.
          * @summary Get relationship statistical findings
-         * @param {string} relationshipId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} relationshipId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRelationshipStatisticalFindings(relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
+        async getRelationshipStatisticalFindings(relationshipId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRelationshipStatisticalFindings(relationshipId, filter, sort, search, fields, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get a list of the studies underlying a given relationship.
          * @summary Get relationship studies
-         * @param {string} relationshipId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: title.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} relationshipId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: title.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRelationshipStudies(relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
+        async getRelationshipStudies(relationshipId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRelationshipStudies(relationshipId, filter, sort, search, fields, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get a list of relationships.
          * @summary Get relationships
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, source_topic.id, source_topic.wikidata_id, source_topic.category, source_topic.roles, target_topic.id, target_topic.wikidata_id, target_topic.category, target_topic.roles.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, source_topic.id, source_topic.wikidata_id, source_topic.category, source_topic.roles, target_topic.id, target_topic.wikidata_id, target_topic.category, target_topic.roles.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRelationships(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseRelationship>> {
+        async getRelationships(filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseRelationship>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRelationships(filter, sort, search, fields, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -1514,10 +1415,10 @@ export const RelationshipsApiFactory = function (configuration?: Configuration, 
 export interface RelationshipsApiGetRelationshipByIdRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationshipById
      */
-    readonly relationshipId: string
+    readonly relationshipId: any
 }
 
 /**
@@ -1528,52 +1429,52 @@ export interface RelationshipsApiGetRelationshipByIdRequest {
 export interface RelationshipsApiGetRelationshipStatisticalFindingsRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationshipStatisticalFindings
      */
-    readonly relationshipId: string
+    readonly relationshipId: any
 
     /**
      * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
-     * @type {string}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationshipStatisticalFindings
      */
-    readonly filter?: string | null
+    readonly filter?: any | null
 
     /**
      * Field to sort the response by. Supported fields for sorting: none.
-     * @type {string}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationshipStatisticalFindings
      */
-    readonly sort?: string | null
+    readonly sort?: any | null
 
     /**
      * Field to search within. Supported fields for searching: none.
-     * @type {string}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationshipStatisticalFindings
      */
-    readonly search?: string | null
+    readonly search?: any | null
 
     /**
      * Comma-separated list of fields to include in the response.
-     * @type {string}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationshipStatisticalFindings
      */
-    readonly fields?: string | null
+    readonly fields?: any | null
 
     /**
      * Offset
-     * @type {number}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationshipStatisticalFindings
      */
-    readonly offset?: number
+    readonly offset?: any
 
     /**
      * Limit
-     * @type {number}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationshipStatisticalFindings
      */
-    readonly limit?: number
+    readonly limit?: any
 }
 
 /**
@@ -1584,52 +1485,52 @@ export interface RelationshipsApiGetRelationshipStatisticalFindingsRequest {
 export interface RelationshipsApiGetRelationshipStudiesRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationshipStudies
      */
-    readonly relationshipId: string
+    readonly relationshipId: any
 
     /**
      * Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
-     * @type {string}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationshipStudies
      */
-    readonly filter?: string | null
+    readonly filter?: any | null
 
     /**
      * Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
-     * @type {string}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationshipStudies
      */
-    readonly sort?: string | null
+    readonly sort?: any | null
 
     /**
      * Field to search within. Supported fields for searching: title.
-     * @type {string}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationshipStudies
      */
-    readonly search?: string | null
+    readonly search?: any | null
 
     /**
      * Comma-separated list of fields to include in the response.
-     * @type {string}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationshipStudies
      */
-    readonly fields?: string | null
+    readonly fields?: any | null
 
     /**
      * Offset
-     * @type {number}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationshipStudies
      */
-    readonly offset?: number
+    readonly offset?: any
 
     /**
      * Limit
-     * @type {number}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationshipStudies
      */
-    readonly limit?: number
+    readonly limit?: any
 }
 
 /**
@@ -1640,45 +1541,45 @@ export interface RelationshipsApiGetRelationshipStudiesRequest {
 export interface RelationshipsApiGetRelationshipsRequest {
     /**
      * Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, source_topic.id, source_topic.wikidata_id, source_topic.category, source_topic.roles, target_topic.id, target_topic.wikidata_id, target_topic.category, target_topic.roles.
-     * @type {string}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationships
      */
-    readonly filter?: string | null
+    readonly filter?: any | null
 
     /**
      * Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-     * @type {string}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationships
      */
-    readonly sort?: string | null
+    readonly sort?: any | null
 
     /**
      * Field to search within. Supported fields for searching: none.
-     * @type {string}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationships
      */
-    readonly search?: string | null
+    readonly search?: any | null
 
     /**
      * Comma-separated list of fields to include in the response.
-     * @type {string}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationships
      */
-    readonly fields?: string | null
+    readonly fields?: any | null
 
     /**
      * Offset
-     * @type {number}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationships
      */
-    readonly offset?: number
+    readonly offset?: any
 
     /**
      * Limit
-     * @type {number}
+     * @type {any}
      * @memberof RelationshipsApiGetRelationships
      */
-    readonly limit?: number
+    readonly limit?: any
 }
 
 /**
@@ -1748,16 +1649,16 @@ export const StatisticalFindingsApiAxiosParamCreator = function (configuration?:
         /**
          * Flag a statistical finding for review.
          * @summary Flag statistical finding
-         * @param {string} findingId 
-         * @param {Array<FlagInput>} flagInput 
+         * @param {any} findingId 
+         * @param {any} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        flagStatisticalFinding: async (findingId: string, flagInput: Array<FlagInput>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        flagStatisticalFinding: async (findingId: any, body: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'findingId' is not null or undefined
             assertParamExists('flagStatisticalFinding', 'findingId', findingId)
-            // verify required parameter 'flagInput' is not null or undefined
-            assertParamExists('flagStatisticalFinding', 'flagInput', flagInput)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('flagStatisticalFinding', 'body', body)
             const localVarPath = `/v0/statistical_findings/{finding_id}/flags`
                 .replace(`{${"finding_id"}}`, encodeURIComponent(String(findingId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1781,7 +1682,7 @@ export const StatisticalFindingsApiAxiosParamCreator = function (configuration?:
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(flagInput, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1791,11 +1692,11 @@ export const StatisticalFindingsApiAxiosParamCreator = function (configuration?:
         /**
          * Get a statistical finding by its ID.
          * @summary Get a statistical finding
-         * @param {string} findingId 
+         * @param {any} findingId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStatisticalFindingById: async (findingId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStatisticalFindingById: async (findingId: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'findingId' is not null or undefined
             assertParamExists('getStatisticalFindingById', 'findingId', findingId)
             const localVarPath = `/v0/statistical_findings/{finding_id}`
@@ -1828,16 +1729,16 @@ export const StatisticalFindingsApiAxiosParamCreator = function (configuration?:
         /**
          * Get a list of statistical findings.
          * @summary Get statistical findings
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStatisticalFindings: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStatisticalFindings: async (filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v0/statistical_findings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1901,39 +1802,39 @@ export const StatisticalFindingsApiFp = function(configuration?: Configuration) 
         /**
          * Flag a statistical finding for review.
          * @summary Flag statistical finding
-         * @param {string} findingId 
-         * @param {Array<FlagInput>} flagInput 
+         * @param {any} findingId 
+         * @param {any} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async flagStatisticalFinding(findingId: string, flagInput: Array<FlagInput>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Flag>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.flagStatisticalFinding(findingId, flagInput, options);
+        async flagStatisticalFinding(findingId: any, body: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.flagStatisticalFinding(findingId, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get a statistical finding by its ID.
          * @summary Get a statistical finding
-         * @param {string} findingId 
+         * @param {any} findingId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStatisticalFindingById(findingId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StatisticalFinding>> {
+        async getStatisticalFindingById(findingId: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StatisticalFinding>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStatisticalFindingById(findingId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get a list of statistical findings.
          * @summary Get statistical findings
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStatisticalFindings(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
+        async getStatisticalFindings(filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStatisticalFindings(filter, sort, search, fields, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -1954,8 +1855,8 @@ export const StatisticalFindingsApiFactory = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        flagStatisticalFinding(requestParameters: StatisticalFindingsApiFlagStatisticalFindingRequest, options?: AxiosRequestConfig): AxiosPromise<Array<Flag>> {
-            return localVarFp.flagStatisticalFinding(requestParameters.findingId, requestParameters.flagInput, options).then((request) => request(axios, basePath));
+        flagStatisticalFinding(requestParameters: StatisticalFindingsApiFlagStatisticalFindingRequest, options?: AxiosRequestConfig): AxiosPromise<any> {
+            return localVarFp.flagStatisticalFinding(requestParameters.findingId, requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * Get a statistical finding by its ID.
@@ -1988,17 +1889,17 @@ export const StatisticalFindingsApiFactory = function (configuration?: Configura
 export interface StatisticalFindingsApiFlagStatisticalFindingRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof StatisticalFindingsApiFlagStatisticalFinding
      */
-    readonly findingId: string
+    readonly findingId: any
 
     /**
      * 
-     * @type {Array<FlagInput>}
+     * @type {any}
      * @memberof StatisticalFindingsApiFlagStatisticalFinding
      */
-    readonly flagInput: Array<FlagInput>
+    readonly body: any
 }
 
 /**
@@ -2009,10 +1910,10 @@ export interface StatisticalFindingsApiFlagStatisticalFindingRequest {
 export interface StatisticalFindingsApiGetStatisticalFindingByIdRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof StatisticalFindingsApiGetStatisticalFindingById
      */
-    readonly findingId: string
+    readonly findingId: any
 }
 
 /**
@@ -2023,45 +1924,45 @@ export interface StatisticalFindingsApiGetStatisticalFindingByIdRequest {
 export interface StatisticalFindingsApiGetStatisticalFindingsRequest {
     /**
      * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
-     * @type {string}
+     * @type {any}
      * @memberof StatisticalFindingsApiGetStatisticalFindings
      */
-    readonly filter?: string | null
+    readonly filter?: any | null
 
     /**
      * Field to sort the response by. Supported fields for sorting: none.
-     * @type {string}
+     * @type {any}
      * @memberof StatisticalFindingsApiGetStatisticalFindings
      */
-    readonly sort?: string | null
+    readonly sort?: any | null
 
     /**
      * Field to search within. Supported fields for searching: none.
-     * @type {string}
+     * @type {any}
      * @memberof StatisticalFindingsApiGetStatisticalFindings
      */
-    readonly search?: string | null
+    readonly search?: any | null
 
     /**
      * Comma-separated list of fields to include in the response.
-     * @type {string}
+     * @type {any}
      * @memberof StatisticalFindingsApiGetStatisticalFindings
      */
-    readonly fields?: string | null
+    readonly fields?: any | null
 
     /**
      * Offset
-     * @type {number}
+     * @type {any}
      * @memberof StatisticalFindingsApiGetStatisticalFindings
      */
-    readonly offset?: number
+    readonly offset?: any
 
     /**
      * Limit
-     * @type {number}
+     * @type {any}
      * @memberof StatisticalFindingsApiGetStatisticalFindings
      */
-    readonly limit?: number
+    readonly limit?: any
 }
 
 /**
@@ -2080,7 +1981,7 @@ export class StatisticalFindingsApi extends BaseAPI {
      * @memberof StatisticalFindingsApi
      */
     public flagStatisticalFinding(requestParameters: StatisticalFindingsApiFlagStatisticalFindingRequest, options?: AxiosRequestConfig) {
-        return StatisticalFindingsApiFp(this.configuration).flagStatisticalFinding(requestParameters.findingId, requestParameters.flagInput, options).then((request) => request(this.axios, this.basePath));
+        return StatisticalFindingsApiFp(this.configuration).flagStatisticalFinding(requestParameters.findingId, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2119,16 +2020,16 @@ export const StudiesApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Get a list of studies.
          * @summary Get studies
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: title.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: title.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStudies: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStudies: async (filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v0/studies`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2182,11 +2083,11 @@ export const StudiesApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Get a study by its ID.
          * @summary Get a study
-         * @param {string} studyId 
+         * @param {any} studyId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStudyById: async (studyId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStudyById: async (studyId: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'studyId' is not null or undefined
             assertParamExists('getStudyById', 'studyId', studyId)
             const localVarPath = `/v0/studies/{study_id}`
@@ -2219,17 +2120,17 @@ export const StudiesApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Get a list of the statistical findings reported by a given study.
          * @summary Get study statistical findings
-         * @param {string} studyId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} studyId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStudyStatisticalFindings: async (studyId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStudyStatisticalFindings: async (studyId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'studyId' is not null or undefined
             assertParamExists('getStudyStatisticalFindings', 'studyId', studyId)
             const localVarPath = `/v0/studies/{study_id}/statistical_findings`
@@ -2296,44 +2197,44 @@ export const StudiesApiFp = function(configuration?: Configuration) {
         /**
          * Get a list of studies.
          * @summary Get studies
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: title.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: title.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStudies(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
+        async getStudies(filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStudies(filter, sort, search, fields, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get a study by its ID.
          * @summary Get a study
-         * @param {string} studyId 
+         * @param {any} studyId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStudyById(studyId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Study>> {
+        async getStudyById(studyId: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Study>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStudyById(studyId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get a list of the statistical findings reported by a given study.
          * @summary Get study statistical findings
-         * @param {string} studyId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} studyId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStudyStatisticalFindings(studyId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
+        async getStudyStatisticalFindings(studyId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStudyStatisticalFindings(studyId, filter, sort, search, fields, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2388,45 +2289,45 @@ export const StudiesApiFactory = function (configuration?: Configuration, basePa
 export interface StudiesApiGetStudiesRequest {
     /**
      * Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
-     * @type {string}
+     * @type {any}
      * @memberof StudiesApiGetStudies
      */
-    readonly filter?: string | null
+    readonly filter?: any | null
 
     /**
      * Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
-     * @type {string}
+     * @type {any}
      * @memberof StudiesApiGetStudies
      */
-    readonly sort?: string | null
+    readonly sort?: any | null
 
     /**
      * Field to search within. Supported fields for searching: title.
-     * @type {string}
+     * @type {any}
      * @memberof StudiesApiGetStudies
      */
-    readonly search?: string | null
+    readonly search?: any | null
 
     /**
      * Comma-separated list of fields to include in the response.
-     * @type {string}
+     * @type {any}
      * @memberof StudiesApiGetStudies
      */
-    readonly fields?: string | null
+    readonly fields?: any | null
 
     /**
      * Offset
-     * @type {number}
+     * @type {any}
      * @memberof StudiesApiGetStudies
      */
-    readonly offset?: number
+    readonly offset?: any
 
     /**
      * Limit
-     * @type {number}
+     * @type {any}
      * @memberof StudiesApiGetStudies
      */
-    readonly limit?: number
+    readonly limit?: any
 }
 
 /**
@@ -2437,10 +2338,10 @@ export interface StudiesApiGetStudiesRequest {
 export interface StudiesApiGetStudyByIdRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof StudiesApiGetStudyById
      */
-    readonly studyId: string
+    readonly studyId: any
 }
 
 /**
@@ -2451,52 +2352,52 @@ export interface StudiesApiGetStudyByIdRequest {
 export interface StudiesApiGetStudyStatisticalFindingsRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof StudiesApiGetStudyStatisticalFindings
      */
-    readonly studyId: string
+    readonly studyId: any
 
     /**
      * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
-     * @type {string}
+     * @type {any}
      * @memberof StudiesApiGetStudyStatisticalFindings
      */
-    readonly filter?: string | null
+    readonly filter?: any | null
 
     /**
      * Field to sort the response by. Supported fields for sorting: none.
-     * @type {string}
+     * @type {any}
      * @memberof StudiesApiGetStudyStatisticalFindings
      */
-    readonly sort?: string | null
+    readonly sort?: any | null
 
     /**
      * Field to search within. Supported fields for searching: none.
-     * @type {string}
+     * @type {any}
      * @memberof StudiesApiGetStudyStatisticalFindings
      */
-    readonly search?: string | null
+    readonly search?: any | null
 
     /**
      * Comma-separated list of fields to include in the response.
-     * @type {string}
+     * @type {any}
      * @memberof StudiesApiGetStudyStatisticalFindings
      */
-    readonly fields?: string | null
+    readonly fields?: any | null
 
     /**
      * Offset
-     * @type {number}
+     * @type {any}
      * @memberof StudiesApiGetStudyStatisticalFindings
      */
-    readonly offset?: number
+    readonly offset?: any
 
     /**
      * Limit
-     * @type {number}
+     * @type {any}
      * @memberof StudiesApiGetStudyStatisticalFindings
      */
-    readonly limit?: number
+    readonly limit?: any
 }
 
 /**
@@ -2554,11 +2455,11 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Get clusters from pubmed search synthesis.
          * @summary Get clusters from pubmed search synthesis
-         * @param {string} jobId 
+         * @param {any} jobId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getClustersFromPubmedSearch: async (jobId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getClustersFromPubmedSearch: async (jobId: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'jobId' is not null or undefined
             assertParamExists('getClustersFromPubmedSearch', 'jobId', jobId)
             const localVarPath = `/v0/synthesis/pubmed_search/{job_id}/clusters`
@@ -2591,11 +2492,11 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Get a pubmed search synthesis by its ID.
          * @summary Get pubmed search synthesis
-         * @param {string} jobId 
+         * @param {any} jobId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPubmedSearchSynthesisById: async (jobId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPubmedSearchSynthesisById: async (jobId: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'jobId' is not null or undefined
             assertParamExists('getPubmedSearchSynthesisById', 'jobId', jobId)
             const localVarPath = `/v0/synthesis/pubmed_search/{job_id}`
@@ -2628,17 +2529,17 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Get statistical findings from pubmed search synthesis.
          * @summary Get statistical findings from pubmed search synthesis
-         * @param {string} jobId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} jobId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStatisticalFindingsFromPubmedSearch: async (jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStatisticalFindingsFromPubmedSearch: async (jobId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'jobId' is not null or undefined
             assertParamExists('getStatisticalFindingsFromPubmedSearch', 'jobId', jobId)
             const localVarPath = `/v0/synthesis/pubmed_search/{job_id}/statistical_findings`
@@ -2695,17 +2596,17 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Get studies from pubmed search synthesis.
          * @summary Get studies from pubmed search synthesis
-         * @param {string} jobId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: title.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} jobId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: title.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStudiesFromPubmedSearch: async (jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStudiesFromPubmedSearch: async (jobId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'jobId' is not null or undefined
             assertParamExists('getStudiesFromPubmedSearch', 'jobId', jobId)
             const localVarPath = `/v0/synthesis/pubmed_search/{job_id}/studies`
@@ -2762,11 +2663,11 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Get synthesis from pubmed search synthesis.
          * @summary Get synthesis from pubmed search synthesis
-         * @param {string} jobId 
+         * @param {any} jobId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSynthesisFromPubmedSearch: async (jobId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getSynthesisFromPubmedSearch: async (jobId: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'jobId' is not null or undefined
             assertParamExists('getSynthesisFromPubmedSearch', 'jobId', jobId)
             const localVarPath = `/v0/synthesis/pubmed_search/{job_id}/synthesis`
@@ -2848,67 +2749,67 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
         /**
          * Get clusters from pubmed search synthesis.
          * @summary Get clusters from pubmed search synthesis
-         * @param {string} jobId 
+         * @param {any} jobId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getClustersFromPubmedSearch(jobId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseCluster>> {
+        async getClustersFromPubmedSearch(jobId: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseCluster>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getClustersFromPubmedSearch(jobId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get a pubmed search synthesis by its ID.
          * @summary Get pubmed search synthesis
-         * @param {string} jobId 
+         * @param {any} jobId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPubmedSearchSynthesisById(jobId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PubmedSearchSynthesisJob>> {
+        async getPubmedSearchSynthesisById(jobId: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PubmedSearchSynthesisJob>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPubmedSearchSynthesisById(jobId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get statistical findings from pubmed search synthesis.
          * @summary Get statistical findings from pubmed search synthesis
-         * @param {string} jobId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} jobId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStatisticalFindingsFromPubmedSearch(jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
+        async getStatisticalFindingsFromPubmedSearch(jobId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStatisticalFindingsFromPubmedSearch(jobId, filter, sort, search, fields, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get studies from pubmed search synthesis.
          * @summary Get studies from pubmed search synthesis
-         * @param {string} jobId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: title.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} jobId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: title.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStudiesFromPubmedSearch(jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
+        async getStudiesFromPubmedSearch(jobId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStudiesFromPubmedSearch(jobId, filter, sort, search, fields, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get synthesis from pubmed search synthesis.
          * @summary Get synthesis from pubmed search synthesis
-         * @param {string} jobId 
+         * @param {any} jobId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSynthesisFromPubmedSearch(jobId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async getSynthesisFromPubmedSearch(jobId: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSynthesisFromPubmedSearch(jobId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2919,7 +2820,7 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async synthesizePubmedSearch(pubmedSearchSynthesisInput: PubmedSearchSynthesisInput, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+        async synthesizePubmedSearch(pubmedSearchSynthesisInput: PubmedSearchSynthesisInput, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.synthesizePubmedSearch(pubmedSearchSynthesisInput, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2980,7 +2881,7 @@ export const SynthesisApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSynthesisFromPubmedSearch(requestParameters: SynthesisApiGetSynthesisFromPubmedSearchRequest, options?: AxiosRequestConfig): AxiosPromise<void> {
+        getSynthesisFromPubmedSearch(requestParameters: SynthesisApiGetSynthesisFromPubmedSearchRequest, options?: AxiosRequestConfig): AxiosPromise<any> {
             return localVarFp.getSynthesisFromPubmedSearch(requestParameters.jobId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2990,7 +2891,7 @@ export const SynthesisApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        synthesizePubmedSearch(requestParameters: SynthesisApiSynthesizePubmedSearchRequest, options?: AxiosRequestConfig): AxiosPromise<string> {
+        synthesizePubmedSearch(requestParameters: SynthesisApiSynthesizePubmedSearchRequest, options?: AxiosRequestConfig): AxiosPromise<any> {
             return localVarFp.synthesizePubmedSearch(requestParameters.pubmedSearchSynthesisInput, options).then((request) => request(axios, basePath));
         },
     };
@@ -3004,10 +2905,10 @@ export const SynthesisApiFactory = function (configuration?: Configuration, base
 export interface SynthesisApiGetClustersFromPubmedSearchRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof SynthesisApiGetClustersFromPubmedSearch
      */
-    readonly jobId: string
+    readonly jobId: any
 }
 
 /**
@@ -3018,10 +2919,10 @@ export interface SynthesisApiGetClustersFromPubmedSearchRequest {
 export interface SynthesisApiGetPubmedSearchSynthesisByIdRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof SynthesisApiGetPubmedSearchSynthesisById
      */
-    readonly jobId: string
+    readonly jobId: any
 }
 
 /**
@@ -3032,52 +2933,52 @@ export interface SynthesisApiGetPubmedSearchSynthesisByIdRequest {
 export interface SynthesisApiGetStatisticalFindingsFromPubmedSearchRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof SynthesisApiGetStatisticalFindingsFromPubmedSearch
      */
-    readonly jobId: string
+    readonly jobId: any
 
     /**
      * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
-     * @type {string}
+     * @type {any}
      * @memberof SynthesisApiGetStatisticalFindingsFromPubmedSearch
      */
-    readonly filter?: string | null
+    readonly filter?: any | null
 
     /**
      * Field to sort the response by. Supported fields for sorting: none.
-     * @type {string}
+     * @type {any}
      * @memberof SynthesisApiGetStatisticalFindingsFromPubmedSearch
      */
-    readonly sort?: string | null
+    readonly sort?: any | null
 
     /**
      * Field to search within. Supported fields for searching: none.
-     * @type {string}
+     * @type {any}
      * @memberof SynthesisApiGetStatisticalFindingsFromPubmedSearch
      */
-    readonly search?: string | null
+    readonly search?: any | null
 
     /**
      * Comma-separated list of fields to include in the response.
-     * @type {string}
+     * @type {any}
      * @memberof SynthesisApiGetStatisticalFindingsFromPubmedSearch
      */
-    readonly fields?: string | null
+    readonly fields?: any | null
 
     /**
      * Offset
-     * @type {number}
+     * @type {any}
      * @memberof SynthesisApiGetStatisticalFindingsFromPubmedSearch
      */
-    readonly offset?: number
+    readonly offset?: any
 
     /**
      * Limit
-     * @type {number}
+     * @type {any}
      * @memberof SynthesisApiGetStatisticalFindingsFromPubmedSearch
      */
-    readonly limit?: number
+    readonly limit?: any
 }
 
 /**
@@ -3088,52 +2989,52 @@ export interface SynthesisApiGetStatisticalFindingsFromPubmedSearchRequest {
 export interface SynthesisApiGetStudiesFromPubmedSearchRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof SynthesisApiGetStudiesFromPubmedSearch
      */
-    readonly jobId: string
+    readonly jobId: any
 
     /**
      * Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
-     * @type {string}
+     * @type {any}
      * @memberof SynthesisApiGetStudiesFromPubmedSearch
      */
-    readonly filter?: string | null
+    readonly filter?: any | null
 
     /**
      * Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
-     * @type {string}
+     * @type {any}
      * @memberof SynthesisApiGetStudiesFromPubmedSearch
      */
-    readonly sort?: string | null
+    readonly sort?: any | null
 
     /**
      * Field to search within. Supported fields for searching: title.
-     * @type {string}
+     * @type {any}
      * @memberof SynthesisApiGetStudiesFromPubmedSearch
      */
-    readonly search?: string | null
+    readonly search?: any | null
 
     /**
      * Comma-separated list of fields to include in the response.
-     * @type {string}
+     * @type {any}
      * @memberof SynthesisApiGetStudiesFromPubmedSearch
      */
-    readonly fields?: string | null
+    readonly fields?: any | null
 
     /**
      * Offset
-     * @type {number}
+     * @type {any}
      * @memberof SynthesisApiGetStudiesFromPubmedSearch
      */
-    readonly offset?: number
+    readonly offset?: any
 
     /**
      * Limit
-     * @type {number}
+     * @type {any}
      * @memberof SynthesisApiGetStudiesFromPubmedSearch
      */
-    readonly limit?: number
+    readonly limit?: any
 }
 
 /**
@@ -3144,10 +3045,10 @@ export interface SynthesisApiGetStudiesFromPubmedSearchRequest {
 export interface SynthesisApiGetSynthesisFromPubmedSearchRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof SynthesisApiGetSynthesisFromPubmedSearch
      */
-    readonly jobId: string
+    readonly jobId: any
 }
 
 /**
@@ -3255,11 +3156,11 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Get a topic by its ID.
          * @summary Get a topic
-         * @param {string} topicId 
+         * @param {any} topicId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicById: async (topicId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopicById: async (topicId: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getTopicById', 'topicId', topicId)
             const localVarPath = `/v0/topics/{topic_id}`
@@ -3292,17 +3193,17 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Get a list of determinants for a given topic. These are formatted as `TopicPath`s, which include data about the relationship and the source topic.
          * @summary Get topic determinants
-         * @param {string} topicId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} topicId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicDeterminants: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopicDeterminants: async (topicId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getTopicDeterminants', 'topicId', topicId)
             const localVarPath = `/v0/topics/{topic_id}/determinants`
@@ -3359,17 +3260,17 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Get a list of interventions for a given topic. These are formatted as `TopicPath`s, which include data about the relationship and the source topic.
          * @summary Get topic interventions
-         * @param {string} topicId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} topicId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicInterventions: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopicInterventions: async (topicId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getTopicInterventions', 'topicId', topicId)
             const localVarPath = `/v0/topics/{topic_id}/interventions`
@@ -3426,17 +3327,17 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Get a list of outcomes for a given topic. These are formatted as `TopicPath`s, which include data about the relationship and the target topic.
          * @summary Get topic outcomes
-         * @param {string} topicId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} topicId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicOutcomes: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopicOutcomes: async (topicId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getTopicOutcomes', 'topicId', topicId)
             const localVarPath = `/v0/topics/{topic_id}/outcomes`
@@ -3493,17 +3394,17 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Get a list of the relationships that include a given topic as the source or target topic.
          * @summary Get topic relationships
-         * @param {string} topicId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, source_topic.id, source_topic.wikidata_id, source_topic.category, source_topic.roles, target_topic.id, target_topic.wikidata_id, target_topic.category, target_topic.roles.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} topicId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, source_topic.id, source_topic.wikidata_id, source_topic.category, source_topic.roles, target_topic.id, target_topic.wikidata_id, target_topic.category, target_topic.roles.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicRelationships: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopicRelationships: async (topicId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getTopicRelationships', 'topicId', topicId)
             const localVarPath = `/v0/topics/{topic_id}/relationships`
@@ -3560,17 +3461,17 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Get a list of the variables that have been matched to a given topic.
          * @summary Get topic variables
-         * @param {string} topicId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_studies.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: name.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} topicId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: num_studies.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: name.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicVariables: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopicVariables: async (topicId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getTopicVariables', 'topicId', topicId)
             const localVarPath = `/v0/topics/{topic_id}/variables`
@@ -3627,16 +3528,16 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Get a list of topics.
          * @summary Get topics
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, wikidata_id, category, roles.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: name.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, wikidata_id, category, roles.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: name.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopics: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopics: async (filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v0/topics`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3700,112 +3601,112 @@ export const TopicsApiFp = function(configuration?: Configuration) {
         /**
          * Get a topic by its ID.
          * @summary Get a topic
-         * @param {string} topicId 
+         * @param {any} topicId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopicById(topicId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Topic>> {
+        async getTopicById(topicId: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Topic>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicById(topicId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get a list of determinants for a given topic. These are formatted as `TopicPath`s, which include data about the relationship and the source topic.
          * @summary Get topic determinants
-         * @param {string} topicId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} topicId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopicDeterminants(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopicPath>> {
+        async getTopicDeterminants(topicId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopicPath>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicDeterminants(topicId, filter, sort, search, fields, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get a list of interventions for a given topic. These are formatted as `TopicPath`s, which include data about the relationship and the source topic.
          * @summary Get topic interventions
-         * @param {string} topicId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} topicId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopicInterventions(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopicPath>> {
+        async getTopicInterventions(topicId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopicPath>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicInterventions(topicId, filter, sort, search, fields, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get a list of outcomes for a given topic. These are formatted as `TopicPath`s, which include data about the relationship and the target topic.
          * @summary Get topic outcomes
-         * @param {string} topicId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} topicId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopicOutcomes(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopicPath>> {
+        async getTopicOutcomes(topicId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopicPath>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicOutcomes(topicId, filter, sort, search, fields, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get a list of the relationships that include a given topic as the source or target topic.
          * @summary Get topic relationships
-         * @param {string} topicId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, source_topic.id, source_topic.wikidata_id, source_topic.category, source_topic.roles, target_topic.id, target_topic.wikidata_id, target_topic.category, target_topic.roles.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} topicId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, source_topic.id, source_topic.wikidata_id, source_topic.category, source_topic.roles, target_topic.id, target_topic.wikidata_id, target_topic.category, target_topic.roles.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopicRelationships(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseRelationship>> {
+        async getTopicRelationships(topicId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseRelationship>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicRelationships(topicId, filter, sort, search, fields, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get a list of the variables that have been matched to a given topic.
          * @summary Get topic variables
-         * @param {string} topicId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_studies.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: name.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} topicId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: num_studies.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: name.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopicVariables(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseVariable>> {
+        async getTopicVariables(topicId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseVariable>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicVariables(topicId, filter, sort, search, fields, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get a list of topics.
          * @summary Get topics
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, wikidata_id, category, roles.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: name.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, wikidata_id, category, roles.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: name.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopics(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopic>> {
+        async getTopics(filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopic>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTopics(filter, sort, search, fields, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3900,10 +3801,10 @@ export const TopicsApiFactory = function (configuration?: Configuration, basePat
 export interface TopicsApiGetTopicByIdRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicById
      */
-    readonly topicId: string
+    readonly topicId: any
 }
 
 /**
@@ -3914,52 +3815,52 @@ export interface TopicsApiGetTopicByIdRequest {
 export interface TopicsApiGetTopicDeterminantsRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicDeterminants
      */
-    readonly topicId: string
+    readonly topicId: any
 
     /**
      * Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicDeterminants
      */
-    readonly filter?: string | null
+    readonly filter?: any | null
 
     /**
      * Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicDeterminants
      */
-    readonly sort?: string | null
+    readonly sort?: any | null
 
     /**
      * Field to search within. Supported fields for searching: none.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicDeterminants
      */
-    readonly search?: string | null
+    readonly search?: any | null
 
     /**
      * Comma-separated list of fields to include in the response.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicDeterminants
      */
-    readonly fields?: string | null
+    readonly fields?: any | null
 
     /**
      * Offset
-     * @type {number}
+     * @type {any}
      * @memberof TopicsApiGetTopicDeterminants
      */
-    readonly offset?: number
+    readonly offset?: any
 
     /**
      * Limit
-     * @type {number}
+     * @type {any}
      * @memberof TopicsApiGetTopicDeterminants
      */
-    readonly limit?: number
+    readonly limit?: any
 }
 
 /**
@@ -3970,52 +3871,52 @@ export interface TopicsApiGetTopicDeterminantsRequest {
 export interface TopicsApiGetTopicInterventionsRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicInterventions
      */
-    readonly topicId: string
+    readonly topicId: any
 
     /**
      * Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicInterventions
      */
-    readonly filter?: string | null
+    readonly filter?: any | null
 
     /**
      * Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicInterventions
      */
-    readonly sort?: string | null
+    readonly sort?: any | null
 
     /**
      * Field to search within. Supported fields for searching: none.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicInterventions
      */
-    readonly search?: string | null
+    readonly search?: any | null
 
     /**
      * Comma-separated list of fields to include in the response.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicInterventions
      */
-    readonly fields?: string | null
+    readonly fields?: any | null
 
     /**
      * Offset
-     * @type {number}
+     * @type {any}
      * @memberof TopicsApiGetTopicInterventions
      */
-    readonly offset?: number
+    readonly offset?: any
 
     /**
      * Limit
-     * @type {number}
+     * @type {any}
      * @memberof TopicsApiGetTopicInterventions
      */
-    readonly limit?: number
+    readonly limit?: any
 }
 
 /**
@@ -4026,52 +3927,52 @@ export interface TopicsApiGetTopicInterventionsRequest {
 export interface TopicsApiGetTopicOutcomesRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicOutcomes
      */
-    readonly topicId: string
+    readonly topicId: any
 
     /**
      * Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicOutcomes
      */
-    readonly filter?: string | null
+    readonly filter?: any | null
 
     /**
      * Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicOutcomes
      */
-    readonly sort?: string | null
+    readonly sort?: any | null
 
     /**
      * Field to search within. Supported fields for searching: none.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicOutcomes
      */
-    readonly search?: string | null
+    readonly search?: any | null
 
     /**
      * Comma-separated list of fields to include in the response.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicOutcomes
      */
-    readonly fields?: string | null
+    readonly fields?: any | null
 
     /**
      * Offset
-     * @type {number}
+     * @type {any}
      * @memberof TopicsApiGetTopicOutcomes
      */
-    readonly offset?: number
+    readonly offset?: any
 
     /**
      * Limit
-     * @type {number}
+     * @type {any}
      * @memberof TopicsApiGetTopicOutcomes
      */
-    readonly limit?: number
+    readonly limit?: any
 }
 
 /**
@@ -4082,52 +3983,52 @@ export interface TopicsApiGetTopicOutcomesRequest {
 export interface TopicsApiGetTopicRelationshipsRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicRelationships
      */
-    readonly topicId: string
+    readonly topicId: any
 
     /**
      * Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, source_topic.id, source_topic.wikidata_id, source_topic.category, source_topic.roles, target_topic.id, target_topic.wikidata_id, target_topic.category, target_topic.roles.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicRelationships
      */
-    readonly filter?: string | null
+    readonly filter?: any | null
 
     /**
      * Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicRelationships
      */
-    readonly sort?: string | null
+    readonly sort?: any | null
 
     /**
      * Field to search within. Supported fields for searching: none.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicRelationships
      */
-    readonly search?: string | null
+    readonly search?: any | null
 
     /**
      * Comma-separated list of fields to include in the response.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicRelationships
      */
-    readonly fields?: string | null
+    readonly fields?: any | null
 
     /**
      * Offset
-     * @type {number}
+     * @type {any}
      * @memberof TopicsApiGetTopicRelationships
      */
-    readonly offset?: number
+    readonly offset?: any
 
     /**
      * Limit
-     * @type {number}
+     * @type {any}
      * @memberof TopicsApiGetTopicRelationships
      */
-    readonly limit?: number
+    readonly limit?: any
 }
 
 /**
@@ -4138,52 +4039,52 @@ export interface TopicsApiGetTopicRelationshipsRequest {
 export interface TopicsApiGetTopicVariablesRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicVariables
      */
-    readonly topicId: string
+    readonly topicId: any
 
     /**
      * Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicVariables
      */
-    readonly filter?: string | null
+    readonly filter?: any | null
 
     /**
      * Field to sort the response by. Supported fields for sorting: num_studies.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicVariables
      */
-    readonly sort?: string | null
+    readonly sort?: any | null
 
     /**
      * Field to search within. Supported fields for searching: name.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicVariables
      */
-    readonly search?: string | null
+    readonly search?: any | null
 
     /**
      * Comma-separated list of fields to include in the response.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopicVariables
      */
-    readonly fields?: string | null
+    readonly fields?: any | null
 
     /**
      * Offset
-     * @type {number}
+     * @type {any}
      * @memberof TopicsApiGetTopicVariables
      */
-    readonly offset?: number
+    readonly offset?: any
 
     /**
      * Limit
-     * @type {number}
+     * @type {any}
      * @memberof TopicsApiGetTopicVariables
      */
-    readonly limit?: number
+    readonly limit?: any
 }
 
 /**
@@ -4194,45 +4095,45 @@ export interface TopicsApiGetTopicVariablesRequest {
 export interface TopicsApiGetTopicsRequest {
     /**
      * Fields and values to filter the response by. Supported fields for filtering: id, wikidata_id, category, roles.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopics
      */
-    readonly filter?: string | null
+    readonly filter?: any | null
 
     /**
      * Field to sort the response by. Supported fields for sorting: none.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopics
      */
-    readonly sort?: string | null
+    readonly sort?: any | null
 
     /**
      * Field to search within. Supported fields for searching: name.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopics
      */
-    readonly search?: string | null
+    readonly search?: any | null
 
     /**
      * Comma-separated list of fields to include in the response.
-     * @type {string}
+     * @type {any}
      * @memberof TopicsApiGetTopics
      */
-    readonly fields?: string | null
+    readonly fields?: any | null
 
     /**
      * Offset
-     * @type {number}
+     * @type {any}
      * @memberof TopicsApiGetTopics
      */
-    readonly offset?: number
+    readonly offset?: any
 
     /**
      * Limit
-     * @type {number}
+     * @type {any}
      * @memberof TopicsApiGetTopics
      */
-    readonly limit?: number
+    readonly limit?: any
 }
 
 /**
@@ -4338,11 +4239,11 @@ export const VariablesApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Get a variable by its ID.
          * @summary Get a variable
-         * @param {string} variableId 
+         * @param {any} variableId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getVariableById: async (variableId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getVariableById: async (variableId: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'variableId' is not null or undefined
             assertParamExists('getVariableById', 'variableId', variableId)
             const localVarPath = `/v0/variables/{variable_id}`
@@ -4375,17 +4276,17 @@ export const VariablesApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Get a list of the statistical findings that include a given variable.
          * @summary Get variable statistical findings
-         * @param {string} variableId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} variableId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getVariableStatisticalFindings: async (variableId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getVariableStatisticalFindings: async (variableId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'variableId' is not null or undefined
             assertParamExists('getVariableStatisticalFindings', 'variableId', variableId)
             const localVarPath = `/v0/variables/{variable_id}/statistical_findings`
@@ -4442,16 +4343,16 @@ export const VariablesApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Get a list of variables.
          * @summary Get variables
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_studies.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: name.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: num_studies.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: name.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getVariables: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getVariables: async (filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v0/variables`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4515,44 +4416,44 @@ export const VariablesApiFp = function(configuration?: Configuration) {
         /**
          * Get a variable by its ID.
          * @summary Get a variable
-         * @param {string} variableId 
+         * @param {any} variableId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getVariableById(variableId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Variable>> {
+        async getVariableById(variableId: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Variable>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getVariableById(variableId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get a list of the statistical findings that include a given variable.
          * @summary Get variable statistical findings
-         * @param {string} variableId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any} variableId 
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: none.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getVariableStatisticalFindings(variableId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
+        async getVariableStatisticalFindings(variableId: any, filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getVariableStatisticalFindings(variableId, filter, sort, search, fields, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Get a list of variables.
          * @summary Get variables
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.
-         * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_studies.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: name.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response.
-         * @param {number} [offset] Offset
-         * @param {number} [limit] Limit
+         * @param {any | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.
+         * @param {any | null} [sort] Field to sort the response by. Supported fields for sorting: num_studies.
+         * @param {any | null} [search] Field to search within. Supported fields for searching: name.
+         * @param {any | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {any} [offset] Offset
+         * @param {any} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getVariables(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseVariable>> {
+        async getVariables(filter?: any | null, sort?: any | null, search?: any | null, fields?: any | null, offset?: any, limit?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseVariable>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getVariables(filter, sort, search, fields, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4607,10 +4508,10 @@ export const VariablesApiFactory = function (configuration?: Configuration, base
 export interface VariablesApiGetVariableByIdRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof VariablesApiGetVariableById
      */
-    readonly variableId: string
+    readonly variableId: any
 }
 
 /**
@@ -4621,52 +4522,52 @@ export interface VariablesApiGetVariableByIdRequest {
 export interface VariablesApiGetVariableStatisticalFindingsRequest {
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof VariablesApiGetVariableStatisticalFindings
      */
-    readonly variableId: string
+    readonly variableId: any
 
     /**
      * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
-     * @type {string}
+     * @type {any}
      * @memberof VariablesApiGetVariableStatisticalFindings
      */
-    readonly filter?: string | null
+    readonly filter?: any | null
 
     /**
      * Field to sort the response by. Supported fields for sorting: none.
-     * @type {string}
+     * @type {any}
      * @memberof VariablesApiGetVariableStatisticalFindings
      */
-    readonly sort?: string | null
+    readonly sort?: any | null
 
     /**
      * Field to search within. Supported fields for searching: none.
-     * @type {string}
+     * @type {any}
      * @memberof VariablesApiGetVariableStatisticalFindings
      */
-    readonly search?: string | null
+    readonly search?: any | null
 
     /**
      * Comma-separated list of fields to include in the response.
-     * @type {string}
+     * @type {any}
      * @memberof VariablesApiGetVariableStatisticalFindings
      */
-    readonly fields?: string | null
+    readonly fields?: any | null
 
     /**
      * Offset
-     * @type {number}
+     * @type {any}
      * @memberof VariablesApiGetVariableStatisticalFindings
      */
-    readonly offset?: number
+    readonly offset?: any
 
     /**
      * Limit
-     * @type {number}
+     * @type {any}
      * @memberof VariablesApiGetVariableStatisticalFindings
      */
-    readonly limit?: number
+    readonly limit?: any
 }
 
 /**
@@ -4677,45 +4578,45 @@ export interface VariablesApiGetVariableStatisticalFindingsRequest {
 export interface VariablesApiGetVariablesRequest {
     /**
      * Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.
-     * @type {string}
+     * @type {any}
      * @memberof VariablesApiGetVariables
      */
-    readonly filter?: string | null
+    readonly filter?: any | null
 
     /**
      * Field to sort the response by. Supported fields for sorting: num_studies.
-     * @type {string}
+     * @type {any}
      * @memberof VariablesApiGetVariables
      */
-    readonly sort?: string | null
+    readonly sort?: any | null
 
     /**
      * Field to search within. Supported fields for searching: name.
-     * @type {string}
+     * @type {any}
      * @memberof VariablesApiGetVariables
      */
-    readonly search?: string | null
+    readonly search?: any | null
 
     /**
      * Comma-separated list of fields to include in the response.
-     * @type {string}
+     * @type {any}
      * @memberof VariablesApiGetVariables
      */
-    readonly fields?: string | null
+    readonly fields?: any | null
 
     /**
      * Offset
-     * @type {number}
+     * @type {any}
      * @memberof VariablesApiGetVariables
      */
-    readonly offset?: number
+    readonly offset?: any
 
     /**
      * Limit
-     * @type {number}
+     * @type {any}
      * @memberof VariablesApiGetVariables
      */
-    readonly limit?: number
+    readonly limit?: any
 }
 
 /**
