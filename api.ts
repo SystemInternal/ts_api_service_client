@@ -14,7 +14,7 @@
 
 
 import type { Configuration } from './configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -391,19 +391,19 @@ export interface MechanisticFinding {
      */
     'topic_2'?: NestedResource | null;
     /**
-     * 
+     * Source variable of the finding
      * @type {NestedResource}
      * @memberof MechanisticFinding
      */
     'variable_1'?: NestedResource;
     /**
-     * 
+     * Target variable of the finding
      * @type {NestedResource}
      * @memberof MechanisticFinding
      */
     'variable_2'?: NestedResource;
     /**
-     * 
+     * Study supporting the finding
      * @type {NestedStudy}
      * @memberof MechanisticFinding
      */
@@ -517,7 +517,7 @@ export interface PubmedSearchSynthesisJob {
      */
     'id': string;
     /**
-     * 
+     * Status of job
      * @type {JobStatus}
      * @memberof PubmedSearchSynthesisJob
      */
@@ -616,13 +616,13 @@ export interface Relationship {
      */
     'has_experimental_trial': boolean;
     /**
-     * 
+     * Unique identifier of the source topic
      * @type {Topic}
      * @memberof Relationship
      */
     'source_topic': Topic;
     /**
-     * 
+     * Unique identifier of the target topic
      * @type {Topic}
      * @memberof Relationship
      */
@@ -700,19 +700,19 @@ export interface StatisticalFinding {
      */
     'topic_2'?: NestedResource | null;
     /**
-     * 
+     * Source variable of the finding
      * @type {NestedResource}
      * @memberof StatisticalFinding
      */
     'variable_1'?: NestedResource;
     /**
-     * 
+     * Target variable of the finding
      * @type {NestedResource}
      * @memberof StatisticalFinding
      */
     'variable_2'?: NestedResource;
     /**
-     * 
+     * Study supporting the finding
      * @type {NestedStudy}
      * @memberof StatisticalFinding
      */
@@ -780,11 +780,11 @@ export interface Study {
      */
     'title'?: string | null;
     /**
-     * Authors of the study
-     * @type {}
+     * 
+     * @type {Array<object>}
      * @memberof Study
      */
-    'authors'?:  | null;
+    'authors'?: Array<object> | null;
     /**
      * 
      * @type {string}
@@ -859,11 +859,11 @@ export interface Topic {
      */
     'wikidata_id'?: string | null;
     /**
-     * UMLS Concept Unique Identifiers (CUIs) for the topic
-     * @type {}
+     * 
+     * @type {Array<string>}
      * @memberof Topic
      */
-    'umls_cuis'?:  | null;
+    'umls_cuis'?: Array<string> | null;
     /**
      * 
      * @type {TopicCategory}
@@ -871,11 +871,11 @@ export interface Topic {
      */
     'category'?: TopicCategory | null;
     /**
-     * Roles associated with the topic
-     * @type {}
+     * 
+     * @type {Array<TopicRole>}
      * @memberof Topic
      */
-    'roles'?:  | null;
+    'roles'?: Array<TopicRole> | null;
 }
 
 
@@ -986,7 +986,7 @@ export interface TopicPath {
      */
     'has_experimental_trial': boolean;
     /**
-     * 
+     * Topic in path
      * @type {Topic}
      * @memberof TopicPath
      */
@@ -1089,7 +1089,7 @@ export const GraphApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSubgraphByTopicId: async (topicId: string, upstream1Filter?: string | null, upstream2Filter?: string | null, downstream1Filter?: string | null, downstream2Filter?: string | null, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getSubgraphByTopicId: async (topicId: string, upstream1Filter?: string | null, upstream2Filter?: string | null, downstream1Filter?: string | null, downstream2Filter?: string | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getSubgraphByTopicId', 'topicId', topicId)
             const localVarPath = `/v0/graph/{topic_id}`
@@ -1156,11 +1156,11 @@ export const GraphApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSubgraphByTopicId(topicId: string, upstream1Filter?: string | null, upstream2Filter?: string | null, downstream1Filter?: string | null, downstream2Filter?: string | null, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GraphResponse>> {
+        async getSubgraphByTopicId(topicId: string, upstream1Filter?: string | null, upstream2Filter?: string | null, downstream1Filter?: string | null, downstream2Filter?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GraphResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSubgraphByTopicId(topicId, upstream1Filter, upstream2Filter, downstream1Filter, downstream2Filter, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['GraphApi.getSubgraphByTopicId']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GraphApi.getSubgraphByTopicId']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -1179,7 +1179,7 @@ export const GraphApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSubgraphByTopicId(requestParameters: GraphApiGetSubgraphByTopicIdRequest, options?: AxiosRequestConfig): AxiosPromise<GraphResponse> {
+        getSubgraphByTopicId(requestParameters: GraphApiGetSubgraphByTopicIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<GraphResponse> {
             return localVarFp.getSubgraphByTopicId(requestParameters.topicId, requestParameters.upstream1Filter, requestParameters.upstream2Filter, requestParameters.downstream1Filter, requestParameters.downstream2Filter, options).then((request) => request(axios, basePath));
         },
     };
@@ -1242,7 +1242,7 @@ export class GraphApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GraphApi
      */
-    public getSubgraphByTopicId(requestParameters: GraphApiGetSubgraphByTopicIdRequest, options?: AxiosRequestConfig) {
+    public getSubgraphByTopicId(requestParameters: GraphApiGetSubgraphByTopicIdRequest, options?: RawAxiosRequestConfig) {
         return GraphApiFp(this.configuration).getSubgraphByTopicId(requestParameters.topicId, requestParameters.upstream1Filter, requestParameters.upstream2Filter, requestParameters.downstream1Filter, requestParameters.downstream2Filter, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -1262,7 +1262,7 @@ export const MechanisticFindingsApiAxiosParamCreator = function (configuration?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMechanisticFindingById: async (findingId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getMechanisticFindingById: async (findingId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'findingId' is not null or undefined
             assertParamExists('getMechanisticFindingById', 'findingId', findingId)
             const localVarPath = `/v0/mechanistic_findings/{finding_id}`
@@ -1304,7 +1304,7 @@ export const MechanisticFindingsApiAxiosParamCreator = function (configuration?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMechanisticFindings: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getMechanisticFindings: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v0/mechanistic_findings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1372,11 +1372,11 @@ export const MechanisticFindingsApiFp = function(configuration?: Configuration) 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getMechanisticFindingById(findingId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MechanisticFinding>> {
+        async getMechanisticFindingById(findingId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MechanisticFinding>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getMechanisticFindingById(findingId, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['MechanisticFindingsApi.getMechanisticFindingById']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MechanisticFindingsApi.getMechanisticFindingById']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get a list of mechanistic findings.
@@ -1390,11 +1390,11 @@ export const MechanisticFindingsApiFp = function(configuration?: Configuration) 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getMechanisticFindings(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseMechanisticFinding>> {
+        async getMechanisticFindings(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseMechanisticFinding>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getMechanisticFindings(filter, sort, search, fields, offset, limit, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['MechanisticFindingsApi.getMechanisticFindings']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MechanisticFindingsApi.getMechanisticFindings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -1413,7 +1413,7 @@ export const MechanisticFindingsApiFactory = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMechanisticFindingById(requestParameters: MechanisticFindingsApiGetMechanisticFindingByIdRequest, options?: AxiosRequestConfig): AxiosPromise<MechanisticFinding> {
+        getMechanisticFindingById(requestParameters: MechanisticFindingsApiGetMechanisticFindingByIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<MechanisticFinding> {
             return localVarFp.getMechanisticFindingById(requestParameters.findingId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1423,7 +1423,7 @@ export const MechanisticFindingsApiFactory = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMechanisticFindings(requestParameters: MechanisticFindingsApiGetMechanisticFindingsRequest = {}, options?: AxiosRequestConfig): AxiosPromise<ListResponseMechanisticFinding> {
+        getMechanisticFindings(requestParameters: MechanisticFindingsApiGetMechanisticFindingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseMechanisticFinding> {
             return localVarFp.getMechanisticFindings(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
@@ -1507,7 +1507,7 @@ export class MechanisticFindingsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MechanisticFindingsApi
      */
-    public getMechanisticFindingById(requestParameters: MechanisticFindingsApiGetMechanisticFindingByIdRequest, options?: AxiosRequestConfig) {
+    public getMechanisticFindingById(requestParameters: MechanisticFindingsApiGetMechanisticFindingByIdRequest, options?: RawAxiosRequestConfig) {
         return MechanisticFindingsApiFp(this.configuration).getMechanisticFindingById(requestParameters.findingId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -1519,7 +1519,7 @@ export class MechanisticFindingsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MechanisticFindingsApi
      */
-    public getMechanisticFindings(requestParameters: MechanisticFindingsApiGetMechanisticFindingsRequest = {}, options?: AxiosRequestConfig) {
+    public getMechanisticFindings(requestParameters: MechanisticFindingsApiGetMechanisticFindingsRequest = {}, options?: RawAxiosRequestConfig) {
         return MechanisticFindingsApiFp(this.configuration).getMechanisticFindings(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -1539,7 +1539,7 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRelationshipById: async (relationshipId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRelationshipById: async (relationshipId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'relationshipId' is not null or undefined
             assertParamExists('getRelationshipById', 'relationshipId', relationshipId)
             const localVarPath = `/v0/relationships/{relationship_id}`
@@ -1582,7 +1582,7 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRelationshipStatisticalFindings: async (relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRelationshipStatisticalFindings: async (relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'relationshipId' is not null or undefined
             assertParamExists('getRelationshipStatisticalFindings', 'relationshipId', relationshipId)
             const localVarPath = `/v0/relationships/{relationship_id}/statistical_findings`
@@ -1649,7 +1649,7 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRelationshipStudies: async (relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRelationshipStudies: async (relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'relationshipId' is not null or undefined
             assertParamExists('getRelationshipStudies', 'relationshipId', relationshipId)
             const localVarPath = `/v0/relationships/{relationship_id}/studies`
@@ -1715,7 +1715,7 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRelationships: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRelationships: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v0/relationships`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1783,11 +1783,11 @@ export const RelationshipsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRelationshipById(relationshipId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Relationship>> {
+        async getRelationshipById(relationshipId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Relationship>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRelationshipById(relationshipId, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['RelationshipsApi.getRelationshipById']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RelationshipsApi.getRelationshipById']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get a list of the statistical findings underlying a given relationship.
@@ -1802,11 +1802,11 @@ export const RelationshipsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRelationshipStatisticalFindings(relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
+        async getRelationshipStatisticalFindings(relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRelationshipStatisticalFindings(relationshipId, filter, sort, search, fields, offset, limit, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['RelationshipsApi.getRelationshipStatisticalFindings']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RelationshipsApi.getRelationshipStatisticalFindings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get a list of the studies underlying a given relationship.
@@ -1821,11 +1821,11 @@ export const RelationshipsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRelationshipStudies(relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
+        async getRelationshipStudies(relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRelationshipStudies(relationshipId, filter, sort, search, fields, offset, limit, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['RelationshipsApi.getRelationshipStudies']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RelationshipsApi.getRelationshipStudies']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get a list of relationships.
@@ -1839,11 +1839,11 @@ export const RelationshipsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRelationships(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseRelationship>> {
+        async getRelationships(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseRelationship>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRelationships(filter, sort, search, fields, offset, limit, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['RelationshipsApi.getRelationships']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RelationshipsApi.getRelationships']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -1862,7 +1862,7 @@ export const RelationshipsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRelationshipById(requestParameters: RelationshipsApiGetRelationshipByIdRequest, options?: AxiosRequestConfig): AxiosPromise<Relationship> {
+        getRelationshipById(requestParameters: RelationshipsApiGetRelationshipByIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<Relationship> {
             return localVarFp.getRelationshipById(requestParameters.relationshipId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1872,7 +1872,7 @@ export const RelationshipsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRelationshipStatisticalFindings(requestParameters: RelationshipsApiGetRelationshipStatisticalFindingsRequest, options?: AxiosRequestConfig): AxiosPromise<ListResponseStatisticalFinding> {
+        getRelationshipStatisticalFindings(requestParameters: RelationshipsApiGetRelationshipStatisticalFindingsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseStatisticalFinding> {
             return localVarFp.getRelationshipStatisticalFindings(requestParameters.relationshipId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1882,7 +1882,7 @@ export const RelationshipsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRelationshipStudies(requestParameters: RelationshipsApiGetRelationshipStudiesRequest, options?: AxiosRequestConfig): AxiosPromise<ListResponseStudy> {
+        getRelationshipStudies(requestParameters: RelationshipsApiGetRelationshipStudiesRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseStudy> {
             return localVarFp.getRelationshipStudies(requestParameters.relationshipId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1892,7 +1892,7 @@ export const RelationshipsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRelationships(requestParameters: RelationshipsApiGetRelationshipsRequest = {}, options?: AxiosRequestConfig): AxiosPromise<ListResponseRelationship> {
+        getRelationships(requestParameters: RelationshipsApiGetRelationshipsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseRelationship> {
             return localVarFp.getRelationships(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
@@ -2088,7 +2088,7 @@ export class RelationshipsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RelationshipsApi
      */
-    public getRelationshipById(requestParameters: RelationshipsApiGetRelationshipByIdRequest, options?: AxiosRequestConfig) {
+    public getRelationshipById(requestParameters: RelationshipsApiGetRelationshipByIdRequest, options?: RawAxiosRequestConfig) {
         return RelationshipsApiFp(this.configuration).getRelationshipById(requestParameters.relationshipId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -2100,7 +2100,7 @@ export class RelationshipsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RelationshipsApi
      */
-    public getRelationshipStatisticalFindings(requestParameters: RelationshipsApiGetRelationshipStatisticalFindingsRequest, options?: AxiosRequestConfig) {
+    public getRelationshipStatisticalFindings(requestParameters: RelationshipsApiGetRelationshipStatisticalFindingsRequest, options?: RawAxiosRequestConfig) {
         return RelationshipsApiFp(this.configuration).getRelationshipStatisticalFindings(requestParameters.relationshipId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -2112,7 +2112,7 @@ export class RelationshipsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RelationshipsApi
      */
-    public getRelationshipStudies(requestParameters: RelationshipsApiGetRelationshipStudiesRequest, options?: AxiosRequestConfig) {
+    public getRelationshipStudies(requestParameters: RelationshipsApiGetRelationshipStudiesRequest, options?: RawAxiosRequestConfig) {
         return RelationshipsApiFp(this.configuration).getRelationshipStudies(requestParameters.relationshipId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -2124,7 +2124,7 @@ export class RelationshipsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RelationshipsApi
      */
-    public getRelationships(requestParameters: RelationshipsApiGetRelationshipsRequest = {}, options?: AxiosRequestConfig) {
+    public getRelationships(requestParameters: RelationshipsApiGetRelationshipsRequest = {}, options?: RawAxiosRequestConfig) {
         return RelationshipsApiFp(this.configuration).getRelationships(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -2145,7 +2145,7 @@ export const StatisticalFindingsApiAxiosParamCreator = function (configuration?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        flagStatisticalFinding: async (findingId: string, flagInput: Array<FlagInput>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        flagStatisticalFinding: async (findingId: string, flagInput: Array<FlagInput>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'findingId' is not null or undefined
             assertParamExists('flagStatisticalFinding', 'findingId', findingId)
             // verify required parameter 'flagInput' is not null or undefined
@@ -2187,7 +2187,7 @@ export const StatisticalFindingsApiAxiosParamCreator = function (configuration?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStatisticalFindingById: async (findingId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStatisticalFindingById: async (findingId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'findingId' is not null or undefined
             assertParamExists('getStatisticalFindingById', 'findingId', findingId)
             const localVarPath = `/v0/statistical_findings/{finding_id}`
@@ -2229,7 +2229,7 @@ export const StatisticalFindingsApiAxiosParamCreator = function (configuration?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStatisticalFindings: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStatisticalFindings: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v0/statistical_findings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2298,11 +2298,11 @@ export const StatisticalFindingsApiFp = function(configuration?: Configuration) 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async flagStatisticalFinding(findingId: string, flagInput: Array<FlagInput>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Flag>>> {
+        async flagStatisticalFinding(findingId: string, flagInput: Array<FlagInput>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Flag>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.flagStatisticalFinding(findingId, flagInput, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['StatisticalFindingsApi.flagStatisticalFinding']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['StatisticalFindingsApi.flagStatisticalFinding']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get a statistical finding by its ID.
@@ -2311,11 +2311,11 @@ export const StatisticalFindingsApiFp = function(configuration?: Configuration) 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStatisticalFindingById(findingId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StatisticalFinding>> {
+        async getStatisticalFindingById(findingId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StatisticalFinding>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStatisticalFindingById(findingId, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['StatisticalFindingsApi.getStatisticalFindingById']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['StatisticalFindingsApi.getStatisticalFindingById']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get a list of statistical findings.
@@ -2329,11 +2329,11 @@ export const StatisticalFindingsApiFp = function(configuration?: Configuration) 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStatisticalFindings(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
+        async getStatisticalFindings(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStatisticalFindings(filter, sort, search, fields, offset, limit, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['StatisticalFindingsApi.getStatisticalFindings']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['StatisticalFindingsApi.getStatisticalFindings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -2352,7 +2352,7 @@ export const StatisticalFindingsApiFactory = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        flagStatisticalFinding(requestParameters: StatisticalFindingsApiFlagStatisticalFindingRequest, options?: AxiosRequestConfig): AxiosPromise<Array<Flag>> {
+        flagStatisticalFinding(requestParameters: StatisticalFindingsApiFlagStatisticalFindingRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<Flag>> {
             return localVarFp.flagStatisticalFinding(requestParameters.findingId, requestParameters.flagInput, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2362,7 +2362,7 @@ export const StatisticalFindingsApiFactory = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStatisticalFindingById(requestParameters: StatisticalFindingsApiGetStatisticalFindingByIdRequest, options?: AxiosRequestConfig): AxiosPromise<StatisticalFinding> {
+        getStatisticalFindingById(requestParameters: StatisticalFindingsApiGetStatisticalFindingByIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<StatisticalFinding> {
             return localVarFp.getStatisticalFindingById(requestParameters.findingId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2372,7 +2372,7 @@ export const StatisticalFindingsApiFactory = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStatisticalFindings(requestParameters: StatisticalFindingsApiGetStatisticalFindingsRequest = {}, options?: AxiosRequestConfig): AxiosPromise<ListResponseStatisticalFinding> {
+        getStatisticalFindings(requestParameters: StatisticalFindingsApiGetStatisticalFindingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseStatisticalFinding> {
             return localVarFp.getStatisticalFindings(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
@@ -2477,7 +2477,7 @@ export class StatisticalFindingsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof StatisticalFindingsApi
      */
-    public flagStatisticalFinding(requestParameters: StatisticalFindingsApiFlagStatisticalFindingRequest, options?: AxiosRequestConfig) {
+    public flagStatisticalFinding(requestParameters: StatisticalFindingsApiFlagStatisticalFindingRequest, options?: RawAxiosRequestConfig) {
         return StatisticalFindingsApiFp(this.configuration).flagStatisticalFinding(requestParameters.findingId, requestParameters.flagInput, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -2489,7 +2489,7 @@ export class StatisticalFindingsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof StatisticalFindingsApi
      */
-    public getStatisticalFindingById(requestParameters: StatisticalFindingsApiGetStatisticalFindingByIdRequest, options?: AxiosRequestConfig) {
+    public getStatisticalFindingById(requestParameters: StatisticalFindingsApiGetStatisticalFindingByIdRequest, options?: RawAxiosRequestConfig) {
         return StatisticalFindingsApiFp(this.configuration).getStatisticalFindingById(requestParameters.findingId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -2501,7 +2501,7 @@ export class StatisticalFindingsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof StatisticalFindingsApi
      */
-    public getStatisticalFindings(requestParameters: StatisticalFindingsApiGetStatisticalFindingsRequest = {}, options?: AxiosRequestConfig) {
+    public getStatisticalFindings(requestParameters: StatisticalFindingsApiGetStatisticalFindingsRequest = {}, options?: RawAxiosRequestConfig) {
         return StatisticalFindingsApiFp(this.configuration).getStatisticalFindings(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -2526,7 +2526,7 @@ export const StudiesApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStudies: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStudies: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v0/studies`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2584,7 +2584,7 @@ export const StudiesApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStudyById: async (studyId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStudyById: async (studyId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'studyId' is not null or undefined
             assertParamExists('getStudyById', 'studyId', studyId)
             const localVarPath = `/v0/studies/{study_id}`
@@ -2627,7 +2627,7 @@ export const StudiesApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStudyStatisticalFindings: async (studyId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStudyStatisticalFindings: async (studyId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'studyId' is not null or undefined
             assertParamExists('getStudyStatisticalFindings', 'studyId', studyId)
             const localVarPath = `/v0/studies/{study_id}/statistical_findings`
@@ -2703,11 +2703,11 @@ export const StudiesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStudies(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
+        async getStudies(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStudies(filter, sort, search, fields, offset, limit, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['StudiesApi.getStudies']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['StudiesApi.getStudies']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get a study by its ID.
@@ -2716,11 +2716,11 @@ export const StudiesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStudyById(studyId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Study>> {
+        async getStudyById(studyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Study>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStudyById(studyId, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['StudiesApi.getStudyById']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['StudiesApi.getStudyById']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get a list of the statistical findings reported by a given study.
@@ -2735,11 +2735,11 @@ export const StudiesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStudyStatisticalFindings(studyId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
+        async getStudyStatisticalFindings(studyId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStudyStatisticalFindings(studyId, filter, sort, search, fields, offset, limit, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['StudiesApi.getStudyStatisticalFindings']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['StudiesApi.getStudyStatisticalFindings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -2758,7 +2758,7 @@ export const StudiesApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStudies(requestParameters: StudiesApiGetStudiesRequest = {}, options?: AxiosRequestConfig): AxiosPromise<ListResponseStudy> {
+        getStudies(requestParameters: StudiesApiGetStudiesRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseStudy> {
             return localVarFp.getStudies(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2768,7 +2768,7 @@ export const StudiesApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStudyById(requestParameters: StudiesApiGetStudyByIdRequest, options?: AxiosRequestConfig): AxiosPromise<Study> {
+        getStudyById(requestParameters: StudiesApiGetStudyByIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<Study> {
             return localVarFp.getStudyById(requestParameters.studyId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2778,7 +2778,7 @@ export const StudiesApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStudyStatisticalFindings(requestParameters: StudiesApiGetStudyStatisticalFindingsRequest, options?: AxiosRequestConfig): AxiosPromise<ListResponseStatisticalFinding> {
+        getStudyStatisticalFindings(requestParameters: StudiesApiGetStudyStatisticalFindingsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseStatisticalFinding> {
             return localVarFp.getStudyStatisticalFindings(requestParameters.studyId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
@@ -2918,7 +2918,7 @@ export class StudiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof StudiesApi
      */
-    public getStudies(requestParameters: StudiesApiGetStudiesRequest = {}, options?: AxiosRequestConfig) {
+    public getStudies(requestParameters: StudiesApiGetStudiesRequest = {}, options?: RawAxiosRequestConfig) {
         return StudiesApiFp(this.configuration).getStudies(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -2930,7 +2930,7 @@ export class StudiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof StudiesApi
      */
-    public getStudyById(requestParameters: StudiesApiGetStudyByIdRequest, options?: AxiosRequestConfig) {
+    public getStudyById(requestParameters: StudiesApiGetStudyByIdRequest, options?: RawAxiosRequestConfig) {
         return StudiesApiFp(this.configuration).getStudyById(requestParameters.studyId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -2942,7 +2942,7 @@ export class StudiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof StudiesApi
      */
-    public getStudyStatisticalFindings(requestParameters: StudiesApiGetStudyStatisticalFindingsRequest, options?: AxiosRequestConfig) {
+    public getStudyStatisticalFindings(requestParameters: StudiesApiGetStudyStatisticalFindingsRequest, options?: RawAxiosRequestConfig) {
         return StudiesApiFp(this.configuration).getStudyStatisticalFindings(requestParameters.studyId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -2962,7 +2962,7 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getClustersFromPubmedSearch: async (jobId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getClustersFromPubmedSearch: async (jobId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'jobId' is not null or undefined
             assertParamExists('getClustersFromPubmedSearch', 'jobId', jobId)
             const localVarPath = `/v0/synthesis/pubmed_search/{job_id}/clusters`
@@ -3005,7 +3005,7 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMechanisticFindingsFromPubmedSearch: async (jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getMechanisticFindingsFromPubmedSearch: async (jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'jobId' is not null or undefined
             assertParamExists('getMechanisticFindingsFromPubmedSearch', 'jobId', jobId)
             const localVarPath = `/v0/synthesis/pubmed_search/{job_id}/mechanistic_findings`
@@ -3066,7 +3066,7 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPubmedSearchSynthesisById: async (jobId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPubmedSearchSynthesisById: async (jobId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'jobId' is not null or undefined
             assertParamExists('getPubmedSearchSynthesisById', 'jobId', jobId)
             const localVarPath = `/v0/synthesis/pubmed_search/{job_id}`
@@ -3109,7 +3109,7 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStatisticalFindingsFromPubmedSearch: async (jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStatisticalFindingsFromPubmedSearch: async (jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'jobId' is not null or undefined
             assertParamExists('getStatisticalFindingsFromPubmedSearch', 'jobId', jobId)
             const localVarPath = `/v0/synthesis/pubmed_search/{job_id}/statistical_findings`
@@ -3176,7 +3176,7 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStudiesFromPubmedSearch: async (jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStudiesFromPubmedSearch: async (jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'jobId' is not null or undefined
             assertParamExists('getStudiesFromPubmedSearch', 'jobId', jobId)
             const localVarPath = `/v0/synthesis/pubmed_search/{job_id}/studies`
@@ -3237,7 +3237,7 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSynthesisFromPubmedSearch: async (jobId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getSynthesisFromPubmedSearch: async (jobId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'jobId' is not null or undefined
             assertParamExists('getSynthesisFromPubmedSearch', 'jobId', jobId)
             const localVarPath = `/v0/synthesis/pubmed_search/{job_id}/synthesis`
@@ -3274,7 +3274,7 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        synthesizePubmedSearch: async (pubmedSearchSynthesisInput: PubmedSearchSynthesisInput, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        synthesizePubmedSearch: async (pubmedSearchSynthesisInput: PubmedSearchSynthesisInput, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'pubmedSearchSynthesisInput' is not null or undefined
             assertParamExists('synthesizePubmedSearch', 'pubmedSearchSynthesisInput', pubmedSearchSynthesisInput)
             const localVarPath = `/v0/synthesis/pubmed_search`;
@@ -3323,11 +3323,11 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getClustersFromPubmedSearch(jobId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseCluster>> {
+        async getClustersFromPubmedSearch(jobId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseCluster>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getClustersFromPubmedSearch(jobId, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['SynthesisApi.getClustersFromPubmedSearch']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SynthesisApi.getClustersFromPubmedSearch']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get statistical findings from pubmed search synthesis.
@@ -3342,11 +3342,11 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getMechanisticFindingsFromPubmedSearch(jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseMechanisticFinding>> {
+        async getMechanisticFindingsFromPubmedSearch(jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseMechanisticFinding>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getMechanisticFindingsFromPubmedSearch(jobId, filter, sort, search, fields, offset, limit, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['SynthesisApi.getMechanisticFindingsFromPubmedSearch']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SynthesisApi.getMechanisticFindingsFromPubmedSearch']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get a pubmed search synthesis by its ID.
@@ -3355,11 +3355,11 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPubmedSearchSynthesisById(jobId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PubmedSearchSynthesisJob>> {
+        async getPubmedSearchSynthesisById(jobId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PubmedSearchSynthesisJob>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPubmedSearchSynthesisById(jobId, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['SynthesisApi.getPubmedSearchSynthesisById']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SynthesisApi.getPubmedSearchSynthesisById']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get statistical findings from pubmed search synthesis.
@@ -3374,11 +3374,11 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStatisticalFindingsFromPubmedSearch(jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
+        async getStatisticalFindingsFromPubmedSearch(jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStatisticalFindingsFromPubmedSearch(jobId, filter, sort, search, fields, offset, limit, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['SynthesisApi.getStatisticalFindingsFromPubmedSearch']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SynthesisApi.getStatisticalFindingsFromPubmedSearch']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get studies from pubmed search synthesis.
@@ -3393,11 +3393,11 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStudiesFromPubmedSearch(jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
+        async getStudiesFromPubmedSearch(jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStudiesFromPubmedSearch(jobId, filter, sort, search, fields, offset, limit, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['SynthesisApi.getStudiesFromPubmedSearch']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SynthesisApi.getStudiesFromPubmedSearch']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get synthesis from pubmed search synthesis.
@@ -3406,11 +3406,11 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSynthesisFromPubmedSearch(jobId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async getSynthesisFromPubmedSearch(jobId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSynthesisFromPubmedSearch(jobId, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['SynthesisApi.getSynthesisFromPubmedSearch']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SynthesisApi.getSynthesisFromPubmedSearch']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Initiate pubmed search synthesis.
@@ -3419,11 +3419,11 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async synthesizePubmedSearch(pubmedSearchSynthesisInput: PubmedSearchSynthesisInput, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+        async synthesizePubmedSearch(pubmedSearchSynthesisInput: PubmedSearchSynthesisInput, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.synthesizePubmedSearch(pubmedSearchSynthesisInput, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['SynthesisApi.synthesizePubmedSearch']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SynthesisApi.synthesizePubmedSearch']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -3442,7 +3442,7 @@ export const SynthesisApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getClustersFromPubmedSearch(requestParameters: SynthesisApiGetClustersFromPubmedSearchRequest, options?: AxiosRequestConfig): AxiosPromise<ListResponseCluster> {
+        getClustersFromPubmedSearch(requestParameters: SynthesisApiGetClustersFromPubmedSearchRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseCluster> {
             return localVarFp.getClustersFromPubmedSearch(requestParameters.jobId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3452,7 +3452,7 @@ export const SynthesisApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMechanisticFindingsFromPubmedSearch(requestParameters: SynthesisApiGetMechanisticFindingsFromPubmedSearchRequest, options?: AxiosRequestConfig): AxiosPromise<ListResponseMechanisticFinding> {
+        getMechanisticFindingsFromPubmedSearch(requestParameters: SynthesisApiGetMechanisticFindingsFromPubmedSearchRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseMechanisticFinding> {
             return localVarFp.getMechanisticFindingsFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3462,7 +3462,7 @@ export const SynthesisApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPubmedSearchSynthesisById(requestParameters: SynthesisApiGetPubmedSearchSynthesisByIdRequest, options?: AxiosRequestConfig): AxiosPromise<PubmedSearchSynthesisJob> {
+        getPubmedSearchSynthesisById(requestParameters: SynthesisApiGetPubmedSearchSynthesisByIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<PubmedSearchSynthesisJob> {
             return localVarFp.getPubmedSearchSynthesisById(requestParameters.jobId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3472,7 +3472,7 @@ export const SynthesisApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStatisticalFindingsFromPubmedSearch(requestParameters: SynthesisApiGetStatisticalFindingsFromPubmedSearchRequest, options?: AxiosRequestConfig): AxiosPromise<ListResponseStatisticalFinding> {
+        getStatisticalFindingsFromPubmedSearch(requestParameters: SynthesisApiGetStatisticalFindingsFromPubmedSearchRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseStatisticalFinding> {
             return localVarFp.getStatisticalFindingsFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3482,7 +3482,7 @@ export const SynthesisApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStudiesFromPubmedSearch(requestParameters: SynthesisApiGetStudiesFromPubmedSearchRequest, options?: AxiosRequestConfig): AxiosPromise<ListResponseStudy> {
+        getStudiesFromPubmedSearch(requestParameters: SynthesisApiGetStudiesFromPubmedSearchRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseStudy> {
             return localVarFp.getStudiesFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3492,7 +3492,7 @@ export const SynthesisApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSynthesisFromPubmedSearch(requestParameters: SynthesisApiGetSynthesisFromPubmedSearchRequest, options?: AxiosRequestConfig): AxiosPromise<void> {
+        getSynthesisFromPubmedSearch(requestParameters: SynthesisApiGetSynthesisFromPubmedSearchRequest, options?: RawAxiosRequestConfig): AxiosPromise<any> {
             return localVarFp.getSynthesisFromPubmedSearch(requestParameters.jobId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3502,7 +3502,7 @@ export const SynthesisApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        synthesizePubmedSearch(requestParameters: SynthesisApiSynthesizePubmedSearchRequest, options?: AxiosRequestConfig): AxiosPromise<string> {
+        synthesizePubmedSearch(requestParameters: SynthesisApiSynthesizePubmedSearchRequest, options?: RawAxiosRequestConfig): AxiosPromise<string> {
             return localVarFp.synthesizePubmedSearch(requestParameters.pubmedSearchSynthesisInput, options).then((request) => request(axios, basePath));
         },
     };
@@ -3747,7 +3747,7 @@ export class SynthesisApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SynthesisApi
      */
-    public getClustersFromPubmedSearch(requestParameters: SynthesisApiGetClustersFromPubmedSearchRequest, options?: AxiosRequestConfig) {
+    public getClustersFromPubmedSearch(requestParameters: SynthesisApiGetClustersFromPubmedSearchRequest, options?: RawAxiosRequestConfig) {
         return SynthesisApiFp(this.configuration).getClustersFromPubmedSearch(requestParameters.jobId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3759,7 +3759,7 @@ export class SynthesisApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SynthesisApi
      */
-    public getMechanisticFindingsFromPubmedSearch(requestParameters: SynthesisApiGetMechanisticFindingsFromPubmedSearchRequest, options?: AxiosRequestConfig) {
+    public getMechanisticFindingsFromPubmedSearch(requestParameters: SynthesisApiGetMechanisticFindingsFromPubmedSearchRequest, options?: RawAxiosRequestConfig) {
         return SynthesisApiFp(this.configuration).getMechanisticFindingsFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3771,7 +3771,7 @@ export class SynthesisApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SynthesisApi
      */
-    public getPubmedSearchSynthesisById(requestParameters: SynthesisApiGetPubmedSearchSynthesisByIdRequest, options?: AxiosRequestConfig) {
+    public getPubmedSearchSynthesisById(requestParameters: SynthesisApiGetPubmedSearchSynthesisByIdRequest, options?: RawAxiosRequestConfig) {
         return SynthesisApiFp(this.configuration).getPubmedSearchSynthesisById(requestParameters.jobId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3783,7 +3783,7 @@ export class SynthesisApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SynthesisApi
      */
-    public getStatisticalFindingsFromPubmedSearch(requestParameters: SynthesisApiGetStatisticalFindingsFromPubmedSearchRequest, options?: AxiosRequestConfig) {
+    public getStatisticalFindingsFromPubmedSearch(requestParameters: SynthesisApiGetStatisticalFindingsFromPubmedSearchRequest, options?: RawAxiosRequestConfig) {
         return SynthesisApiFp(this.configuration).getStatisticalFindingsFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3795,7 +3795,7 @@ export class SynthesisApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SynthesisApi
      */
-    public getStudiesFromPubmedSearch(requestParameters: SynthesisApiGetStudiesFromPubmedSearchRequest, options?: AxiosRequestConfig) {
+    public getStudiesFromPubmedSearch(requestParameters: SynthesisApiGetStudiesFromPubmedSearchRequest, options?: RawAxiosRequestConfig) {
         return SynthesisApiFp(this.configuration).getStudiesFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3807,7 +3807,7 @@ export class SynthesisApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SynthesisApi
      */
-    public getSynthesisFromPubmedSearch(requestParameters: SynthesisApiGetSynthesisFromPubmedSearchRequest, options?: AxiosRequestConfig) {
+    public getSynthesisFromPubmedSearch(requestParameters: SynthesisApiGetSynthesisFromPubmedSearchRequest, options?: RawAxiosRequestConfig) {
         return SynthesisApiFp(this.configuration).getSynthesisFromPubmedSearch(requestParameters.jobId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3819,7 +3819,7 @@ export class SynthesisApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SynthesisApi
      */
-    public synthesizePubmedSearch(requestParameters: SynthesisApiSynthesizePubmedSearchRequest, options?: AxiosRequestConfig) {
+    public synthesizePubmedSearch(requestParameters: SynthesisApiSynthesizePubmedSearchRequest, options?: RawAxiosRequestConfig) {
         return SynthesisApiFp(this.configuration).synthesizePubmedSearch(requestParameters.pubmedSearchSynthesisInput, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -3839,7 +3839,7 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicById: async (topicId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopicById: async (topicId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getTopicById', 'topicId', topicId)
             const localVarPath = `/v0/topics/{topic_id}`
@@ -3882,7 +3882,7 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicDeterminants: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopicDeterminants: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getTopicDeterminants', 'topicId', topicId)
             const localVarPath = `/v0/topics/{topic_id}/determinants`
@@ -3949,7 +3949,7 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicInterventions: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopicInterventions: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getTopicInterventions', 'topicId', topicId)
             const localVarPath = `/v0/topics/{topic_id}/interventions`
@@ -4016,7 +4016,7 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicOutcomes: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopicOutcomes: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getTopicOutcomes', 'topicId', topicId)
             const localVarPath = `/v0/topics/{topic_id}/outcomes`
@@ -4083,7 +4083,7 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicRelationships: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopicRelationships: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getTopicRelationships', 'topicId', topicId)
             const localVarPath = `/v0/topics/{topic_id}/relationships`
@@ -4150,7 +4150,7 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicVariables: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopicVariables: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getTopicVariables', 'topicId', topicId)
             const localVarPath = `/v0/topics/{topic_id}/variables`
@@ -4216,7 +4216,7 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopics: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopics: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v0/topics`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4284,11 +4284,11 @@ export const TopicsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopicById(topicId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Topic>> {
+        async getTopicById(topicId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Topic>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicById(topicId, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['TopicsApi.getTopicById']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TopicsApi.getTopicById']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get a list of determinants for a given topic. These are formatted as `TopicPath`s, which include data about the relationship and the source topic.
@@ -4303,11 +4303,11 @@ export const TopicsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopicDeterminants(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopicPath>> {
+        async getTopicDeterminants(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopicPath>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicDeterminants(topicId, filter, sort, search, fields, offset, limit, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['TopicsApi.getTopicDeterminants']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TopicsApi.getTopicDeterminants']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get a list of interventions for a given topic. These are formatted as `TopicPath`s, which include data about the relationship and the source topic.
@@ -4322,11 +4322,11 @@ export const TopicsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopicInterventions(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopicPath>> {
+        async getTopicInterventions(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopicPath>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicInterventions(topicId, filter, sort, search, fields, offset, limit, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['TopicsApi.getTopicInterventions']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TopicsApi.getTopicInterventions']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get a list of outcomes for a given topic. These are formatted as `TopicPath`s, which include data about the relationship and the target topic.
@@ -4341,11 +4341,11 @@ export const TopicsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopicOutcomes(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopicPath>> {
+        async getTopicOutcomes(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopicPath>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicOutcomes(topicId, filter, sort, search, fields, offset, limit, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['TopicsApi.getTopicOutcomes']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TopicsApi.getTopicOutcomes']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get a list of the relationships that include a given topic as the source or target topic.
@@ -4360,11 +4360,11 @@ export const TopicsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopicRelationships(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseRelationship>> {
+        async getTopicRelationships(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseRelationship>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicRelationships(topicId, filter, sort, search, fields, offset, limit, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['TopicsApi.getTopicRelationships']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TopicsApi.getTopicRelationships']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get a list of the variables that have been matched to a given topic.
@@ -4379,11 +4379,11 @@ export const TopicsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopicVariables(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseVariable>> {
+        async getTopicVariables(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseVariable>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicVariables(topicId, filter, sort, search, fields, offset, limit, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['TopicsApi.getTopicVariables']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TopicsApi.getTopicVariables']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get a list of topics.
@@ -4397,11 +4397,11 @@ export const TopicsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopics(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopic>> {
+        async getTopics(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopic>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTopics(filter, sort, search, fields, offset, limit, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['TopicsApi.getTopics']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TopicsApi.getTopics']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -4420,7 +4420,7 @@ export const TopicsApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicById(requestParameters: TopicsApiGetTopicByIdRequest, options?: AxiosRequestConfig): AxiosPromise<Topic> {
+        getTopicById(requestParameters: TopicsApiGetTopicByIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<Topic> {
             return localVarFp.getTopicById(requestParameters.topicId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4430,7 +4430,7 @@ export const TopicsApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicDeterminants(requestParameters: TopicsApiGetTopicDeterminantsRequest, options?: AxiosRequestConfig): AxiosPromise<ListResponseTopicPath> {
+        getTopicDeterminants(requestParameters: TopicsApiGetTopicDeterminantsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseTopicPath> {
             return localVarFp.getTopicDeterminants(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4440,7 +4440,7 @@ export const TopicsApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicInterventions(requestParameters: TopicsApiGetTopicInterventionsRequest, options?: AxiosRequestConfig): AxiosPromise<ListResponseTopicPath> {
+        getTopicInterventions(requestParameters: TopicsApiGetTopicInterventionsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseTopicPath> {
             return localVarFp.getTopicInterventions(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4450,7 +4450,7 @@ export const TopicsApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicOutcomes(requestParameters: TopicsApiGetTopicOutcomesRequest, options?: AxiosRequestConfig): AxiosPromise<ListResponseTopicPath> {
+        getTopicOutcomes(requestParameters: TopicsApiGetTopicOutcomesRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseTopicPath> {
             return localVarFp.getTopicOutcomes(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4460,7 +4460,7 @@ export const TopicsApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicRelationships(requestParameters: TopicsApiGetTopicRelationshipsRequest, options?: AxiosRequestConfig): AxiosPromise<ListResponseRelationship> {
+        getTopicRelationships(requestParameters: TopicsApiGetTopicRelationshipsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseRelationship> {
             return localVarFp.getTopicRelationships(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4470,7 +4470,7 @@ export const TopicsApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicVariables(requestParameters: TopicsApiGetTopicVariablesRequest, options?: AxiosRequestConfig): AxiosPromise<ListResponseVariable> {
+        getTopicVariables(requestParameters: TopicsApiGetTopicVariablesRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseVariable> {
             return localVarFp.getTopicVariables(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4480,7 +4480,7 @@ export const TopicsApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopics(requestParameters: TopicsApiGetTopicsRequest = {}, options?: AxiosRequestConfig): AxiosPromise<ListResponseTopic> {
+        getTopics(requestParameters: TopicsApiGetTopicsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseTopic> {
             return localVarFp.getTopics(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
@@ -4844,7 +4844,7 @@ export class TopicsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TopicsApi
      */
-    public getTopicById(requestParameters: TopicsApiGetTopicByIdRequest, options?: AxiosRequestConfig) {
+    public getTopicById(requestParameters: TopicsApiGetTopicByIdRequest, options?: RawAxiosRequestConfig) {
         return TopicsApiFp(this.configuration).getTopicById(requestParameters.topicId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4856,7 +4856,7 @@ export class TopicsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TopicsApi
      */
-    public getTopicDeterminants(requestParameters: TopicsApiGetTopicDeterminantsRequest, options?: AxiosRequestConfig) {
+    public getTopicDeterminants(requestParameters: TopicsApiGetTopicDeterminantsRequest, options?: RawAxiosRequestConfig) {
         return TopicsApiFp(this.configuration).getTopicDeterminants(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4868,7 +4868,7 @@ export class TopicsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TopicsApi
      */
-    public getTopicInterventions(requestParameters: TopicsApiGetTopicInterventionsRequest, options?: AxiosRequestConfig) {
+    public getTopicInterventions(requestParameters: TopicsApiGetTopicInterventionsRequest, options?: RawAxiosRequestConfig) {
         return TopicsApiFp(this.configuration).getTopicInterventions(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4880,7 +4880,7 @@ export class TopicsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TopicsApi
      */
-    public getTopicOutcomes(requestParameters: TopicsApiGetTopicOutcomesRequest, options?: AxiosRequestConfig) {
+    public getTopicOutcomes(requestParameters: TopicsApiGetTopicOutcomesRequest, options?: RawAxiosRequestConfig) {
         return TopicsApiFp(this.configuration).getTopicOutcomes(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4892,7 +4892,7 @@ export class TopicsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TopicsApi
      */
-    public getTopicRelationships(requestParameters: TopicsApiGetTopicRelationshipsRequest, options?: AxiosRequestConfig) {
+    public getTopicRelationships(requestParameters: TopicsApiGetTopicRelationshipsRequest, options?: RawAxiosRequestConfig) {
         return TopicsApiFp(this.configuration).getTopicRelationships(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4904,7 +4904,7 @@ export class TopicsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TopicsApi
      */
-    public getTopicVariables(requestParameters: TopicsApiGetTopicVariablesRequest, options?: AxiosRequestConfig) {
+    public getTopicVariables(requestParameters: TopicsApiGetTopicVariablesRequest, options?: RawAxiosRequestConfig) {
         return TopicsApiFp(this.configuration).getTopicVariables(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4916,7 +4916,7 @@ export class TopicsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TopicsApi
      */
-    public getTopics(requestParameters: TopicsApiGetTopicsRequest = {}, options?: AxiosRequestConfig) {
+    public getTopics(requestParameters: TopicsApiGetTopicsRequest = {}, options?: RawAxiosRequestConfig) {
         return TopicsApiFp(this.configuration).getTopics(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -4936,7 +4936,7 @@ export const VariablesApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getVariableById: async (variableId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getVariableById: async (variableId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'variableId' is not null or undefined
             assertParamExists('getVariableById', 'variableId', variableId)
             const localVarPath = `/v0/variables/{variable_id}`
@@ -4979,7 +4979,7 @@ export const VariablesApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getVariableStatisticalFindings: async (variableId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getVariableStatisticalFindings: async (variableId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'variableId' is not null or undefined
             assertParamExists('getVariableStatisticalFindings', 'variableId', variableId)
             const localVarPath = `/v0/variables/{variable_id}/statistical_findings`
@@ -5045,7 +5045,7 @@ export const VariablesApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getVariables: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getVariables: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v0/variables`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5113,11 +5113,11 @@ export const VariablesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getVariableById(variableId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Variable>> {
+        async getVariableById(variableId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Variable>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getVariableById(variableId, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['VariablesApi.getVariableById']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['VariablesApi.getVariableById']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get a list of the statistical findings that include a given variable.
@@ -5132,11 +5132,11 @@ export const VariablesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getVariableStatisticalFindings(variableId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
+        async getVariableStatisticalFindings(variableId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getVariableStatisticalFindings(variableId, filter, sort, search, fields, offset, limit, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['VariablesApi.getVariableStatisticalFindings']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['VariablesApi.getVariableStatisticalFindings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Get a list of variables.
@@ -5150,11 +5150,11 @@ export const VariablesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getVariables(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseVariable>> {
+        async getVariables(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseVariable>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getVariables(filter, sort, search, fields, offset, limit, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['VariablesApi.getVariables']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['VariablesApi.getVariables']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -5173,7 +5173,7 @@ export const VariablesApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getVariableById(requestParameters: VariablesApiGetVariableByIdRequest, options?: AxiosRequestConfig): AxiosPromise<Variable> {
+        getVariableById(requestParameters: VariablesApiGetVariableByIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<Variable> {
             return localVarFp.getVariableById(requestParameters.variableId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5183,7 +5183,7 @@ export const VariablesApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getVariableStatisticalFindings(requestParameters: VariablesApiGetVariableStatisticalFindingsRequest, options?: AxiosRequestConfig): AxiosPromise<ListResponseStatisticalFinding> {
+        getVariableStatisticalFindings(requestParameters: VariablesApiGetVariableStatisticalFindingsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseStatisticalFinding> {
             return localVarFp.getVariableStatisticalFindings(requestParameters.variableId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5193,7 +5193,7 @@ export const VariablesApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getVariables(requestParameters: VariablesApiGetVariablesRequest = {}, options?: AxiosRequestConfig): AxiosPromise<ListResponseVariable> {
+        getVariables(requestParameters: VariablesApiGetVariablesRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseVariable> {
             return localVarFp.getVariables(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
@@ -5333,7 +5333,7 @@ export class VariablesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof VariablesApi
      */
-    public getVariableById(requestParameters: VariablesApiGetVariableByIdRequest, options?: AxiosRequestConfig) {
+    public getVariableById(requestParameters: VariablesApiGetVariableByIdRequest, options?: RawAxiosRequestConfig) {
         return VariablesApiFp(this.configuration).getVariableById(requestParameters.variableId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -5345,7 +5345,7 @@ export class VariablesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof VariablesApi
      */
-    public getVariableStatisticalFindings(requestParameters: VariablesApiGetVariableStatisticalFindingsRequest, options?: AxiosRequestConfig) {
+    public getVariableStatisticalFindings(requestParameters: VariablesApiGetVariableStatisticalFindingsRequest, options?: RawAxiosRequestConfig) {
         return VariablesApiFp(this.configuration).getVariableStatisticalFindings(requestParameters.variableId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -5357,7 +5357,7 @@ export class VariablesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof VariablesApi
      */
-    public getVariables(requestParameters: VariablesApiGetVariablesRequest = {}, options?: AxiosRequestConfig) {
+    public getVariables(requestParameters: VariablesApiGetVariablesRequest = {}, options?: RawAxiosRequestConfig) {
         return VariablesApiFp(this.configuration).getVariables(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
