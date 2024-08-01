@@ -24,6 +24,31 @@ import type { RequestArgs } from './base';
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base';
 
 /**
+ * Author.
+ * @export
+ * @interface Author
+ */
+export interface Author {
+    /**
+     * Full name of author
+     * @type {string}
+     * @memberof Author
+     */
+    'full_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Author
+     */
+    'orcid'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Author
+     */
+    'openalex_id'?: string | null;
+}
+/**
  * Cluster.
  * @export
  * @interface Cluster
@@ -781,10 +806,10 @@ export interface Study {
     'title'?: string | null;
     /**
      * 
-     * @type {Array<object>}
+     * @type {Array<Author>}
      * @memberof Study
      */
-    'authors'?: Array<object> | null;
+    'authors'?: Array<Author> | null;
     /**
      * 
      * @type {string}
@@ -833,6 +858,19 @@ export interface Study {
      * @memberof Study
      */
     'retraction_reason'?: string | null;
+}
+/**
+ * Synthesis response.
+ * @export
+ * @interface Synthesis
+ */
+export interface Synthesis {
+    /**
+     * Thematic summaries of the findings.
+     * @type {Array<{ [key: string]: string; }>}
+     * @memberof Synthesis
+     */
+    'summaries': Array<{ [key: string]: string; }>;
 }
 /**
  * Topic.
@@ -3060,8 +3098,8 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Get a pubmed search synthesis by its ID.
-         * @summary Get pubmed search synthesis
+         * Get information about a pubmed search synthesis job.
+         * @summary Get pubmed search synthesis by ID
          * @param {string} jobId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3349,8 +3387,8 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Get a pubmed search synthesis by its ID.
-         * @summary Get pubmed search synthesis
+         * Get information about a pubmed search synthesis job.
+         * @summary Get pubmed search synthesis by ID
          * @param {string} jobId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3406,7 +3444,7 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSynthesisFromPubmedSearch(jobId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+        async getSynthesisFromPubmedSearch(jobId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Synthesis>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSynthesisFromPubmedSearch(jobId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SynthesisApi.getSynthesisFromPubmedSearch']?.[localVarOperationServerIndex]?.url;
@@ -3456,8 +3494,8 @@ export const SynthesisApiFactory = function (configuration?: Configuration, base
             return localVarFp.getMechanisticFindingsFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get a pubmed search synthesis by its ID.
-         * @summary Get pubmed search synthesis
+         * Get information about a pubmed search synthesis job.
+         * @summary Get pubmed search synthesis by ID
          * @param {SynthesisApiGetPubmedSearchSynthesisByIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3492,7 +3530,7 @@ export const SynthesisApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSynthesisFromPubmedSearch(requestParameters: SynthesisApiGetSynthesisFromPubmedSearchRequest, options?: RawAxiosRequestConfig): AxiosPromise<any> {
+        getSynthesisFromPubmedSearch(requestParameters: SynthesisApiGetSynthesisFromPubmedSearchRequest, options?: RawAxiosRequestConfig): AxiosPromise<Synthesis> {
             return localVarFp.getSynthesisFromPubmedSearch(requestParameters.jobId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3764,8 +3802,8 @@ export class SynthesisApi extends BaseAPI {
     }
 
     /**
-     * Get a pubmed search synthesis by its ID.
-     * @summary Get pubmed search synthesis
+     * Get information about a pubmed search synthesis job.
+     * @summary Get pubmed search synthesis by ID
      * @param {SynthesisApiGetPubmedSearchSynthesisByIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
