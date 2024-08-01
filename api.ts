@@ -1642,7 +1642,7 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
          * @param {string} relationshipId 
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: title.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
@@ -1814,7 +1814,7 @@ export const RelationshipsApiFp = function(configuration?: Configuration) {
          * @param {string} relationshipId 
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: title.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
@@ -1996,7 +1996,7 @@ export interface RelationshipsApiGetRelationshipStudiesRequest {
     readonly sort?: string | null
 
     /**
-     * Field to search within. Supported fields for searching: title.
+     * Field to search within. Supported fields for searching: none.
      * @type {string}
      * @memberof RelationshipsApiGetRelationshipStudies
      */
@@ -2519,7 +2519,7 @@ export const StudiesApiAxiosParamCreator = function (configuration?: Configurati
          * @summary Get studies
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: title.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
@@ -2696,7 +2696,7 @@ export const StudiesApiFp = function(configuration?: Configuration) {
          * @summary Get studies
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: title.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
@@ -2805,7 +2805,7 @@ export interface StudiesApiGetStudiesRequest {
     readonly sort?: string | null
 
     /**
-     * Field to search within. Supported fields for searching: title.
+     * Field to search within. Supported fields for searching: none.
      * @type {string}
      * @memberof StudiesApiGetStudies
      */
@@ -3169,7 +3169,7 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
          * @param {string} jobId 
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: title.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
@@ -3386,7 +3386,7 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
          * @param {string} jobId 
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: title.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
@@ -3676,7 +3676,7 @@ export interface SynthesisApiGetStudiesFromPubmedSearchRequest {
     readonly sort?: string | null
 
     /**
-     * Field to search within. Supported fields for searching: title.
+     * Field to search within. Supported fields for searching: none.
      * @type {string}
      * @memberof SynthesisApiGetStudiesFromPubmedSearch
      */
