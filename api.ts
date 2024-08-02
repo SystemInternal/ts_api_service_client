@@ -238,7 +238,7 @@ export interface ListResponseCluster {
      * @type {number}
      * @memberof ListResponseCluster
      */
-    'total': number;
+    'total'?: number | null;
 }
 /**
  * 
@@ -257,7 +257,7 @@ export interface ListResponseMechanisticFinding {
      * @type {number}
      * @memberof ListResponseMechanisticFinding
      */
-    'total': number;
+    'total'?: number | null;
 }
 /**
  * 
@@ -276,7 +276,7 @@ export interface ListResponseRelationship {
      * @type {number}
      * @memberof ListResponseRelationship
      */
-    'total': number;
+    'total'?: number | null;
 }
 /**
  * 
@@ -295,7 +295,7 @@ export interface ListResponseStatisticalFinding {
      * @type {number}
      * @memberof ListResponseStatisticalFinding
      */
-    'total': number;
+    'total'?: number | null;
 }
 /**
  * 
@@ -314,7 +314,7 @@ export interface ListResponseStudy {
      * @type {number}
      * @memberof ListResponseStudy
      */
-    'total': number;
+    'total'?: number | null;
 }
 /**
  * 
@@ -333,7 +333,7 @@ export interface ListResponseTopic {
      * @type {number}
      * @memberof ListResponseTopic
      */
-    'total': number;
+    'total'?: number | null;
 }
 /**
  * 
@@ -352,7 +352,7 @@ export interface ListResponseTopicPath {
      * @type {number}
      * @memberof ListResponseTopicPath
      */
-    'total': number;
+    'total'?: number | null;
 }
 /**
  * 
@@ -371,7 +371,7 @@ export interface ListResponseVariable {
      * @type {number}
      * @memberof ListResponseVariable
      */
-    'total': number;
+    'total'?: number | null;
 }
 /**
  * Mechanistic finding.
@@ -1337,12 +1337,13 @@ export const MechanisticFindingsApiAxiosParamCreator = function (configuration?:
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMechanisticFindings: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getMechanisticFindings: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v0/mechanistic_findings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1372,6 +1373,10 @@ export const MechanisticFindingsApiAxiosParamCreator = function (configuration?:
 
             if (fields !== undefined) {
                 localVarQueryParameter['fields'] = fields;
+            }
+
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['include_total'] = includeTotal;
             }
 
             if (offset !== undefined) {
@@ -1423,13 +1428,14 @@ export const MechanisticFindingsApiFp = function(configuration?: Configuration) 
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getMechanisticFindings(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseMechanisticFinding>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getMechanisticFindings(filter, sort, search, fields, offset, limit, options);
+        async getMechanisticFindings(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseMechanisticFinding>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMechanisticFindings(filter, sort, search, fields, includeTotal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['MechanisticFindingsApi.getMechanisticFindings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1462,7 +1468,7 @@ export const MechanisticFindingsApiFactory = function (configuration?: Configura
          * @throws {RequiredError}
          */
         getMechanisticFindings(requestParameters: MechanisticFindingsApiGetMechanisticFindingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseMechanisticFinding> {
-            return localVarFp.getMechanisticFindings(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.getMechanisticFindings(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1516,6 +1522,13 @@ export interface MechanisticFindingsApiGetMechanisticFindingsRequest {
     readonly fields?: string | null
 
     /**
+     * Include total number of records in the response.
+     * @type {boolean}
+     * @memberof MechanisticFindingsApiGetMechanisticFindings
+     */
+    readonly includeTotal?: boolean | null
+
+    /**
      * Offset
      * @type {number}
      * @memberof MechanisticFindingsApiGetMechanisticFindings
@@ -1558,7 +1571,7 @@ export class MechanisticFindingsApi extends BaseAPI {
      * @memberof MechanisticFindingsApi
      */
     public getMechanisticFindings(requestParameters: MechanisticFindingsApiGetMechanisticFindingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return MechanisticFindingsApiFp(this.configuration).getMechanisticFindings(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return MechanisticFindingsApiFp(this.configuration).getMechanisticFindings(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -1615,12 +1628,13 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRelationshipStatisticalFindings: async (relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRelationshipStatisticalFindings: async (relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'relationshipId' is not null or undefined
             assertParamExists('getRelationshipStatisticalFindings', 'relationshipId', relationshipId)
             const localVarPath = `/v0/relationships/{relationship_id}/statistical_findings`
@@ -1655,6 +1669,10 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
                 localVarQueryParameter['fields'] = fields;
             }
 
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['include_total'] = includeTotal;
+            }
+
             if (offset !== undefined) {
                 localVarQueryParameter['offset'] = offset;
             }
@@ -1682,12 +1700,13 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRelationshipStudies: async (relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRelationshipStudies: async (relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'relationshipId' is not null or undefined
             assertParamExists('getRelationshipStudies', 'relationshipId', relationshipId)
             const localVarPath = `/v0/relationships/{relationship_id}/studies`
@@ -1722,6 +1741,10 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
                 localVarQueryParameter['fields'] = fields;
             }
 
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['include_total'] = includeTotal;
+            }
+
             if (offset !== undefined) {
                 localVarQueryParameter['offset'] = offset;
             }
@@ -1748,12 +1771,13 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRelationships: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRelationships: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v0/relationships`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1783,6 +1807,10 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
 
             if (fields !== undefined) {
                 localVarQueryParameter['fields'] = fields;
+            }
+
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['include_total'] = includeTotal;
             }
 
             if (offset !== undefined) {
@@ -1835,13 +1863,14 @@ export const RelationshipsApiFp = function(configuration?: Configuration) {
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRelationshipStatisticalFindings(relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRelationshipStatisticalFindings(relationshipId, filter, sort, search, fields, offset, limit, options);
+        async getRelationshipStatisticalFindings(relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRelationshipStatisticalFindings(relationshipId, filter, sort, search, fields, includeTotal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RelationshipsApi.getRelationshipStatisticalFindings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1854,13 +1883,14 @@ export const RelationshipsApiFp = function(configuration?: Configuration) {
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRelationshipStudies(relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRelationshipStudies(relationshipId, filter, sort, search, fields, offset, limit, options);
+        async getRelationshipStudies(relationshipId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRelationshipStudies(relationshipId, filter, sort, search, fields, includeTotal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RelationshipsApi.getRelationshipStudies']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1872,13 +1902,14 @@ export const RelationshipsApiFp = function(configuration?: Configuration) {
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRelationships(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseRelationship>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRelationships(filter, sort, search, fields, offset, limit, options);
+        async getRelationships(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseRelationship>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRelationships(filter, sort, search, fields, includeTotal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RelationshipsApi.getRelationships']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1911,7 +1942,7 @@ export const RelationshipsApiFactory = function (configuration?: Configuration, 
          * @throws {RequiredError}
          */
         getRelationshipStatisticalFindings(requestParameters: RelationshipsApiGetRelationshipStatisticalFindingsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseStatisticalFinding> {
-            return localVarFp.getRelationshipStatisticalFindings(requestParameters.relationshipId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.getRelationshipStatisticalFindings(requestParameters.relationshipId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Get a list of the studies underlying a given relationship.
@@ -1921,7 +1952,7 @@ export const RelationshipsApiFactory = function (configuration?: Configuration, 
          * @throws {RequiredError}
          */
         getRelationshipStudies(requestParameters: RelationshipsApiGetRelationshipStudiesRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseStudy> {
-            return localVarFp.getRelationshipStudies(requestParameters.relationshipId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.getRelationshipStudies(requestParameters.relationshipId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Get a list of relationships.
@@ -1931,7 +1962,7 @@ export const RelationshipsApiFactory = function (configuration?: Configuration, 
          * @throws {RequiredError}
          */
         getRelationships(requestParameters: RelationshipsApiGetRelationshipsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseRelationship> {
-            return localVarFp.getRelationships(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.getRelationships(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1992,6 +2023,13 @@ export interface RelationshipsApiGetRelationshipStatisticalFindingsRequest {
     readonly fields?: string | null
 
     /**
+     * Include total number of records in the response.
+     * @type {boolean}
+     * @memberof RelationshipsApiGetRelationshipStatisticalFindings
+     */
+    readonly includeTotal?: boolean | null
+
+    /**
      * Offset
      * @type {number}
      * @memberof RelationshipsApiGetRelationshipStatisticalFindings
@@ -2048,6 +2086,13 @@ export interface RelationshipsApiGetRelationshipStudiesRequest {
     readonly fields?: string | null
 
     /**
+     * Include total number of records in the response.
+     * @type {boolean}
+     * @memberof RelationshipsApiGetRelationshipStudies
+     */
+    readonly includeTotal?: boolean | null
+
+    /**
      * Offset
      * @type {number}
      * @memberof RelationshipsApiGetRelationshipStudies
@@ -2097,6 +2142,13 @@ export interface RelationshipsApiGetRelationshipsRequest {
     readonly fields?: string | null
 
     /**
+     * Include total number of records in the response.
+     * @type {boolean}
+     * @memberof RelationshipsApiGetRelationships
+     */
+    readonly includeTotal?: boolean | null
+
+    /**
      * Offset
      * @type {number}
      * @memberof RelationshipsApiGetRelationships
@@ -2139,7 +2191,7 @@ export class RelationshipsApi extends BaseAPI {
      * @memberof RelationshipsApi
      */
     public getRelationshipStatisticalFindings(requestParameters: RelationshipsApiGetRelationshipStatisticalFindingsRequest, options?: RawAxiosRequestConfig) {
-        return RelationshipsApiFp(this.configuration).getRelationshipStatisticalFindings(requestParameters.relationshipId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return RelationshipsApiFp(this.configuration).getRelationshipStatisticalFindings(requestParameters.relationshipId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2151,7 +2203,7 @@ export class RelationshipsApi extends BaseAPI {
      * @memberof RelationshipsApi
      */
     public getRelationshipStudies(requestParameters: RelationshipsApiGetRelationshipStudiesRequest, options?: RawAxiosRequestConfig) {
-        return RelationshipsApiFp(this.configuration).getRelationshipStudies(requestParameters.relationshipId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return RelationshipsApiFp(this.configuration).getRelationshipStudies(requestParameters.relationshipId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2163,7 +2215,7 @@ export class RelationshipsApi extends BaseAPI {
      * @memberof RelationshipsApi
      */
     public getRelationships(requestParameters: RelationshipsApiGetRelationshipsRequest = {}, options?: RawAxiosRequestConfig) {
-        return RelationshipsApiFp(this.configuration).getRelationships(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return RelationshipsApiFp(this.configuration).getRelationships(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -2262,12 +2314,13 @@ export const StatisticalFindingsApiAxiosParamCreator = function (configuration?:
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStatisticalFindings: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStatisticalFindings: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v0/statistical_findings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2297,6 +2350,10 @@ export const StatisticalFindingsApiAxiosParamCreator = function (configuration?:
 
             if (fields !== undefined) {
                 localVarQueryParameter['fields'] = fields;
+            }
+
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['include_total'] = includeTotal;
             }
 
             if (offset !== undefined) {
@@ -2362,13 +2419,14 @@ export const StatisticalFindingsApiFp = function(configuration?: Configuration) 
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStatisticalFindings(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getStatisticalFindings(filter, sort, search, fields, offset, limit, options);
+        async getStatisticalFindings(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getStatisticalFindings(filter, sort, search, fields, includeTotal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['StatisticalFindingsApi.getStatisticalFindings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2411,7 +2469,7 @@ export const StatisticalFindingsApiFactory = function (configuration?: Configura
          * @throws {RequiredError}
          */
         getStatisticalFindings(requestParameters: StatisticalFindingsApiGetStatisticalFindingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseStatisticalFinding> {
-            return localVarFp.getStatisticalFindings(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.getStatisticalFindings(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -2486,6 +2544,13 @@ export interface StatisticalFindingsApiGetStatisticalFindingsRequest {
     readonly fields?: string | null
 
     /**
+     * Include total number of records in the response.
+     * @type {boolean}
+     * @memberof StatisticalFindingsApiGetStatisticalFindings
+     */
+    readonly includeTotal?: boolean | null
+
+    /**
      * Offset
      * @type {number}
      * @memberof StatisticalFindingsApiGetStatisticalFindings
@@ -2540,7 +2605,7 @@ export class StatisticalFindingsApi extends BaseAPI {
      * @memberof StatisticalFindingsApi
      */
     public getStatisticalFindings(requestParameters: StatisticalFindingsApiGetStatisticalFindingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return StatisticalFindingsApiFp(this.configuration).getStatisticalFindings(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return StatisticalFindingsApiFp(this.configuration).getStatisticalFindings(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -2559,12 +2624,13 @@ export const StudiesApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStudies: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStudies: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v0/studies`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2594,6 +2660,10 @@ export const StudiesApiAxiosParamCreator = function (configuration?: Configurati
 
             if (fields !== undefined) {
                 localVarQueryParameter['fields'] = fields;
+            }
+
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['include_total'] = includeTotal;
             }
 
             if (offset !== undefined) {
@@ -2660,12 +2730,13 @@ export const StudiesApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStudyStatisticalFindings: async (studyId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStudyStatisticalFindings: async (studyId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'studyId' is not null or undefined
             assertParamExists('getStudyStatisticalFindings', 'studyId', studyId)
             const localVarPath = `/v0/studies/{study_id}/statistical_findings`
@@ -2698,6 +2769,10 @@ export const StudiesApiAxiosParamCreator = function (configuration?: Configurati
 
             if (fields !== undefined) {
                 localVarQueryParameter['fields'] = fields;
+            }
+
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['include_total'] = includeTotal;
             }
 
             if (offset !== undefined) {
@@ -2736,13 +2811,14 @@ export const StudiesApiFp = function(configuration?: Configuration) {
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStudies(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getStudies(filter, sort, search, fields, offset, limit, options);
+        async getStudies(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getStudies(filter, sort, search, fields, includeTotal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['StudiesApi.getStudies']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2768,13 +2844,14 @@ export const StudiesApiFp = function(configuration?: Configuration) {
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStudyStatisticalFindings(studyId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getStudyStatisticalFindings(studyId, filter, sort, search, fields, offset, limit, options);
+        async getStudyStatisticalFindings(studyId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getStudyStatisticalFindings(studyId, filter, sort, search, fields, includeTotal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['StudiesApi.getStudyStatisticalFindings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2797,7 +2874,7 @@ export const StudiesApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         getStudies(requestParameters: StudiesApiGetStudiesRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseStudy> {
-            return localVarFp.getStudies(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.getStudies(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Get a study by its ID.
@@ -2817,7 +2894,7 @@ export const StudiesApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         getStudyStatisticalFindings(requestParameters: StudiesApiGetStudyStatisticalFindingsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseStatisticalFinding> {
-            return localVarFp.getStudyStatisticalFindings(requestParameters.studyId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.getStudyStatisticalFindings(requestParameters.studyId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -2855,6 +2932,13 @@ export interface StudiesApiGetStudiesRequest {
      * @memberof StudiesApiGetStudies
      */
     readonly fields?: string | null
+
+    /**
+     * Include total number of records in the response.
+     * @type {boolean}
+     * @memberof StudiesApiGetStudies
+     */
+    readonly includeTotal?: boolean | null
 
     /**
      * Offset
@@ -2927,6 +3011,13 @@ export interface StudiesApiGetStudyStatisticalFindingsRequest {
     readonly fields?: string | null
 
     /**
+     * Include total number of records in the response.
+     * @type {boolean}
+     * @memberof StudiesApiGetStudyStatisticalFindings
+     */
+    readonly includeTotal?: boolean | null
+
+    /**
      * Offset
      * @type {number}
      * @memberof StudiesApiGetStudyStatisticalFindings
@@ -2957,7 +3048,7 @@ export class StudiesApi extends BaseAPI {
      * @memberof StudiesApi
      */
     public getStudies(requestParameters: StudiesApiGetStudiesRequest = {}, options?: RawAxiosRequestConfig) {
-        return StudiesApiFp(this.configuration).getStudies(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return StudiesApiFp(this.configuration).getStudies(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2981,7 +3072,7 @@ export class StudiesApi extends BaseAPI {
      * @memberof StudiesApi
      */
     public getStudyStatisticalFindings(requestParameters: StudiesApiGetStudyStatisticalFindingsRequest, options?: RawAxiosRequestConfig) {
-        return StudiesApiFp(this.configuration).getStudyStatisticalFindings(requestParameters.studyId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return StudiesApiFp(this.configuration).getStudyStatisticalFindings(requestParameters.studyId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -3038,12 +3129,13 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMechanisticFindingsFromPubmedSearch: async (jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getMechanisticFindingsFromPubmedSearch: async (jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'jobId' is not null or undefined
             assertParamExists('getMechanisticFindingsFromPubmedSearch', 'jobId', jobId)
             const localVarPath = `/v0/synthesis/pubmed_search/{job_id}/mechanistic_findings`
@@ -3076,6 +3168,10 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
 
             if (fields !== undefined) {
                 localVarQueryParameter['fields'] = fields;
+            }
+
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['include_total'] = includeTotal;
             }
 
             if (offset !== undefined) {
@@ -3142,12 +3238,13 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStatisticalFindingsFromPubmedSearch: async (jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStatisticalFindingsFromPubmedSearch: async (jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'jobId' is not null or undefined
             assertParamExists('getStatisticalFindingsFromPubmedSearch', 'jobId', jobId)
             const localVarPath = `/v0/synthesis/pubmed_search/{job_id}/statistical_findings`
@@ -3182,6 +3279,10 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['fields'] = fields;
             }
 
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['include_total'] = includeTotal;
+            }
+
             if (offset !== undefined) {
                 localVarQueryParameter['offset'] = offset;
             }
@@ -3209,12 +3310,13 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStudiesFromPubmedSearch: async (jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStudiesFromPubmedSearch: async (jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'jobId' is not null or undefined
             assertParamExists('getStudiesFromPubmedSearch', 'jobId', jobId)
             const localVarPath = `/v0/synthesis/pubmed_search/{job_id}/studies`
@@ -3247,6 +3349,10 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
 
             if (fields !== undefined) {
                 localVarQueryParameter['fields'] = fields;
+            }
+
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['include_total'] = includeTotal;
             }
 
             if (offset !== undefined) {
@@ -3375,13 +3481,14 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getMechanisticFindingsFromPubmedSearch(jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseMechanisticFinding>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getMechanisticFindingsFromPubmedSearch(jobId, filter, sort, search, fields, offset, limit, options);
+        async getMechanisticFindingsFromPubmedSearch(jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseMechanisticFinding>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMechanisticFindingsFromPubmedSearch(jobId, filter, sort, search, fields, includeTotal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SynthesisApi.getMechanisticFindingsFromPubmedSearch']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3407,13 +3514,14 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStatisticalFindingsFromPubmedSearch(jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getStatisticalFindingsFromPubmedSearch(jobId, filter, sort, search, fields, offset, limit, options);
+        async getStatisticalFindingsFromPubmedSearch(jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getStatisticalFindingsFromPubmedSearch(jobId, filter, sort, search, fields, includeTotal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SynthesisApi.getStatisticalFindingsFromPubmedSearch']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3426,13 +3534,14 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStudiesFromPubmedSearch(jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getStudiesFromPubmedSearch(jobId, filter, sort, search, fields, offset, limit, options);
+        async getStudiesFromPubmedSearch(jobId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStudy>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getStudiesFromPubmedSearch(jobId, filter, sort, search, fields, includeTotal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SynthesisApi.getStudiesFromPubmedSearch']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3491,7 +3600,7 @@ export const SynthesisApiFactory = function (configuration?: Configuration, base
          * @throws {RequiredError}
          */
         getMechanisticFindingsFromPubmedSearch(requestParameters: SynthesisApiGetMechanisticFindingsFromPubmedSearchRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseMechanisticFinding> {
-            return localVarFp.getMechanisticFindingsFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.getMechanisticFindingsFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Get information about a pubmed search synthesis job.
@@ -3511,7 +3620,7 @@ export const SynthesisApiFactory = function (configuration?: Configuration, base
          * @throws {RequiredError}
          */
         getStatisticalFindingsFromPubmedSearch(requestParameters: SynthesisApiGetStatisticalFindingsFromPubmedSearchRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseStatisticalFinding> {
-            return localVarFp.getStatisticalFindingsFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.getStatisticalFindingsFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Get studies from pubmed search synthesis.
@@ -3521,7 +3630,7 @@ export const SynthesisApiFactory = function (configuration?: Configuration, base
          * @throws {RequiredError}
          */
         getStudiesFromPubmedSearch(requestParameters: SynthesisApiGetStudiesFromPubmedSearchRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseStudy> {
-            return localVarFp.getStudiesFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.getStudiesFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Get synthesis from pubmed search synthesis.
@@ -3602,6 +3711,13 @@ export interface SynthesisApiGetMechanisticFindingsFromPubmedSearchRequest {
     readonly fields?: string | null
 
     /**
+     * Include total number of records in the response.
+     * @type {boolean}
+     * @memberof SynthesisApiGetMechanisticFindingsFromPubmedSearch
+     */
+    readonly includeTotal?: boolean | null
+
+    /**
      * Offset
      * @type {number}
      * @memberof SynthesisApiGetMechanisticFindingsFromPubmedSearch
@@ -3672,6 +3788,13 @@ export interface SynthesisApiGetStatisticalFindingsFromPubmedSearchRequest {
     readonly fields?: string | null
 
     /**
+     * Include total number of records in the response.
+     * @type {boolean}
+     * @memberof SynthesisApiGetStatisticalFindingsFromPubmedSearch
+     */
+    readonly includeTotal?: boolean | null
+
+    /**
      * Offset
      * @type {number}
      * @memberof SynthesisApiGetStatisticalFindingsFromPubmedSearch
@@ -3726,6 +3849,13 @@ export interface SynthesisApiGetStudiesFromPubmedSearchRequest {
      * @memberof SynthesisApiGetStudiesFromPubmedSearch
      */
     readonly fields?: string | null
+
+    /**
+     * Include total number of records in the response.
+     * @type {boolean}
+     * @memberof SynthesisApiGetStudiesFromPubmedSearch
+     */
+    readonly includeTotal?: boolean | null
 
     /**
      * Offset
@@ -3798,7 +3928,7 @@ export class SynthesisApi extends BaseAPI {
      * @memberof SynthesisApi
      */
     public getMechanisticFindingsFromPubmedSearch(requestParameters: SynthesisApiGetMechanisticFindingsFromPubmedSearchRequest, options?: RawAxiosRequestConfig) {
-        return SynthesisApiFp(this.configuration).getMechanisticFindingsFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return SynthesisApiFp(this.configuration).getMechanisticFindingsFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3822,7 +3952,7 @@ export class SynthesisApi extends BaseAPI {
      * @memberof SynthesisApi
      */
     public getStatisticalFindingsFromPubmedSearch(requestParameters: SynthesisApiGetStatisticalFindingsFromPubmedSearchRequest, options?: RawAxiosRequestConfig) {
-        return SynthesisApiFp(this.configuration).getStatisticalFindingsFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return SynthesisApiFp(this.configuration).getStatisticalFindingsFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3834,7 +3964,7 @@ export class SynthesisApi extends BaseAPI {
      * @memberof SynthesisApi
      */
     public getStudiesFromPubmedSearch(requestParameters: SynthesisApiGetStudiesFromPubmedSearchRequest, options?: RawAxiosRequestConfig) {
-        return SynthesisApiFp(this.configuration).getStudiesFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return SynthesisApiFp(this.configuration).getStudiesFromPubmedSearch(requestParameters.jobId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3915,12 +4045,13 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicDeterminants: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopicDeterminants: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getTopicDeterminants', 'topicId', topicId)
             const localVarPath = `/v0/topics/{topic_id}/determinants`
@@ -3955,6 +4086,10 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
                 localVarQueryParameter['fields'] = fields;
             }
 
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['include_total'] = includeTotal;
+            }
+
             if (offset !== undefined) {
                 localVarQueryParameter['offset'] = offset;
             }
@@ -3982,12 +4117,13 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicInterventions: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopicInterventions: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getTopicInterventions', 'topicId', topicId)
             const localVarPath = `/v0/topics/{topic_id}/interventions`
@@ -4022,6 +4158,10 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
                 localVarQueryParameter['fields'] = fields;
             }
 
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['include_total'] = includeTotal;
+            }
+
             if (offset !== undefined) {
                 localVarQueryParameter['offset'] = offset;
             }
@@ -4049,12 +4189,13 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicOutcomes: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopicOutcomes: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getTopicOutcomes', 'topicId', topicId)
             const localVarPath = `/v0/topics/{topic_id}/outcomes`
@@ -4089,6 +4230,10 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
                 localVarQueryParameter['fields'] = fields;
             }
 
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['include_total'] = includeTotal;
+            }
+
             if (offset !== undefined) {
                 localVarQueryParameter['offset'] = offset;
             }
@@ -4116,12 +4261,13 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicRelationships: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopicRelationships: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getTopicRelationships', 'topicId', topicId)
             const localVarPath = `/v0/topics/{topic_id}/relationships`
@@ -4156,6 +4302,10 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
                 localVarQueryParameter['fields'] = fields;
             }
 
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['include_total'] = includeTotal;
+            }
+
             if (offset !== undefined) {
                 localVarQueryParameter['offset'] = offset;
             }
@@ -4183,12 +4333,13 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_studies.
          * @param {string | null} [search] Field to search within. Supported fields for searching: name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopicVariables: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopicVariables: async (topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getTopicVariables', 'topicId', topicId)
             const localVarPath = `/v0/topics/{topic_id}/variables`
@@ -4223,6 +4374,10 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
                 localVarQueryParameter['fields'] = fields;
             }
 
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['include_total'] = includeTotal;
+            }
+
             if (offset !== undefined) {
                 localVarQueryParameter['offset'] = offset;
             }
@@ -4249,12 +4404,13 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTopics: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTopics: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v0/topics`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4284,6 +4440,10 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (fields !== undefined) {
                 localVarQueryParameter['fields'] = fields;
+            }
+
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['include_total'] = includeTotal;
             }
 
             if (offset !== undefined) {
@@ -4336,13 +4496,14 @@ export const TopicsApiFp = function(configuration?: Configuration) {
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopicDeterminants(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopicPath>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicDeterminants(topicId, filter, sort, search, fields, offset, limit, options);
+        async getTopicDeterminants(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopicPath>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicDeterminants(topicId, filter, sort, search, fields, includeTotal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TopicsApi.getTopicDeterminants']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4355,13 +4516,14 @@ export const TopicsApiFp = function(configuration?: Configuration) {
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopicInterventions(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopicPath>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicInterventions(topicId, filter, sort, search, fields, offset, limit, options);
+        async getTopicInterventions(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopicPath>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicInterventions(topicId, filter, sort, search, fields, includeTotal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TopicsApi.getTopicInterventions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4374,13 +4536,14 @@ export const TopicsApiFp = function(configuration?: Configuration) {
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopicOutcomes(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopicPath>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicOutcomes(topicId, filter, sort, search, fields, offset, limit, options);
+        async getTopicOutcomes(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopicPath>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicOutcomes(topicId, filter, sort, search, fields, includeTotal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TopicsApi.getTopicOutcomes']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4393,13 +4556,14 @@ export const TopicsApiFp = function(configuration?: Configuration) {
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopicRelationships(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseRelationship>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicRelationships(topicId, filter, sort, search, fields, offset, limit, options);
+        async getTopicRelationships(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseRelationship>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicRelationships(topicId, filter, sort, search, fields, includeTotal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TopicsApi.getTopicRelationships']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4412,13 +4576,14 @@ export const TopicsApiFp = function(configuration?: Configuration) {
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_studies.
          * @param {string | null} [search] Field to search within. Supported fields for searching: name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopicVariables(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseVariable>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicVariables(topicId, filter, sort, search, fields, offset, limit, options);
+        async getTopicVariables(topicId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseVariable>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTopicVariables(topicId, filter, sort, search, fields, includeTotal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TopicsApi.getTopicVariables']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4430,13 +4595,14 @@ export const TopicsApiFp = function(configuration?: Configuration) {
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTopics(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopic>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getTopics(filter, sort, search, fields, offset, limit, options);
+        async getTopics(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseTopic>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTopics(filter, sort, search, fields, includeTotal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TopicsApi.getTopics']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4469,7 +4635,7 @@ export const TopicsApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         getTopicDeterminants(requestParameters: TopicsApiGetTopicDeterminantsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseTopicPath> {
-            return localVarFp.getTopicDeterminants(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.getTopicDeterminants(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Get a list of interventions for a given topic. These are formatted as `TopicPath`s, which include data about the relationship and the source topic.
@@ -4479,7 +4645,7 @@ export const TopicsApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         getTopicInterventions(requestParameters: TopicsApiGetTopicInterventionsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseTopicPath> {
-            return localVarFp.getTopicInterventions(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.getTopicInterventions(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Get a list of outcomes for a given topic. These are formatted as `TopicPath`s, which include data about the relationship and the target topic.
@@ -4489,7 +4655,7 @@ export const TopicsApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         getTopicOutcomes(requestParameters: TopicsApiGetTopicOutcomesRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseTopicPath> {
-            return localVarFp.getTopicOutcomes(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.getTopicOutcomes(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Get a list of the relationships that include a given topic as the source or target topic.
@@ -4499,7 +4665,7 @@ export const TopicsApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         getTopicRelationships(requestParameters: TopicsApiGetTopicRelationshipsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseRelationship> {
-            return localVarFp.getTopicRelationships(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.getTopicRelationships(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Get a list of the variables that have been matched to a given topic.
@@ -4509,7 +4675,7 @@ export const TopicsApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         getTopicVariables(requestParameters: TopicsApiGetTopicVariablesRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseVariable> {
-            return localVarFp.getTopicVariables(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.getTopicVariables(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Get a list of topics.
@@ -4519,7 +4685,7 @@ export const TopicsApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         getTopics(requestParameters: TopicsApiGetTopicsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseTopic> {
-            return localVarFp.getTopics(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.getTopics(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -4580,6 +4746,13 @@ export interface TopicsApiGetTopicDeterminantsRequest {
     readonly fields?: string | null
 
     /**
+     * Include total number of records in the response.
+     * @type {boolean}
+     * @memberof TopicsApiGetTopicDeterminants
+     */
+    readonly includeTotal?: boolean | null
+
+    /**
      * Offset
      * @type {number}
      * @memberof TopicsApiGetTopicDeterminants
@@ -4634,6 +4807,13 @@ export interface TopicsApiGetTopicInterventionsRequest {
      * @memberof TopicsApiGetTopicInterventions
      */
     readonly fields?: string | null
+
+    /**
+     * Include total number of records in the response.
+     * @type {boolean}
+     * @memberof TopicsApiGetTopicInterventions
+     */
+    readonly includeTotal?: boolean | null
 
     /**
      * Offset
@@ -4692,6 +4872,13 @@ export interface TopicsApiGetTopicOutcomesRequest {
     readonly fields?: string | null
 
     /**
+     * Include total number of records in the response.
+     * @type {boolean}
+     * @memberof TopicsApiGetTopicOutcomes
+     */
+    readonly includeTotal?: boolean | null
+
+    /**
      * Offset
      * @type {number}
      * @memberof TopicsApiGetTopicOutcomes
@@ -4746,6 +4933,13 @@ export interface TopicsApiGetTopicRelationshipsRequest {
      * @memberof TopicsApiGetTopicRelationships
      */
     readonly fields?: string | null
+
+    /**
+     * Include total number of records in the response.
+     * @type {boolean}
+     * @memberof TopicsApiGetTopicRelationships
+     */
+    readonly includeTotal?: boolean | null
 
     /**
      * Offset
@@ -4804,6 +4998,13 @@ export interface TopicsApiGetTopicVariablesRequest {
     readonly fields?: string | null
 
     /**
+     * Include total number of records in the response.
+     * @type {boolean}
+     * @memberof TopicsApiGetTopicVariables
+     */
+    readonly includeTotal?: boolean | null
+
+    /**
      * Offset
      * @type {number}
      * @memberof TopicsApiGetTopicVariables
@@ -4853,6 +5054,13 @@ export interface TopicsApiGetTopicsRequest {
     readonly fields?: string | null
 
     /**
+     * Include total number of records in the response.
+     * @type {boolean}
+     * @memberof TopicsApiGetTopics
+     */
+    readonly includeTotal?: boolean | null
+
+    /**
      * Offset
      * @type {number}
      * @memberof TopicsApiGetTopics
@@ -4895,7 +5103,7 @@ export class TopicsApi extends BaseAPI {
      * @memberof TopicsApi
      */
     public getTopicDeterminants(requestParameters: TopicsApiGetTopicDeterminantsRequest, options?: RawAxiosRequestConfig) {
-        return TopicsApiFp(this.configuration).getTopicDeterminants(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return TopicsApiFp(this.configuration).getTopicDeterminants(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4907,7 +5115,7 @@ export class TopicsApi extends BaseAPI {
      * @memberof TopicsApi
      */
     public getTopicInterventions(requestParameters: TopicsApiGetTopicInterventionsRequest, options?: RawAxiosRequestConfig) {
-        return TopicsApiFp(this.configuration).getTopicInterventions(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return TopicsApiFp(this.configuration).getTopicInterventions(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4919,7 +5127,7 @@ export class TopicsApi extends BaseAPI {
      * @memberof TopicsApi
      */
     public getTopicOutcomes(requestParameters: TopicsApiGetTopicOutcomesRequest, options?: RawAxiosRequestConfig) {
-        return TopicsApiFp(this.configuration).getTopicOutcomes(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return TopicsApiFp(this.configuration).getTopicOutcomes(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4931,7 +5139,7 @@ export class TopicsApi extends BaseAPI {
      * @memberof TopicsApi
      */
     public getTopicRelationships(requestParameters: TopicsApiGetTopicRelationshipsRequest, options?: RawAxiosRequestConfig) {
-        return TopicsApiFp(this.configuration).getTopicRelationships(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return TopicsApiFp(this.configuration).getTopicRelationships(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4943,7 +5151,7 @@ export class TopicsApi extends BaseAPI {
      * @memberof TopicsApi
      */
     public getTopicVariables(requestParameters: TopicsApiGetTopicVariablesRequest, options?: RawAxiosRequestConfig) {
-        return TopicsApiFp(this.configuration).getTopicVariables(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return TopicsApiFp(this.configuration).getTopicVariables(requestParameters.topicId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4955,7 +5163,7 @@ export class TopicsApi extends BaseAPI {
      * @memberof TopicsApi
      */
     public getTopics(requestParameters: TopicsApiGetTopicsRequest = {}, options?: RawAxiosRequestConfig) {
-        return TopicsApiFp(this.configuration).getTopics(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return TopicsApiFp(this.configuration).getTopics(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -5012,12 +5220,13 @@ export const VariablesApiAxiosParamCreator = function (configuration?: Configura
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getVariableStatisticalFindings: async (variableId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getVariableStatisticalFindings: async (variableId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'variableId' is not null or undefined
             assertParamExists('getVariableStatisticalFindings', 'variableId', variableId)
             const localVarPath = `/v0/variables/{variable_id}/statistical_findings`
@@ -5052,6 +5261,10 @@ export const VariablesApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['fields'] = fields;
             }
 
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['include_total'] = includeTotal;
+            }
+
             if (offset !== undefined) {
                 localVarQueryParameter['offset'] = offset;
             }
@@ -5078,12 +5291,13 @@ export const VariablesApiAxiosParamCreator = function (configuration?: Configura
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_studies.
          * @param {string | null} [search] Field to search within. Supported fields for searching: name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getVariables: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getVariables: async (filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v0/variables`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5113,6 +5327,10 @@ export const VariablesApiAxiosParamCreator = function (configuration?: Configura
 
             if (fields !== undefined) {
                 localVarQueryParameter['fields'] = fields;
+            }
+
+            if (includeTotal !== undefined) {
+                localVarQueryParameter['include_total'] = includeTotal;
             }
 
             if (offset !== undefined) {
@@ -5165,13 +5383,14 @@ export const VariablesApiFp = function(configuration?: Configuration) {
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getVariableStatisticalFindings(variableId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getVariableStatisticalFindings(variableId, filter, sort, search, fields, offset, limit, options);
+        async getVariableStatisticalFindings(variableId: string, filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseStatisticalFinding>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getVariableStatisticalFindings(variableId, filter, sort, search, fields, includeTotal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['VariablesApi.getVariableStatisticalFindings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -5183,13 +5402,14 @@ export const VariablesApiFp = function(configuration?: Configuration) {
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_studies.
          * @param {string | null} [search] Field to search within. Supported fields for searching: name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
+         * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
          * @param {number} [limit] Limit
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getVariables(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseVariable>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getVariables(filter, sort, search, fields, offset, limit, options);
+        async getVariables(filter?: string | null, sort?: string | null, search?: string | null, fields?: string | null, includeTotal?: boolean | null, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListResponseVariable>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getVariables(filter, sort, search, fields, includeTotal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['VariablesApi.getVariables']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -5222,7 +5442,7 @@ export const VariablesApiFactory = function (configuration?: Configuration, base
          * @throws {RequiredError}
          */
         getVariableStatisticalFindings(requestParameters: VariablesApiGetVariableStatisticalFindingsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseStatisticalFinding> {
-            return localVarFp.getVariableStatisticalFindings(requestParameters.variableId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.getVariableStatisticalFindings(requestParameters.variableId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Get a list of variables.
@@ -5232,7 +5452,7 @@ export const VariablesApiFactory = function (configuration?: Configuration, base
          * @throws {RequiredError}
          */
         getVariables(requestParameters: VariablesApiGetVariablesRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ListResponseVariable> {
-            return localVarFp.getVariables(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.getVariables(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5293,6 +5513,13 @@ export interface VariablesApiGetVariableStatisticalFindingsRequest {
     readonly fields?: string | null
 
     /**
+     * Include total number of records in the response.
+     * @type {boolean}
+     * @memberof VariablesApiGetVariableStatisticalFindings
+     */
+    readonly includeTotal?: boolean | null
+
+    /**
      * Offset
      * @type {number}
      * @memberof VariablesApiGetVariableStatisticalFindings
@@ -5342,6 +5569,13 @@ export interface VariablesApiGetVariablesRequest {
     readonly fields?: string | null
 
     /**
+     * Include total number of records in the response.
+     * @type {boolean}
+     * @memberof VariablesApiGetVariables
+     */
+    readonly includeTotal?: boolean | null
+
+    /**
      * Offset
      * @type {number}
      * @memberof VariablesApiGetVariables
@@ -5384,7 +5618,7 @@ export class VariablesApi extends BaseAPI {
      * @memberof VariablesApi
      */
     public getVariableStatisticalFindings(requestParameters: VariablesApiGetVariableStatisticalFindingsRequest, options?: RawAxiosRequestConfig) {
-        return VariablesApiFp(this.configuration).getVariableStatisticalFindings(requestParameters.variableId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return VariablesApiFp(this.configuration).getVariableStatisticalFindings(requestParameters.variableId, requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5396,7 +5630,7 @@ export class VariablesApi extends BaseAPI {
      * @memberof VariablesApi
      */
     public getVariables(requestParameters: VariablesApiGetVariablesRequest = {}, options?: RawAxiosRequestConfig) {
-        return VariablesApiFp(this.configuration).getVariables(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return VariablesApiFp(this.configuration).getVariables(requestParameters.filter, requestParameters.sort, requestParameters.search, requestParameters.fields, requestParameters.includeTotal, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
