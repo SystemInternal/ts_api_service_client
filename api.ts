@@ -49,6 +49,120 @@ export interface Author {
     'openalex_id'?: string | null;
 }
 /**
+ * 
+ * @export
+ * @interface CypherNodeSchema
+ */
+export interface CypherNodeSchema {
+    /**
+     * 
+     * @type {string}
+     * @memberof CypherNodeSchema
+     */
+    'node_type': string;
+    /**
+     * 
+     * @type {Array<CypherProperty>}
+     * @memberof CypherNodeSchema
+     */
+    'properties': Array<CypherProperty>;
+}
+/**
+ * 
+ * @export
+ * @interface CypherPayload
+ */
+export interface CypherPayload {
+    /**
+     * 
+     * @type {string}
+     * @memberof CypherPayload
+     */
+    'query': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof CypherPayload
+     */
+    'parameters'?: object | null;
+}
+/**
+ * 
+ * @export
+ * @interface CypherProperty
+ */
+export interface CypherProperty {
+    /**
+     * 
+     * @type {string}
+     * @memberof CypherProperty
+     */
+    'name': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CypherProperty
+     */
+    'types': Array<string>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CypherProperty
+     */
+    'mandatory': boolean;
+}
+/**
+ * 
+ * @export
+ * @interface CypherRelationshipSchema
+ */
+export interface CypherRelationshipSchema {
+    /**
+     * 
+     * @type {string}
+     * @memberof CypherRelationshipSchema
+     */
+    'rel_type': string;
+    /**
+     * 
+     * @type {Array<CypherProperty>}
+     * @memberof CypherRelationshipSchema
+     */
+    'properties': Array<CypherProperty>;
+}
+/**
+ * 
+ * @export
+ * @interface CypherResponse
+ */
+export interface CypherResponse {
+    /**
+     * 
+     * @type {Array<object>}
+     * @memberof CypherResponse
+     */
+    'records': Array<object>;
+}
+/**
+ * 
+ * @export
+ * @interface CypherSchema
+ */
+export interface CypherSchema {
+    /**
+     * 
+     * @type {Array<CypherNodeSchema>}
+     * @memberof CypherSchema
+     */
+    'nodes': Array<CypherNodeSchema>;
+    /**
+     * 
+     * @type {Array<CypherRelationshipSchema>}
+     * @memberof CypherSchema
+     */
+    'relationships': Array<CypherRelationshipSchema>;
+}
+/**
  * Type of finding.
  * @export
  * @enum {string}
@@ -113,11 +227,23 @@ export interface FlagInput {
     'reason'?: string | null;
 }
 /**
- * Graph response.
+ * 
  * @export
  * @interface GraphResponse
  */
 export interface GraphResponse {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GraphResponse
+     */
+    'directed': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GraphResponse
+     */
+    'multigraph': boolean;
     /**
      * 
      * @type {Array<Node>}
@@ -169,7 +295,7 @@ export type JobStatus = typeof JobStatus[keyof typeof JobStatus];
 
 
 /**
- * Link.
+ * 
  * @export
  * @interface Link
  */
@@ -186,6 +312,42 @@ export interface Link {
      * @memberof Link
      */
     'target': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Link
+     */
+    'last_published'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Link
+     */
+    'median_effect_size'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Link
+     */
+    'num_studies': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Link
+     */
+    'highest_cited'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Link
+     */
+    'num_significant_findings': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Link
+     */
+    'num_findings': number;
 }
 /**
  * 
@@ -464,7 +626,7 @@ export interface NestedStudy {
     'sample_size'?: string;
 }
 /**
- * Node.
+ * 
  * @export
  * @interface Node
  */
@@ -480,7 +642,19 @@ export interface Node {
      * @type {string}
      * @memberof Node
      */
-    'label'?: string | null;
+    'label': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Node
+     */
+    'category': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Node
+     */
+    'roles': Array<string>;
 }
 /**
  * Pubmed search synthesis input.
@@ -1116,17 +1290,47 @@ export interface Variable {
 export const GraphApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Gets a subgraph of a topic by id.         The subgraph includes upstream and downstream relationships within two hops.         If the response takes too long or is too large, consider using filters to reduce the size of the response.
-         * @summary Get subgraph by topic id
-         * @param {string} topicId 
-         * @param {string | null} [upstream1Filter] Fields and values to filter the first upstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-         * @param {string | null} [upstream2Filter] Fields and values to filter the second upstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-         * @param {string | null} [downstream1Filter] Fields and values to filter the first downstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-         * @param {string | null} [downstream2Filter] Fields and values to filter the second downstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
+         * Schema for node and relationship properties to query in cypher.
+         * @summary Schema for cypher queries
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSubgraphByTopicId: async (topicId: string, upstream1Filter?: string | null, upstream2Filter?: string | null, downstream1Filter?: string | null, downstream2Filter?: string | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCypherSchema: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v0/graph/cypher/schema`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication APIKeyHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Gets a subgraph of a topic by id.         The subgraph includes upstream and downstream relationships within n degrees.
+         * @summary Get subgraph by topic id
+         * @param {string} topicId 
+         * @param {number | null} [nDegree] The number of degrees to search over to create the graph.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSubgraphByTopicId: async (topicId: string, nDegree?: number | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'topicId' is not null or undefined
             assertParamExists('getSubgraphByTopicId', 'topicId', topicId)
             const localVarPath = `/v0/graph/{topic_id}`
@@ -1145,20 +1349,8 @@ export const GraphApiAxiosParamCreator = function (configuration?: Configuration
             // authentication APIKeyHeader required
             await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
 
-            if (upstream1Filter !== undefined) {
-                localVarQueryParameter['upstream_1_filter'] = upstream1Filter;
-            }
-
-            if (upstream2Filter !== undefined) {
-                localVarQueryParameter['upstream_2_filter'] = upstream2Filter;
-            }
-
-            if (downstream1Filter !== undefined) {
-                localVarQueryParameter['downstream_1_filter'] = downstream1Filter;
-            }
-
-            if (downstream2Filter !== undefined) {
-                localVarQueryParameter['downstream_2_filter'] = downstream2Filter;
+            if (nDegree !== undefined) {
+                localVarQueryParameter['n_degree'] = nDegree;
             }
 
 
@@ -1166,6 +1358,45 @@ export const GraphApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Query the topic graph with any cypher query.         For querying:         - The node type is Topic.         - The relationship type is `RELATES_TO`.         - The schema is provided by the `/cypher/schema` endpoint.
+         * @summary Query graph with cypher
+         * @param {CypherPayload} cypherPayload 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postCypherQuery: async (cypherPayload: CypherPayload, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'cypherPayload' is not null or undefined
+            assertParamExists('postCypherQuery', 'cypherPayload', cypherPayload)
+            const localVarPath = `/v0/graph/cypher`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication APIKeyHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(cypherPayload, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1183,20 +1414,42 @@ export const GraphApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = GraphApiAxiosParamCreator(configuration)
     return {
         /**
-         * Gets a subgraph of a topic by id.         The subgraph includes upstream and downstream relationships within two hops.         If the response takes too long or is too large, consider using filters to reduce the size of the response.
-         * @summary Get subgraph by topic id
-         * @param {string} topicId 
-         * @param {string | null} [upstream1Filter] Fields and values to filter the first upstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-         * @param {string | null} [upstream2Filter] Fields and values to filter the second upstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-         * @param {string | null} [downstream1Filter] Fields and values to filter the first downstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-         * @param {string | null} [downstream2Filter] Fields and values to filter the second downstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
+         * Schema for node and relationship properties to query in cypher.
+         * @summary Schema for cypher queries
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSubgraphByTopicId(topicId: string, upstream1Filter?: string | null, upstream2Filter?: string | null, downstream1Filter?: string | null, downstream2Filter?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GraphResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getSubgraphByTopicId(topicId, upstream1Filter, upstream2Filter, downstream1Filter, downstream2Filter, options);
+        async getCypherSchema(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CypherSchema>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCypherSchema(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GraphApi.getCypherSchema']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Gets a subgraph of a topic by id.         The subgraph includes upstream and downstream relationships within n degrees.
+         * @summary Get subgraph by topic id
+         * @param {string} topicId 
+         * @param {number | null} [nDegree] The number of degrees to search over to create the graph.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSubgraphByTopicId(topicId: string, nDegree?: number | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GraphResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSubgraphByTopicId(topicId, nDegree, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GraphApi.getSubgraphByTopicId']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Query the topic graph with any cypher query.         For querying:         - The node type is Topic.         - The relationship type is `RELATES_TO`.         - The schema is provided by the `/cypher/schema` endpoint.
+         * @summary Query graph with cypher
+         * @param {CypherPayload} cypherPayload 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postCypherQuery(cypherPayload: CypherPayload, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CypherResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postCypherQuery(cypherPayload, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GraphApi.postCypherQuery']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -1210,14 +1463,33 @@ export const GraphApiFactory = function (configuration?: Configuration, basePath
     const localVarFp = GraphApiFp(configuration)
     return {
         /**
-         * Gets a subgraph of a topic by id.         The subgraph includes upstream and downstream relationships within two hops.         If the response takes too long or is too large, consider using filters to reduce the size of the response.
+         * Schema for node and relationship properties to query in cypher.
+         * @summary Schema for cypher queries
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCypherSchema(options?: RawAxiosRequestConfig): AxiosPromise<CypherSchema> {
+            return localVarFp.getCypherSchema(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Gets a subgraph of a topic by id.         The subgraph includes upstream and downstream relationships within n degrees.
          * @summary Get subgraph by topic id
          * @param {GraphApiGetSubgraphByTopicIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         getSubgraphByTopicId(requestParameters: GraphApiGetSubgraphByTopicIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<GraphResponse> {
-            return localVarFp.getSubgraphByTopicId(requestParameters.topicId, requestParameters.upstream1Filter, requestParameters.upstream2Filter, requestParameters.downstream1Filter, requestParameters.downstream2Filter, options).then((request) => request(axios, basePath));
+            return localVarFp.getSubgraphByTopicId(requestParameters.topicId, requestParameters.nDegree, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Query the topic graph with any cypher query.         For querying:         - The node type is Topic.         - The relationship type is `RELATES_TO`.         - The schema is provided by the `/cypher/schema` endpoint.
+         * @summary Query graph with cypher
+         * @param {GraphApiPostCypherQueryRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postCypherQuery(requestParameters: GraphApiPostCypherQueryRequest, options?: RawAxiosRequestConfig): AxiosPromise<CypherResponse> {
+            return localVarFp.postCypherQuery(requestParameters.cypherPayload, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1236,32 +1508,25 @@ export interface GraphApiGetSubgraphByTopicIdRequest {
     readonly topicId: string
 
     /**
-     * Fields and values to filter the first upstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-     * @type {string}
+     * The number of degrees to search over to create the graph.
+     * @type {number}
      * @memberof GraphApiGetSubgraphByTopicId
      */
-    readonly upstream1Filter?: string | null
+    readonly nDegree?: number | null
+}
 
+/**
+ * Request parameters for postCypherQuery operation in GraphApi.
+ * @export
+ * @interface GraphApiPostCypherQueryRequest
+ */
+export interface GraphApiPostCypherQueryRequest {
     /**
-     * Fields and values to filter the second upstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-     * @type {string}
-     * @memberof GraphApiGetSubgraphByTopicId
+     * 
+     * @type {CypherPayload}
+     * @memberof GraphApiPostCypherQuery
      */
-    readonly upstream2Filter?: string | null
-
-    /**
-     * Fields and values to filter the first downstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-     * @type {string}
-     * @memberof GraphApiGetSubgraphByTopicId
-     */
-    readonly downstream1Filter?: string | null
-
-    /**
-     * Fields and values to filter the second downstream relationship. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, topic.id, topic.wikidata_id, topic.category, topic.roles.
-     * @type {string}
-     * @memberof GraphApiGetSubgraphByTopicId
-     */
-    readonly downstream2Filter?: string | null
+    readonly cypherPayload: CypherPayload
 }
 
 /**
@@ -1272,7 +1537,18 @@ export interface GraphApiGetSubgraphByTopicIdRequest {
  */
 export class GraphApi extends BaseAPI {
     /**
-     * Gets a subgraph of a topic by id.         The subgraph includes upstream and downstream relationships within two hops.         If the response takes too long or is too large, consider using filters to reduce the size of the response.
+     * Schema for node and relationship properties to query in cypher.
+     * @summary Schema for cypher queries
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GraphApi
+     */
+    public getCypherSchema(options?: RawAxiosRequestConfig) {
+        return GraphApiFp(this.configuration).getCypherSchema(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Gets a subgraph of a topic by id.         The subgraph includes upstream and downstream relationships within n degrees.
      * @summary Get subgraph by topic id
      * @param {GraphApiGetSubgraphByTopicIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1280,7 +1556,19 @@ export class GraphApi extends BaseAPI {
      * @memberof GraphApi
      */
     public getSubgraphByTopicId(requestParameters: GraphApiGetSubgraphByTopicIdRequest, options?: RawAxiosRequestConfig) {
-        return GraphApiFp(this.configuration).getSubgraphByTopicId(requestParameters.topicId, requestParameters.upstream1Filter, requestParameters.upstream2Filter, requestParameters.downstream1Filter, requestParameters.downstream2Filter, options).then((request) => request(this.axios, this.basePath));
+        return GraphApiFp(this.configuration).getSubgraphByTopicId(requestParameters.topicId, requestParameters.nDegree, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Query the topic graph with any cypher query.         For querying:         - The node type is Topic.         - The relationship type is `RELATES_TO`.         - The schema is provided by the `/cypher/schema` endpoint.
+     * @summary Query graph with cypher
+     * @param {GraphApiPostCypherQueryRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GraphApi
+     */
+    public postCypherQuery(requestParameters: GraphApiPostCypherQueryRequest, options?: RawAxiosRequestConfig) {
+        return GraphApiFp(this.configuration).postCypherQuery(requestParameters.cypherPayload, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
