@@ -793,6 +793,12 @@ export interface Study {
     'doi'?: string | null;
     /**
      * 
+     * @type {number}
+     * @memberof Study
+     */
+    'pmid'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof Study
      */
@@ -1689,7 +1695,7 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
          * Get a list of the studies underlying a given relationship.
          * @summary Get relationship studies
          * @param {string} relationshipId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, pmid, publish_date, cited_by, study_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -1872,7 +1878,7 @@ export const RelationshipsApiFp = function(configuration?: Configuration) {
          * Get a list of the studies underlying a given relationship.
          * @summary Get relationship studies
          * @param {string} relationshipId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, pmid, publish_date, cited_by, study_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -2051,7 +2057,7 @@ export interface RelationshipsApiGetRelationshipStudiesRequest {
     readonly relationshipId: string
 
     /**
-     * Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+     * Fields and values to filter the response by. Supported fields for filtering: id, doi, pmid, publish_date, cited_by, study_type.
      * @type {string}
      * @memberof RelationshipsApiGetRelationshipStudies
      */
@@ -2613,7 +2619,7 @@ export const StudiesApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Get a list of studies.
          * @summary Get studies
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, pmid, publish_date, cited_by, study_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -2800,7 +2806,7 @@ export const StudiesApiFp = function(configuration?: Configuration) {
         /**
          * Get a list of studies.
          * @summary Get studies
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, pmid, publish_date, cited_by, study_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -2899,7 +2905,7 @@ export const StudiesApiFactory = function (configuration?: Configuration, basePa
  */
 export interface StudiesApiGetStudiesRequest {
     /**
-     * Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+     * Fields and values to filter the response by. Supported fields for filtering: id, doi, pmid, publish_date, cited_by, study_type.
      * @type {string}
      * @memberof StudiesApiGetStudies
      */
@@ -3314,7 +3320,7 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
          * Get studies from pubmed search synthesis.
          * @summary Get studies from pubmed search synthesis
          * @param {string} jobId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, pmid, publish_date, cited_by, study_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -3541,7 +3547,7 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
          * Get studies from pubmed search synthesis.
          * @summary Get studies from pubmed search synthesis
          * @param {string} jobId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, doi, pmid, publish_date, cited_by, study_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: publish_date, sample_size, cited_by.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -3855,7 +3861,7 @@ export interface SynthesisApiGetStudiesFromPubmedSearchRequest {
     readonly jobId: string
 
     /**
-     * Fields and values to filter the response by. Supported fields for filtering: id, doi, publish_date, cited_by, study_type.
+     * Fields and values to filter the response by. Supported fields for filtering: id, doi, pmid, publish_date, cited_by, study_type.
      * @type {string}
      * @memberof SynthesisApiGetStudiesFromPubmedSearch
      */
