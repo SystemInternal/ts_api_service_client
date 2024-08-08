@@ -1334,7 +1334,7 @@ export const MechanisticFindingsApiAxiosParamCreator = function (configuration?:
          * @summary Get mechanistic findings
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
@@ -1425,7 +1425,7 @@ export const MechanisticFindingsApiFp = function(configuration?: Configuration) 
          * @summary Get mechanistic findings
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
@@ -1507,7 +1507,7 @@ export interface MechanisticFindingsApiGetMechanisticFindingsRequest {
     readonly sort?: string | null
 
     /**
-     * Field to search within. Supported fields for searching: none.
+     * Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
      * @type {string}
      * @memberof MechanisticFindingsApiGetMechanisticFindings
      */
@@ -1625,7 +1625,7 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
          * @param {string} relationshipId 
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
@@ -1768,7 +1768,7 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
          * @summary Get relationships
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, source_topic.id, source_topic.wikidata_id, source_topic.category, source_topic.roles, target_topic.id, target_topic.wikidata_id, target_topic.category, target_topic.roles.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: source_topic.name, target_topic.name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
@@ -1860,7 +1860,7 @@ export const RelationshipsApiFp = function(configuration?: Configuration) {
          * @param {string} relationshipId 
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
@@ -1899,7 +1899,7 @@ export const RelationshipsApiFp = function(configuration?: Configuration) {
          * @summary Get relationships
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, source_topic.id, source_topic.wikidata_id, source_topic.category, source_topic.roles, target_topic.id, target_topic.wikidata_id, target_topic.category, target_topic.roles.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: source_topic.name, target_topic.name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
@@ -2008,7 +2008,7 @@ export interface RelationshipsApiGetRelationshipStatisticalFindingsRequest {
     readonly sort?: string | null
 
     /**
-     * Field to search within. Supported fields for searching: none.
+     * Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
      * @type {string}
      * @memberof RelationshipsApiGetRelationshipStatisticalFindings
      */
@@ -2127,7 +2127,7 @@ export interface RelationshipsApiGetRelationshipsRequest {
     readonly sort?: string | null
 
     /**
-     * Field to search within. Supported fields for searching: none.
+     * Field to search within. Supported fields for searching: source_topic.name, target_topic.name.
      * @type {string}
      * @memberof RelationshipsApiGetRelationships
      */
@@ -2311,7 +2311,7 @@ export const StatisticalFindingsApiAxiosParamCreator = function (configuration?:
          * @summary Get statistical findings
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
@@ -2416,7 +2416,7 @@ export const StatisticalFindingsApiFp = function(configuration?: Configuration) 
          * @summary Get statistical findings
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
@@ -2529,7 +2529,7 @@ export interface StatisticalFindingsApiGetStatisticalFindingsRequest {
     readonly sort?: string | null
 
     /**
-     * Field to search within. Supported fields for searching: none.
+     * Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
      * @type {string}
      * @memberof StatisticalFindingsApiGetStatisticalFindings
      */
@@ -2727,7 +2727,7 @@ export const StudiesApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} studyId 
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
@@ -2841,7 +2841,7 @@ export const StudiesApiFp = function(configuration?: Configuration) {
          * @param {string} studyId 
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
@@ -2996,7 +2996,7 @@ export interface StudiesApiGetStudyStatisticalFindingsRequest {
     readonly sort?: string | null
 
     /**
-     * Field to search within. Supported fields for searching: none.
+     * Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
      * @type {string}
      * @memberof StudiesApiGetStudyStatisticalFindings
      */
@@ -3089,7 +3089,7 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
          * @param {string} jobId 
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
@@ -3250,7 +3250,7 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
          * @param {string} jobId 
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
@@ -3480,7 +3480,7 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
          * @param {string} jobId 
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
@@ -3529,7 +3529,7 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
          * @param {string} jobId 
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
@@ -3700,7 +3700,7 @@ export interface SynthesisApiGetMechanisticFindingsFromPubmedSearchRequest {
     readonly sort?: string | null
 
     /**
-     * Field to search within. Supported fields for searching: none.
+     * Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
      * @type {string}
      * @memberof SynthesisApiGetMechanisticFindingsFromPubmedSearch
      */
@@ -3812,7 +3812,7 @@ export interface SynthesisApiGetStatisticalFindingsFromPubmedSearchRequest {
     readonly sort?: string | null
 
     /**
-     * Field to search within. Supported fields for searching: none.
+     * Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
      * @type {string}
      * @memberof SynthesisApiGetStatisticalFindingsFromPubmedSearch
      */
@@ -4297,7 +4297,7 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {string} topicId 
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, source_topic.id, source_topic.wikidata_id, source_topic.category, source_topic.roles, target_topic.id, target_topic.wikidata_id, target_topic.category, target_topic.roles.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: source_topic.name, target_topic.name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
@@ -4592,7 +4592,7 @@ export const TopicsApiFp = function(configuration?: Configuration) {
          * @param {string} topicId 
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial, source_topic.id, source_topic.wikidata_id, source_topic.category, source_topic.roles, target_topic.id, target_topic.wikidata_id, target_topic.category, target_topic.roles.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_findings, num_studies, num_significant_findings, highest_cited, median_effect_size, last_updated, has_experimental_trial.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: source_topic.name, target_topic.name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
@@ -4959,7 +4959,7 @@ export interface TopicsApiGetTopicRelationshipsRequest {
     readonly sort?: string | null
 
     /**
-     * Field to search within. Supported fields for searching: none.
+     * Field to search within. Supported fields for searching: source_topic.name, target_topic.name.
      * @type {string}
      * @memberof TopicsApiGetTopicRelationships
      */
@@ -5256,7 +5256,7 @@ export const VariablesApiAxiosParamCreator = function (configuration?: Configura
          * @param {string} variableId 
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
@@ -5419,7 +5419,7 @@ export const VariablesApiFp = function(configuration?: Configuration) {
          * @param {string} variableId 
          * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
-         * @param {string | null} [search] Field to search within. Supported fields for searching: none.
+         * @param {string | null} [search] Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
          * @param {boolean | null} [includeTotal] Include total number of records in the response.
          * @param {number} [offset] Offset
@@ -5537,7 +5537,7 @@ export interface VariablesApiGetVariableStatisticalFindingsRequest {
     readonly sort?: string | null
 
     /**
-     * Field to search within. Supported fields for searching: none.
+     * Field to search within. Supported fields for searching: topic_1.name, topic_2.name, variable_1.name, variable_2.name.
      * @type {string}
      * @memberof VariablesApiGetVariableStatisticalFindings
      */
