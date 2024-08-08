@@ -1332,7 +1332,7 @@ export const MechanisticFindingsApiAxiosParamCreator = function (configuration?:
         /**
          * Get a list of mechanistic findings.
          * @summary Get mechanistic findings
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -1423,7 +1423,7 @@ export const MechanisticFindingsApiFp = function(configuration?: Configuration) 
         /**
          * Get a list of mechanistic findings.
          * @summary Get mechanistic findings
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -1493,7 +1493,7 @@ export interface MechanisticFindingsApiGetMechanisticFindingByIdRequest {
  */
 export interface MechanisticFindingsApiGetMechanisticFindingsRequest {
     /**
-     * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
+     * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
      * @type {string}
      * @memberof MechanisticFindingsApiGetMechanisticFindings
      */
@@ -1623,7 +1623,7 @@ export const RelationshipsApiAxiosParamCreator = function (configuration?: Confi
          * Get a list of the statistical findings underlying a given relationship.
          * @summary Get relationship statistical findings
          * @param {string} relationshipId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -1858,7 +1858,7 @@ export const RelationshipsApiFp = function(configuration?: Configuration) {
          * Get a list of the statistical findings underlying a given relationship.
          * @summary Get relationship statistical findings
          * @param {string} relationshipId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -1994,7 +1994,7 @@ export interface RelationshipsApiGetRelationshipStatisticalFindingsRequest {
     readonly relationshipId: string
 
     /**
-     * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+     * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
      * @type {string}
      * @memberof RelationshipsApiGetRelationshipStatisticalFindings
      */
@@ -2309,7 +2309,7 @@ export const StatisticalFindingsApiAxiosParamCreator = function (configuration?:
         /**
          * Get a list of statistical findings.
          * @summary Get statistical findings
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -2414,7 +2414,7 @@ export const StatisticalFindingsApiFp = function(configuration?: Configuration) 
         /**
          * Get a list of statistical findings.
          * @summary Get statistical findings
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -2515,7 +2515,7 @@ export interface StatisticalFindingsApiGetStatisticalFindingByIdRequest {
  */
 export interface StatisticalFindingsApiGetStatisticalFindingsRequest {
     /**
-     * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+     * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
      * @type {string}
      * @memberof StatisticalFindingsApiGetStatisticalFindings
      */
@@ -2725,7 +2725,7 @@ export const StudiesApiAxiosParamCreator = function (configuration?: Configurati
          * Get a list of the statistical findings reported by a given study.
          * @summary Get study statistical findings
          * @param {string} studyId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -2839,7 +2839,7 @@ export const StudiesApiFp = function(configuration?: Configuration) {
          * Get a list of the statistical findings reported by a given study.
          * @summary Get study statistical findings
          * @param {string} studyId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -2982,7 +2982,7 @@ export interface StudiesApiGetStudyStatisticalFindingsRequest {
     readonly studyId: string
 
     /**
-     * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+     * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
      * @type {string}
      * @memberof StudiesApiGetStudyStatisticalFindings
      */
@@ -3087,7 +3087,7 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
          * Get statistical findings from pubmed search synthesis.
          * @summary Get mechanistic findings from pubmed search synthesis
          * @param {string} jobId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -3248,7 +3248,7 @@ export const SynthesisApiAxiosParamCreator = function (configuration?: Configura
          * Get statistical findings from pubmed search synthesis.
          * @summary Get statistical findings from pubmed search synthesis
          * @param {string} jobId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -3478,7 +3478,7 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
          * Get statistical findings from pubmed search synthesis.
          * @summary Get mechanistic findings from pubmed search synthesis
          * @param {string} jobId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -3527,7 +3527,7 @@ export const SynthesisApiFp = function(configuration?: Configuration) {
          * Get statistical findings from pubmed search synthesis.
          * @summary Get statistical findings from pubmed search synthesis
          * @param {string} jobId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -3686,7 +3686,7 @@ export interface SynthesisApiGetMechanisticFindingsFromPubmedSearchRequest {
     readonly jobId: string
 
     /**
-     * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
+     * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, mechanism_type.
      * @type {string}
      * @memberof SynthesisApiGetMechanisticFindingsFromPubmedSearch
      */
@@ -3798,7 +3798,7 @@ export interface SynthesisApiGetStatisticalFindingsFromPubmedSearchRequest {
     readonly jobId: string
 
     /**
-     * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+     * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
      * @type {string}
      * @memberof SynthesisApiGetStatisticalFindingsFromPubmedSearch
      */
@@ -4367,7 +4367,7 @@ export const TopicsApiAxiosParamCreator = function (configuration?: Configuratio
          * Get a list of the variables that have been matched to a given topic.
          * @summary Get topic variables
          * @param {string} topicId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.id.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_studies.
          * @param {string | null} [search] Field to search within. Supported fields for searching: name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -4610,7 +4610,7 @@ export const TopicsApiFp = function(configuration?: Configuration) {
          * Get a list of the variables that have been matched to a given topic.
          * @summary Get topic variables
          * @param {string} topicId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.id.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_studies.
          * @param {string | null} [search] Field to search within. Supported fields for searching: name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -5008,7 +5008,7 @@ export interface TopicsApiGetTopicVariablesRequest {
     readonly topicId: string
 
     /**
-     * Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.
+     * Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.id.
      * @type {string}
      * @memberof TopicsApiGetTopicVariables
      */
@@ -5254,7 +5254,7 @@ export const VariablesApiAxiosParamCreator = function (configuration?: Configura
          * Get a list of the statistical findings that include a given variable.
          * @summary Get variable statistical findings
          * @param {string} variableId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -5325,7 +5325,7 @@ export const VariablesApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Get a list of variables.
          * @summary Get variables
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.id.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_studies.
          * @param {string | null} [search] Field to search within. Supported fields for searching: name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -5417,7 +5417,7 @@ export const VariablesApiFp = function(configuration?: Configuration) {
          * Get a list of the statistical findings that include a given variable.
          * @summary Get variable statistical findings
          * @param {string} variableId 
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: none.
          * @param {string | null} [search] Field to search within. Supported fields for searching: none.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -5436,7 +5436,7 @@ export const VariablesApiFp = function(configuration?: Configuration) {
         /**
          * Get a list of variables.
          * @summary Get variables
-         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.
+         * @param {string | null} [filter] Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.id.
          * @param {string | null} [sort] Field to sort the response by. Supported fields for sorting: num_studies.
          * @param {string | null} [search] Field to search within. Supported fields for searching: name.
          * @param {string | null} [fields] Comma-separated list of fields to include in the response.
@@ -5523,7 +5523,7 @@ export interface VariablesApiGetVariableStatisticalFindingsRequest {
     readonly variableId: string
 
     /**
-     * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1, topic_2, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
+     * Fields and values to filter the response by. Supported fields for filtering: id, flagged, topic_1.id, topic_2.id, variable_1.id, variable_2.id, study.id, study.doi, statistic_type.
      * @type {string}
      * @memberof VariablesApiGetVariableStatisticalFindings
      */
@@ -5579,7 +5579,7 @@ export interface VariablesApiGetVariableStatisticalFindingsRequest {
  */
 export interface VariablesApiGetVariablesRequest {
     /**
-     * Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.
+     * Fields and values to filter the response by. Supported fields for filtering: id, num_studies, topic.id.
      * @type {string}
      * @memberof VariablesApiGetVariables
      */
