@@ -51,6 +51,25 @@ export interface Author {
 /**
  * 
  * @export
+ * @interface CypherError
+ */
+export interface CypherError {
+    /**
+     * 
+     * @type {string}
+     * @memberof CypherError
+     */
+    'code': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CypherError
+     */
+    'message': string;
+}
+/**
+ * 
+ * @export
  * @interface CypherNodeSchema
  */
 export interface CypherNodeSchema {
@@ -66,25 +85,6 @@ export interface CypherNodeSchema {
      * @memberof CypherNodeSchema
      */
     'properties': Array<CypherProperty>;
-}
-/**
- * 
- * @export
- * @interface CypherPayload
- */
-export interface CypherPayload {
-    /**
-     * 
-     * @type {string}
-     * @memberof CypherPayload
-     */
-    'query': string;
-    /**
-     * 
-     * @type {object}
-     * @memberof CypherPayload
-     */
-    'parameters'?: object | null;
 }
 /**
  * 
@@ -131,18 +131,19 @@ export interface CypherRelationshipSchema {
     'properties': Array<CypherProperty>;
 }
 /**
- * 
+ * Cypher return type.
  * @export
- * @interface CypherResponse
+ * @enum {string}
  */
-export interface CypherResponse {
-    /**
-     * 
-     * @type {Array<object>}
-     * @memberof CypherResponse
-     */
-    'records': Array<object>;
-}
+
+export const CypherReturnType = {
+    Records: 'records',
+    Graph: 'graph'
+} as const;
+
+export type CypherReturnType = typeof CypherReturnType[keyof typeof CypherReturnType];
+
+
 /**
  * 
  * @export
@@ -162,6 +163,60 @@ export interface CypherSchema {
      */
     'relationships': Array<CypherRelationshipSchema>;
 }
+/**
+ * 
+ * @export
+ * @interface CypherStatement
+ */
+export interface CypherStatement {
+    /**
+     * 
+     * @type {string}
+     * @memberof CypherStatement
+     */
+    'statement': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof CypherStatement
+     */
+    'parameters'?: object | null;
+    /**
+     * 
+     * @type {CypherReturnType}
+     * @memberof CypherStatement
+     */
+    'ret_type'?: CypherReturnType | null;
+}
+
+
+/**
+ * 
+ * @export
+ * @interface Data
+ */
+export interface Data {
+    /**
+     * 
+     * @type {string}
+     * @memberof Data
+     */
+    'type': DataTypeEnum;
+    /**
+     * 
+     * @type {Array<object>}
+     * @memberof Data
+     */
+    'content': Array<object>;
+}
+
+export const DataTypeEnum = {
+    Graph: 'graph',
+    Records: 'records'
+} as const;
+
+export type DataTypeEnum = typeof DataTypeEnum[keyof typeof DataTypeEnum];
+
 /**
  * Type of finding.
  * @export
@@ -229,31 +284,31 @@ export interface FlagInput {
 /**
  * 
  * @export
- * @interface GraphResponse
+ * @interface Graph
  */
-export interface GraphResponse {
+export interface Graph {
     /**
      * 
      * @type {boolean}
-     * @memberof GraphResponse
+     * @memberof Graph
      */
     'directed': boolean;
     /**
      * 
      * @type {boolean}
-     * @memberof GraphResponse
+     * @memberof Graph
      */
     'multigraph': boolean;
     /**
      * 
      * @type {Array<Node>}
-     * @memberof GraphResponse
+     * @memberof Graph
      */
     'nodes': Array<Node>;
     /**
      * 
      * @type {Array<Link>}
-     * @memberof GraphResponse
+     * @memberof Graph
      */
     'links': Array<Link>;
 }
@@ -655,6 +710,77 @@ export interface Node {
      * @memberof Node
      */
     'roles': Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface PostCypherGraphData
+ */
+export interface PostCypherGraphData {
+    /**
+     * 
+     * @type {string}
+     * @memberof PostCypherGraphData
+     */
+    'type': PostCypherGraphDataTypeEnum;
+    /**
+     * 
+     * @type {Graph}
+     * @memberof PostCypherGraphData
+     */
+    'content': Graph;
+}
+
+export const PostCypherGraphDataTypeEnum = {
+    Graph: 'graph'
+} as const;
+
+export type PostCypherGraphDataTypeEnum = typeof PostCypherGraphDataTypeEnum[keyof typeof PostCypherGraphDataTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface PostCypherRecordsData
+ */
+export interface PostCypherRecordsData {
+    /**
+     * 
+     * @type {string}
+     * @memberof PostCypherRecordsData
+     */
+    'type': PostCypherRecordsDataTypeEnum;
+    /**
+     * 
+     * @type {Array<object>}
+     * @memberof PostCypherRecordsData
+     */
+    'content': Array<object>;
+}
+
+export const PostCypherRecordsDataTypeEnum = {
+    Records: 'records'
+} as const;
+
+export type PostCypherRecordsDataTypeEnum = typeof PostCypherRecordsDataTypeEnum[keyof typeof PostCypherRecordsDataTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface PostCypherResponse
+ */
+export interface PostCypherResponse {
+    /**
+     * 
+     * @type {Data}
+     * @memberof PostCypherResponse
+     */
+    'data'?: Data | null;
+    /**
+     * 
+     * @type {CypherError}
+     * @memberof PostCypherResponse
+     */
+    'error'?: CypherError | null;
 }
 /**
  * Pubmed search synthesis input.
@@ -1365,15 +1491,15 @@ export const GraphApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Query the topic graph with any cypher query.         For querying:         - The node type is Topic.         - The relationship type is `RELATES_TO`.         - The schema is provided by the `/cypher/schema` endpoint.
+         * Query the topic graph with any cypher query.         For querying:         - The schema is provided by the `/cypher/schema` endpoint.         - `ret_type` can be either `records` or `graph` to return the list of Records or a Graph of the result.
          * @summary Query graph with cypher
-         * @param {CypherPayload} cypherPayload 
+         * @param {CypherStatement} cypherStatement 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postCypherQuery: async (cypherPayload: CypherPayload, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'cypherPayload' is not null or undefined
-            assertParamExists('postCypherQuery', 'cypherPayload', cypherPayload)
+        postCypherStatement: async (cypherStatement: CypherStatement, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'cypherStatement' is not null or undefined
+            assertParamExists('postCypherStatement', 'cypherStatement', cypherStatement)
             const localVarPath = `/v0/graph/cypher`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1396,7 +1522,7 @@ export const GraphApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(cypherPayload, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(cypherStatement, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1433,23 +1559,23 @@ export const GraphApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSubgraphByTopicId(topicId: string, nDegree?: number | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GraphResponse>> {
+        async getSubgraphByTopicId(topicId: string, nDegree?: number | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Graph>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSubgraphByTopicId(topicId, nDegree, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GraphApi.getSubgraphByTopicId']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Query the topic graph with any cypher query.         For querying:         - The node type is Topic.         - The relationship type is `RELATES_TO`.         - The schema is provided by the `/cypher/schema` endpoint.
+         * Query the topic graph with any cypher query.         For querying:         - The schema is provided by the `/cypher/schema` endpoint.         - `ret_type` can be either `records` or `graph` to return the list of Records or a Graph of the result.
          * @summary Query graph with cypher
-         * @param {CypherPayload} cypherPayload 
+         * @param {CypherStatement} cypherStatement 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postCypherQuery(cypherPayload: CypherPayload, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CypherResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postCypherQuery(cypherPayload, options);
+        async postCypherStatement(cypherStatement: CypherStatement, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PostCypherResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postCypherStatement(cypherStatement, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GraphApi.postCypherQuery']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['GraphApi.postCypherStatement']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -1478,18 +1604,18 @@ export const GraphApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSubgraphByTopicId(requestParameters: GraphApiGetSubgraphByTopicIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<GraphResponse> {
+        getSubgraphByTopicId(requestParameters: GraphApiGetSubgraphByTopicIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<Graph> {
             return localVarFp.getSubgraphByTopicId(requestParameters.topicId, requestParameters.nDegree, options).then((request) => request(axios, basePath));
         },
         /**
-         * Query the topic graph with any cypher query.         For querying:         - The node type is Topic.         - The relationship type is `RELATES_TO`.         - The schema is provided by the `/cypher/schema` endpoint.
+         * Query the topic graph with any cypher query.         For querying:         - The schema is provided by the `/cypher/schema` endpoint.         - `ret_type` can be either `records` or `graph` to return the list of Records or a Graph of the result.
          * @summary Query graph with cypher
-         * @param {GraphApiPostCypherQueryRequest} requestParameters Request parameters.
+         * @param {GraphApiPostCypherStatementRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postCypherQuery(requestParameters: GraphApiPostCypherQueryRequest, options?: RawAxiosRequestConfig): AxiosPromise<CypherResponse> {
-            return localVarFp.postCypherQuery(requestParameters.cypherPayload, options).then((request) => request(axios, basePath));
+        postCypherStatement(requestParameters: GraphApiPostCypherStatementRequest, options?: RawAxiosRequestConfig): AxiosPromise<PostCypherResponse> {
+            return localVarFp.postCypherStatement(requestParameters.cypherStatement, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1516,17 +1642,17 @@ export interface GraphApiGetSubgraphByTopicIdRequest {
 }
 
 /**
- * Request parameters for postCypherQuery operation in GraphApi.
+ * Request parameters for postCypherStatement operation in GraphApi.
  * @export
- * @interface GraphApiPostCypherQueryRequest
+ * @interface GraphApiPostCypherStatementRequest
  */
-export interface GraphApiPostCypherQueryRequest {
+export interface GraphApiPostCypherStatementRequest {
     /**
      * 
-     * @type {CypherPayload}
-     * @memberof GraphApiPostCypherQuery
+     * @type {CypherStatement}
+     * @memberof GraphApiPostCypherStatement
      */
-    readonly cypherPayload: CypherPayload
+    readonly cypherStatement: CypherStatement
 }
 
 /**
@@ -1560,15 +1686,15 @@ export class GraphApi extends BaseAPI {
     }
 
     /**
-     * Query the topic graph with any cypher query.         For querying:         - The node type is Topic.         - The relationship type is `RELATES_TO`.         - The schema is provided by the `/cypher/schema` endpoint.
+     * Query the topic graph with any cypher query.         For querying:         - The schema is provided by the `/cypher/schema` endpoint.         - `ret_type` can be either `records` or `graph` to return the list of Records or a Graph of the result.
      * @summary Query graph with cypher
-     * @param {GraphApiPostCypherQueryRequest} requestParameters Request parameters.
+     * @param {GraphApiPostCypherStatementRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GraphApi
      */
-    public postCypherQuery(requestParameters: GraphApiPostCypherQueryRequest, options?: RawAxiosRequestConfig) {
-        return GraphApiFp(this.configuration).postCypherQuery(requestParameters.cypherPayload, options).then((request) => request(this.axios, this.basePath));
+    public postCypherStatement(requestParameters: GraphApiPostCypherStatementRequest, options?: RawAxiosRequestConfig) {
+        return GraphApiFp(this.configuration).postCypherStatement(requestParameters.cypherStatement, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
