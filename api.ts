@@ -191,33 +191,6 @@ export interface CypherStatement {
 
 
 /**
- * 
- * @export
- * @interface Data
- */
-export interface Data {
-    /**
-     * 
-     * @type {string}
-     * @memberof Data
-     */
-    'type': DataTypeEnum;
-    /**
-     * 
-     * @type {Array<object>}
-     * @memberof Data
-     */
-    'content': Array<object>;
-}
-
-export const DataTypeEnum = {
-    Graph: 'graph',
-    Records: 'records'
-} as const;
-
-export type DataTypeEnum = typeof DataTypeEnum[keyof typeof DataTypeEnum];
-
-/**
  * Type of finding.
  * @export
  * @enum {string}
@@ -712,6 +685,12 @@ export interface Node {
     'roles': Array<string>;
 }
 /**
+ * @type PostCypherData
+ * @export
+ */
+export type PostCypherData = { type: 'graph' } & PostCypherGraphData | { type: 'records' } & PostCypherRecordsData;
+
+/**
  * 
  * @export
  * @interface PostCypherGraphData
@@ -771,10 +750,10 @@ export type PostCypherRecordsDataTypeEnum = typeof PostCypherRecordsDataTypeEnum
 export interface PostCypherResponse {
     /**
      * 
-     * @type {Data}
+     * @type {PostCypherData}
      * @memberof PostCypherResponse
      */
-    'data'?: Data | null;
+    'data'?: PostCypherData | null;
     /**
      * 
      * @type {CypherError}
