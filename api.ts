@@ -1031,6 +1031,12 @@ export interface StatisticalFinding {
      * @type {number}
      * @memberof StatisticalFinding
      */
+    'effect_size'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof StatisticalFinding
+     */
     'ci_upper'?: number | null;
     /**
      * 
