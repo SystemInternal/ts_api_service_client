@@ -13,57 +13,72 @@
  */
 
 import { mapValues } from '../runtime';
+import type { CypherReturnType } from './CypherReturnType';
+import {
+    CypherReturnTypeFromJSON,
+    CypherReturnTypeFromJSONTyped,
+    CypherReturnTypeToJSON,
+} from './CypherReturnType';
+
 /**
  * 
  * @export
- * @interface CypherPayload
+ * @interface CypherStatement
  */
-export interface CypherPayload {
+export interface CypherStatement {
     /**
      * 
      * @type {string}
-     * @memberof CypherPayload
+     * @memberof CypherStatement
      */
-    query: string;
+    statement: string;
     /**
      * 
      * @type {object}
-     * @memberof CypherPayload
+     * @memberof CypherStatement
      */
     parameters?: object | null;
+    /**
+     * 
+     * @type {CypherReturnType}
+     * @memberof CypherStatement
+     */
+    retType?: CypherReturnType | null;
 }
 
 /**
- * Check if a given object implements the CypherPayload interface.
+ * Check if a given object implements the CypherStatement interface.
  */
-export function instanceOfCypherPayload(value: object): value is CypherPayload {
-    if (!('query' in value) || value['query'] === undefined) return false;
+export function instanceOfCypherStatement(value: object): value is CypherStatement {
+    if (!('statement' in value) || value['statement'] === undefined) return false;
     return true;
 }
 
-export function CypherPayloadFromJSON(json: any): CypherPayload {
-    return CypherPayloadFromJSONTyped(json, false);
+export function CypherStatementFromJSON(json: any): CypherStatement {
+    return CypherStatementFromJSONTyped(json, false);
 }
 
-export function CypherPayloadFromJSONTyped(json: any, ignoreDiscriminator: boolean): CypherPayload {
+export function CypherStatementFromJSONTyped(json: any, ignoreDiscriminator: boolean): CypherStatement {
     if (json == null) {
         return json;
     }
     return {
         
-        'query': json['query'],
+        'statement': json['statement'],
         'parameters': json['parameters'] == null ? undefined : json['parameters'],
+        'retType': json['ret_type'] == null ? undefined : CypherReturnTypeFromJSON(json['ret_type']),
     };
 }
 
-export function CypherPayloadToJSON(value?: CypherPayload | null): any {
+export function CypherStatementToJSON(value?: CypherStatement | null): any {
     if (value == null) {
         return value;
     }
     return {
         
-        'query': value['query'],
+        'statement': value['statement'],
         'parameters': value['parameters'],
+        'ret_type': CypherReturnTypeToJSON(value['retType']),
     };
 }
 

@@ -33,10 +33,10 @@ export interface Link {
     target: string;
     /**
      * 
-     * @type {string}
+     * @type {Date}
      * @memberof Link
      */
-    lastPublished?: string | null;
+    lastPublished?: Date | null;
     /**
      * 
      * @type {number}
@@ -93,7 +93,7 @@ export function LinkFromJSONTyped(json: any, ignoreDiscriminator: boolean): Link
         
         'source': json['source'],
         'target': json['target'],
-        'lastPublished': json['last_published'] == null ? undefined : json['last_published'],
+        'lastPublished': json['last_published'] == null ? undefined : (new Date(json['last_published'])),
         'medianEffectSize': json['median_effect_size'] == null ? undefined : json['median_effect_size'],
         'numStudies': json['num_studies'],
         'highestCited': json['highest_cited'] == null ? undefined : json['highest_cited'],
@@ -110,7 +110,7 @@ export function LinkToJSON(value?: Link | null): any {
         
         'source': value['source'],
         'target': value['target'],
-        'last_published': value['lastPublished'],
+        'last_published': value['lastPublished'] == null ? undefined : ((value['lastPublished'] as any).toISOString()),
         'median_effect_size': value['medianEffectSize'],
         'num_studies': value['numStudies'],
         'highest_cited': value['highestCited'],

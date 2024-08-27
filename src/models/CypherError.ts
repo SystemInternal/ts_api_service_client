@@ -16,46 +16,55 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface CypherResponse
+ * @interface CypherError
  */
-export interface CypherResponse {
+export interface CypherError {
     /**
      * 
-     * @type {Array<object>}
-     * @memberof CypherResponse
+     * @type {string}
+     * @memberof CypherError
      */
-    records: Array<object>;
+    code: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CypherError
+     */
+    message: string;
 }
 
 /**
- * Check if a given object implements the CypherResponse interface.
+ * Check if a given object implements the CypherError interface.
  */
-export function instanceOfCypherResponse(value: object): value is CypherResponse {
-    if (!('records' in value) || value['records'] === undefined) return false;
+export function instanceOfCypherError(value: object): value is CypherError {
+    if (!('code' in value) || value['code'] === undefined) return false;
+    if (!('message' in value) || value['message'] === undefined) return false;
     return true;
 }
 
-export function CypherResponseFromJSON(json: any): CypherResponse {
-    return CypherResponseFromJSONTyped(json, false);
+export function CypherErrorFromJSON(json: any): CypherError {
+    return CypherErrorFromJSONTyped(json, false);
 }
 
-export function CypherResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): CypherResponse {
+export function CypherErrorFromJSONTyped(json: any, ignoreDiscriminator: boolean): CypherError {
     if (json == null) {
         return json;
     }
     return {
         
-        'records': json['records'],
+        'code': json['code'],
+        'message': json['message'],
     };
 }
 
-export function CypherResponseToJSON(value?: CypherResponse | null): any {
+export function CypherErrorToJSON(value?: CypherError | null): any {
     if (value == null) {
         return value;
     }
     return {
         
-        'records': value['records'],
+        'code': value['code'],
+        'message': value['message'],
     };
 }
 

@@ -109,6 +109,12 @@ export interface StatisticalFinding {
      * @type {number}
      * @memberof StatisticalFinding
      */
+    effectSize?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof StatisticalFinding
+     */
     ciUpper?: number | null;
     /**
      * 
@@ -163,6 +169,7 @@ export function StatisticalFindingFromJSONTyped(json: any, ignoreDiscriminator: 
         'study': json['study'] == null ? undefined : NestedStudyFromJSON(json['study']),
         'statisticType': json['statistic_type'] == null ? undefined : StatisticTypeFromJSON(json['statistic_type']),
         'statisticValue': json['statistic_value'] == null ? undefined : json['statistic_value'],
+        'effectSize': json['effect_size'] == null ? undefined : json['effect_size'],
         'ciUpper': json['ci_upper'] == null ? undefined : json['ci_upper'],
         'ciLower': json['ci_lower'] == null ? undefined : json['ci_lower'],
         'pValue': json['p_value'] == null ? undefined : json['p_value'],
@@ -186,6 +193,7 @@ export function StatisticalFindingToJSON(value?: StatisticalFinding | null): any
         'study': NestedStudyToJSON(value['study']),
         'statistic_type': StatisticTypeToJSON(value['statisticType']),
         'statistic_value': value['statisticValue'],
+        'effect_size': value['effectSize'],
         'ci_upper': value['ciUpper'],
         'ci_lower': value['ciLower'],
         'p_value': value['pValue'],

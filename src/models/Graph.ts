@@ -29,39 +29,39 @@ import {
 /**
  * 
  * @export
- * @interface GraphResponse
+ * @interface Graph
  */
-export interface GraphResponse {
+export interface Graph {
     /**
      * 
      * @type {boolean}
-     * @memberof GraphResponse
+     * @memberof Graph
      */
     directed: boolean;
     /**
      * 
      * @type {boolean}
-     * @memberof GraphResponse
+     * @memberof Graph
      */
     multigraph: boolean;
     /**
      * 
      * @type {Array<Node>}
-     * @memberof GraphResponse
+     * @memberof Graph
      */
     nodes: Array<Node>;
     /**
      * 
      * @type {Array<Link>}
-     * @memberof GraphResponse
+     * @memberof Graph
      */
     links: Array<Link>;
 }
 
 /**
- * Check if a given object implements the GraphResponse interface.
+ * Check if a given object implements the Graph interface.
  */
-export function instanceOfGraphResponse(value: object): value is GraphResponse {
+export function instanceOfGraph(value: object): value is Graph {
     if (!('directed' in value) || value['directed'] === undefined) return false;
     if (!('multigraph' in value) || value['multigraph'] === undefined) return false;
     if (!('nodes' in value) || value['nodes'] === undefined) return false;
@@ -69,11 +69,11 @@ export function instanceOfGraphResponse(value: object): value is GraphResponse {
     return true;
 }
 
-export function GraphResponseFromJSON(json: any): GraphResponse {
-    return GraphResponseFromJSONTyped(json, false);
+export function GraphFromJSON(json: any): Graph {
+    return GraphFromJSONTyped(json, false);
 }
 
-export function GraphResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): GraphResponse {
+export function GraphFromJSONTyped(json: any, ignoreDiscriminator: boolean): Graph {
     if (json == null) {
         return json;
     }
@@ -86,7 +86,7 @@ export function GraphResponseFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function GraphResponseToJSON(value?: GraphResponse | null): any {
+export function GraphToJSON(value?: Graph | null): any {
     if (value == null) {
         return value;
     }

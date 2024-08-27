@@ -15,23 +15,23 @@
 
 import * as runtime from '../runtime';
 import type {
-  CypherPayload,
-  CypherResponse,
   CypherSchema,
-  GraphResponse,
+  CypherStatement,
+  Graph,
   HTTPValidationError,
+  PostCypherResponse,
 } from '../models/index';
 import {
-    CypherPayloadFromJSON,
-    CypherPayloadToJSON,
-    CypherResponseFromJSON,
-    CypherResponseToJSON,
     CypherSchemaFromJSON,
     CypherSchemaToJSON,
-    GraphResponseFromJSON,
-    GraphResponseToJSON,
+    CypherStatementFromJSON,
+    CypherStatementToJSON,
+    GraphFromJSON,
+    GraphToJSON,
     HTTPValidationErrorFromJSON,
     HTTPValidationErrorToJSON,
+    PostCypherResponseFromJSON,
+    PostCypherResponseToJSON,
 } from '../models/index';
 
 export interface GetSubgraphByTopicIdRequest {
@@ -39,8 +39,8 @@ export interface GetSubgraphByTopicIdRequest {
     nDegree?: number | null;
 }
 
-export interface PostCypherQueryRequest {
-    cypherPayload: CypherPayload;
+export interface PostCypherStatementRequest {
+    cypherStatement: CypherStatement;
 }
 
 /**
@@ -84,7 +84,7 @@ export class GraphApi extends runtime.BaseAPI {
      * Gets a subgraph of a topic by id.         The subgraph includes upstream and downstream relationships within n degrees.
      * Get subgraph by topic id
      */
-    async getSubgraphByTopicIdRaw(requestParameters: GetSubgraphByTopicIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GraphResponse>> {
+    async getSubgraphByTopicIdRaw(requestParameters: GetSubgraphByTopicIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Graph>> {
         if (requestParameters['topicId'] == null) {
             throw new runtime.RequiredError(
                 'topicId',
@@ -111,27 +111,27 @@ export class GraphApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => GraphResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => GraphFromJSON(jsonValue));
     }
 
     /**
      * Gets a subgraph of a topic by id.         The subgraph includes upstream and downstream relationships within n degrees.
      * Get subgraph by topic id
      */
-    async getSubgraphByTopicId(requestParameters: GetSubgraphByTopicIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GraphResponse> {
+    async getSubgraphByTopicId(requestParameters: GetSubgraphByTopicIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Graph> {
         const response = await this.getSubgraphByTopicIdRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Query the topic graph with any cypher query.         For querying:         - The node type is Topic.         - The relationship type is `RELATES_TO`.         - The schema is provided by the `/cypher/schema` endpoint.
+     * Query the topic graph with any cypher query.         For querying:         - The schema is provided by the `/cypher/schema` endpoint.         - `ret_type` can be either `records` or `graph` to return the list of Records or a Graph of the result.
      * Query graph with cypher
      */
-    async postCypherQueryRaw(requestParameters: PostCypherQueryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CypherResponse>> {
-        if (requestParameters['cypherPayload'] == null) {
+    async postCypherStatementRaw(requestParameters: PostCypherStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PostCypherResponse>> {
+        if (requestParameters['cypherStatement'] == null) {
             throw new runtime.RequiredError(
-                'cypherPayload',
-                'Required parameter "cypherPayload" was null or undefined when calling postCypherQuery().'
+                'cypherStatement',
+                'Required parameter "cypherStatement" was null or undefined when calling postCypherStatement().'
             );
         }
 
@@ -150,18 +150,18 @@ export class GraphApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CypherPayloadToJSON(requestParameters['cypherPayload']),
+            body: CypherStatementToJSON(requestParameters['cypherStatement']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CypherResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => PostCypherResponseFromJSON(jsonValue));
     }
 
     /**
-     * Query the topic graph with any cypher query.         For querying:         - The node type is Topic.         - The relationship type is `RELATES_TO`.         - The schema is provided by the `/cypher/schema` endpoint.
+     * Query the topic graph with any cypher query.         For querying:         - The schema is provided by the `/cypher/schema` endpoint.         - `ret_type` can be either `records` or `graph` to return the list of Records or a Graph of the result.
      * Query graph with cypher
      */
-    async postCypherQuery(requestParameters: PostCypherQueryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CypherResponse> {
-        const response = await this.postCypherQueryRaw(requestParameters, initOverrides);
+    async postCypherStatement(requestParameters: PostCypherStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostCypherResponse> {
+        const response = await this.postCypherStatementRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

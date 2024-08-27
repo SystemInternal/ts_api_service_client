@@ -13,6 +13,37 @@
  */
 
 
-export * from "./api";
-export * from "./configuration";
+/**
+ * Cypher return type.
+ * @export
+ */
+export const CypherReturnType = {
+    Records: 'records',
+    Graph: 'graph'
+} as const;
+export type CypherReturnType = typeof CypherReturnType[keyof typeof CypherReturnType];
+
+
+export function instanceOfCypherReturnType(value: any): boolean {
+    for (const key in CypherReturnType) {
+        if (Object.prototype.hasOwnProperty.call(CypherReturnType, key)) {
+            if ((CypherReturnType as Record<string, CypherReturnType>)[key] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+export function CypherReturnTypeFromJSON(json: any): CypherReturnType {
+    return CypherReturnTypeFromJSONTyped(json, false);
+}
+
+export function CypherReturnTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean): CypherReturnType {
+    return json as CypherReturnType;
+}
+
+export function CypherReturnTypeToJSON(value?: CypherReturnType | null): any {
+    return value as any;
+}
 

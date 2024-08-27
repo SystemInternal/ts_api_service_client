@@ -18,12 +18,12 @@
  * @export
  */
 export const TopicCategory = {
-    BiomedicalDiseasesDisorders: 'Biomedical - Diseases & Disorders',
+    BiomedicalDiseasesDisorders: 'Biomedical - Diseases & disorders',
     BiomedicalHospitalization: 'Biomedical - Hospitalization',
     BiomedicalMortalitySurvival: 'Biomedical - Mortality/survival',
     BiomedicalPathogen: 'Biomedical - Pathogen',
     BiomedicalEthnicity: 'Biomedical - Ethnicity',
-    BiomedicalOtherBiologicalFactors: 'Biomedical - Other Biological factors',
+    BiomedicalOtherBiologicalFactors: 'Biomedical - Other biological factors',
     BiomedicalAnthropometry: 'Biomedical - Anthropometry',
     BiomedicalAge: 'Biomedical - Age',
     BiomedicalSex: 'Biomedical - Sex',
@@ -32,7 +32,7 @@ export const TopicCategory = {
     BehavioralPersonalHygiene: 'Behavioral - Personal hygiene',
     BehavioralOtherDietaryFactors: 'Behavioral - Other dietary factors',
     BehavioralStress: 'Behavioral - Stress',
-    BehavioralSubstanceUse: 'Behavioral - Substance Use',
+    BehavioralSubstanceUse: 'Behavioral - Substance use',
     BehavioralEatingBehaviors: 'Behavioral - Eating behaviors',
     BehavioralSleep: 'Behavioral - Sleep',
     BehavioralPhysicalActivity: 'Behavioral - Physical activity',
@@ -41,7 +41,7 @@ export const TopicCategory = {
     EnvironmentalAirQuality: 'Environmental - Air quality',
     EnvironmentalWaterQuality: 'Environmental - Water quality',
     EnvironmentalWeatherAndClimateChange: 'Environmental - Weather and climate change',
-    EnvironmentalOtherEnvironmentalFactors: 'Environmental - Other Environmental factors',
+    EnvironmentalOtherEnvironmentalFactors: 'Environmental - Other environmental factors',
     SocialEducation: 'Social - Education',
     SocialEconomicContext: 'Social - Economic context',
     SocialOtherSocialFactors: 'Social - Other social factors',
