@@ -23,6 +23,7 @@ import type {
   PubmedSearchSynthesisInput,
   PubmedSearchSynthesisJob,
   PubmedSearchTranslationInput,
+  SuggestedPubmedSearch,
   Synthesis,
 } from '../models/index';
 import {
@@ -42,6 +43,8 @@ import {
     PubmedSearchSynthesisJobToJSON,
     PubmedSearchTranslationInputFromJSON,
     PubmedSearchTranslationInputToJSON,
+    SuggestedPubmedSearchFromJSON,
+    SuggestedPubmedSearchToJSON,
     SynthesisFromJSON,
     SynthesisToJSON,
 } from '../models/index';
@@ -494,7 +497,7 @@ export class SynthesisApi extends runtime.BaseAPI {
      * Translate query to pubmed search.
      * Translate query to pubmed search
      */
-    async translateQueryToPubmedSearchRaw(requestParameters: TranslateQueryToPubmedSearchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+    async translateQueryToPubmedSearchRaw(requestParameters: TranslateQueryToPubmedSearchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<SuggestedPubmedSearch>>> {
         if (requestParameters['pubmedSearchTranslationInput'] == null) {
             throw new runtime.RequiredError(
                 'pubmedSearchTranslationInput',
@@ -520,14 +523,14 @@ export class SynthesisApi extends runtime.BaseAPI {
             body: PubmedSearchTranslationInputToJSON(requestParameters['pubmedSearchTranslationInput']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse<any>(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SuggestedPubmedSearchFromJSON));
     }
 
     /**
      * Translate query to pubmed search.
      * Translate query to pubmed search
      */
-    async translateQueryToPubmedSearch(requestParameters: TranslateQueryToPubmedSearchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<string>> {
+    async translateQueryToPubmedSearch(requestParameters: TranslateQueryToPubmedSearchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<SuggestedPubmedSearch>> {
         const response = await this.translateQueryToPubmedSearchRaw(requestParameters, initOverrides);
         return await response.value();
     }

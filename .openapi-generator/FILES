@@ -51,6 +51,7 @@ src/models/Statement.ts
 src/models/StatisticType.ts
 src/models/StatisticalFinding.ts
 src/models/Study.ts
+src/models/SuggestedPubmedSearch.ts
 src/models/Synthesis.ts
 src/models/Topic.ts
 src/models/TopicCategory.ts

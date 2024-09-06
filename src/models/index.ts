@@ -39,6 +39,7 @@ export * from './Statement';
 export * from './StatisticType';
 export * from './StatisticalFinding';
 export * from './Study';
+export * from './SuggestedPubmedSearch';
 export * from './Synthesis';
 export * from './Topic';
 export * from './TopicCategory';
