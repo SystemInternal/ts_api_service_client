@@ -33,6 +33,7 @@ export * from './PostCypherRecordsData';
 export * from './PostCypherResponse';
 export * from './PubmedSearchSynthesisInput';
 export * from './PubmedSearchSynthesisJob';
+export * from './PubmedSearchTranslationInput';
 export * from './Relationship';
 export * from './Statement';
 export * from './StatisticType';

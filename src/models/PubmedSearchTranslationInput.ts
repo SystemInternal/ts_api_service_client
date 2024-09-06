@@ -14,56 +14,48 @@
 
 import { mapValues } from '../runtime';
 /**
- * Pubmed search synthesis input.
+ * Pubmed search translation input.
  * @export
- * @interface PubmedSearchSynthesisInput
+ * @interface PubmedSearchTranslationInput
  */
-export interface PubmedSearchSynthesisInput {
+export interface PubmedSearchTranslationInput {
     /**
      * 
      * @type {string}
-     * @memberof PubmedSearchSynthesisInput
+     * @memberof PubmedSearchTranslationInput
      */
     query: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PubmedSearchSynthesisInput
-     */
-    pubmedQuery?: string | null;
 }
 
 /**
- * Check if a given object implements the PubmedSearchSynthesisInput interface.
+ * Check if a given object implements the PubmedSearchTranslationInput interface.
  */
-export function instanceOfPubmedSearchSynthesisInput(value: object): value is PubmedSearchSynthesisInput {
+export function instanceOfPubmedSearchTranslationInput(value: object): value is PubmedSearchTranslationInput {
     if (!('query' in value) || value['query'] === undefined) return false;
     return true;
 }
 
-export function PubmedSearchSynthesisInputFromJSON(json: any): PubmedSearchSynthesisInput {
-    return PubmedSearchSynthesisInputFromJSONTyped(json, false);
+export function PubmedSearchTranslationInputFromJSON(json: any): PubmedSearchTranslationInput {
+    return PubmedSearchTranslationInputFromJSONTyped(json, false);
 }
 
-export function PubmedSearchSynthesisInputFromJSONTyped(json: any, ignoreDiscriminator: boolean): PubmedSearchSynthesisInput {
+export function PubmedSearchTranslationInputFromJSONTyped(json: any, ignoreDiscriminator: boolean): PubmedSearchTranslationInput {
     if (json == null) {
         return json;
     }
     return {
         
         'query': json['query'],
-        'pubmedQuery': json['pubmed_query'] == null ? undefined : json['pubmed_query'],
     };
 }
 
-export function PubmedSearchSynthesisInputToJSON(value?: PubmedSearchSynthesisInput | null): any {
+export function PubmedSearchTranslationInputToJSON(value?: PubmedSearchTranslationInput | null): any {
     if (value == null) {
         return value;
     }
     return {
         
         'query': value['query'],
-        'pubmed_query': value['pubmedQuery'],
     };
 }
 

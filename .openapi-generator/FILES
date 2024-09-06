@@ -45,6 +45,7 @@ src/models/PostCypherRecordsData.ts
 src/models/PostCypherResponse.ts
 src/models/PubmedSearchSynthesisInput.ts
 src/models/PubmedSearchSynthesisJob.ts
+src/models/PubmedSearchTranslationInput.ts
 src/models/Relationship.ts
 src/models/Statement.ts
 src/models/StatisticType.ts

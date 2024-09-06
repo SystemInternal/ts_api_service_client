@@ -22,6 +22,7 @@ import type {
   ListResponseStudy,
   PubmedSearchSynthesisInput,
   PubmedSearchSynthesisJob,
+  PubmedSearchTranslationInput,
   Synthesis,
 } from '../models/index';
 import {
@@ -39,6 +40,8 @@ import {
     PubmedSearchSynthesisInputToJSON,
     PubmedSearchSynthesisJobFromJSON,
     PubmedSearchSynthesisJobToJSON,
+    PubmedSearchTranslationInputFromJSON,
+    PubmedSearchTranslationInputToJSON,
     SynthesisFromJSON,
     SynthesisToJSON,
 } from '../models/index';
@@ -93,6 +96,10 @@ export interface GetSynthesisFromPubmedSearchRequest {
 
 export interface SynthesizePubmedSearchRequest {
     pubmedSearchSynthesisInput: PubmedSearchSynthesisInput;
+}
+
+export interface TranslateQueryToPubmedSearchRequest {
+    pubmedSearchTranslationInput: PubmedSearchTranslationInput;
 }
 
 /**
@@ -481,6 +488,48 @@ export class SynthesisApi extends runtime.BaseAPI {
             default:
                 return await response.value();
         }
+    }
+
+    /**
+     * Translate query to pubmed search.
+     * Translate query to pubmed search
+     */
+    async translateQueryToPubmedSearchRaw(requestParameters: TranslateQueryToPubmedSearchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+        if (requestParameters['pubmedSearchTranslationInput'] == null) {
+            throw new runtime.RequiredError(
+                'pubmedSearchTranslationInput',
+                'Required parameter "pubmedSearchTranslationInput" was null or undefined when calling translateQueryToPubmedSearch().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["x-api-key"] = await this.configuration.apiKey("x-api-key"); // APIKeyHeader authentication
+        }
+
+        const response = await this.request({
+            path: `/v0/synthesis/pubmed_search_translation`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PubmedSearchTranslationInputToJSON(requestParameters['pubmedSearchTranslationInput']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * Translate query to pubmed search.
+     * Translate query to pubmed search
+     */
+    async translateQueryToPubmedSearch(requestParameters: TranslateQueryToPubmedSearchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<string>> {
+        const response = await this.translateQueryToPubmedSearchRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
 }
