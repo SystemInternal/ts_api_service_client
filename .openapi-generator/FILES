@@ -35,9 +35,8 @@ src/models/ListResponseStudy.ts
 src/models/ListResponseTopic.ts
 src/models/ListResponseTopicPath.ts
 src/models/ListResponseVariable.ts
+src/models/MechanismType.ts
 src/models/MechanisticFinding.ts
-src/models/NestedResource.ts
-src/models/NestedStudy.ts
 src/models/Node.ts
 src/models/PostCypherData.ts
 src/models/PostCypherGraphData.ts

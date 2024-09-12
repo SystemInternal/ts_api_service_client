@@ -13,24 +13,30 @@
  */
 
 import { mapValues } from '../runtime';
-import type { NestedStudy } from './NestedStudy';
+import type { Study } from './Study';
 import {
-    NestedStudyFromJSON,
-    NestedStudyFromJSONTyped,
-    NestedStudyToJSON,
-} from './NestedStudy';
+    StudyFromJSON,
+    StudyFromJSONTyped,
+    StudyToJSON,
+} from './Study';
+import type { Variable } from './Variable';
+import {
+    VariableFromJSON,
+    VariableFromJSONTyped,
+    VariableToJSON,
+} from './Variable';
 import type { StatisticType } from './StatisticType';
 import {
     StatisticTypeFromJSON,
     StatisticTypeFromJSONTyped,
     StatisticTypeToJSON,
 } from './StatisticType';
-import type { NestedResource } from './NestedResource';
+import type { Topic } from './Topic';
 import {
-    NestedResourceFromJSON,
-    NestedResourceFromJSONTyped,
-    NestedResourceToJSON,
-} from './NestedResource';
+    TopicFromJSON,
+    TopicFromJSONTyped,
+    TopicToJSON,
+} from './Topic';
 
 /**
  * Statistical finding.
@@ -64,34 +70,34 @@ export interface StatisticalFinding {
     summary?: string | null;
     /**
      * 
-     * @type {NestedResource}
+     * @type {Topic}
      * @memberof StatisticalFinding
      */
-    topic1?: NestedResource | null;
+    topic1?: Topic | null;
     /**
      * 
-     * @type {NestedResource}
+     * @type {Topic}
      * @memberof StatisticalFinding
      */
-    topic2?: NestedResource | null;
+    topic2?: Topic | null;
     /**
      * Source variable of the finding
-     * @type {NestedResource}
+     * @type {Variable}
      * @memberof StatisticalFinding
      */
-    variable1?: NestedResource;
+    variable1?: Variable;
     /**
      * Target variable of the finding
-     * @type {NestedResource}
+     * @type {Variable}
      * @memberof StatisticalFinding
      */
-    variable2?: NestedResource;
+    variable2?: Variable;
     /**
      * Study supporting the finding
-     * @type {NestedStudy}
+     * @type {Study}
      * @memberof StatisticalFinding
      */
-    study?: NestedStudy;
+    study?: Study;
     /**
      * 
      * @type {StatisticType}
@@ -162,11 +168,11 @@ export function StatisticalFindingFromJSONTyped(json: any, ignoreDiscriminator: 
         'flagged': json['flagged'] == null ? undefined : json['flagged'],
         'findingType': json['finding_type'] == null ? undefined : json['finding_type'],
         'summary': json['summary'] == null ? undefined : json['summary'],
-        'topic1': json['topic_1'] == null ? undefined : NestedResourceFromJSON(json['topic_1']),
-        'topic2': json['topic_2'] == null ? undefined : NestedResourceFromJSON(json['topic_2']),
-        'variable1': json['variable_1'] == null ? undefined : NestedResourceFromJSON(json['variable_1']),
-        'variable2': json['variable_2'] == null ? undefined : NestedResourceFromJSON(json['variable_2']),
-        'study': json['study'] == null ? undefined : NestedStudyFromJSON(json['study']),
+        'topic1': json['topic_1'] == null ? undefined : TopicFromJSON(json['topic_1']),
+        'topic2': json['topic_2'] == null ? undefined : TopicFromJSON(json['topic_2']),
+        'variable1': json['variable_1'] == null ? undefined : VariableFromJSON(json['variable_1']),
+        'variable2': json['variable_2'] == null ? undefined : VariableFromJSON(json['variable_2']),
+        'study': json['study'] == null ? undefined : StudyFromJSON(json['study']),
         'statisticType': json['statistic_type'] == null ? undefined : StatisticTypeFromJSON(json['statistic_type']),
         'statisticValue': json['statistic_value'] == null ? undefined : json['statistic_value'],
         'effectSize': json['effect_size'] == null ? undefined : json['effect_size'],
@@ -186,11 +192,11 @@ export function StatisticalFindingToJSON(value?: StatisticalFinding | null): any
         'flagged': value['flagged'],
         'finding_type': value['findingType'],
         'summary': value['summary'],
-        'topic_1': NestedResourceToJSON(value['topic1']),
-        'topic_2': NestedResourceToJSON(value['topic2']),
-        'variable_1': NestedResourceToJSON(value['variable1']),
-        'variable_2': NestedResourceToJSON(value['variable2']),
-        'study': NestedStudyToJSON(value['study']),
+        'topic_1': TopicToJSON(value['topic1']),
+        'topic_2': TopicToJSON(value['topic2']),
+        'variable_1': VariableToJSON(value['variable1']),
+        'variable_2': VariableToJSON(value['variable2']),
+        'study': StudyToJSON(value['study']),
         'statistic_type': StatisticTypeToJSON(value['statisticType']),
         'statistic_value': value['statisticValue'],
         'effect_size': value['effectSize'],

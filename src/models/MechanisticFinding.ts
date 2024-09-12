@@ -13,18 +13,30 @@
  */
 
 import { mapValues } from '../runtime';
-import type { NestedStudy } from './NestedStudy';
+import type { Study } from './Study';
 import {
-    NestedStudyFromJSON,
-    NestedStudyFromJSONTyped,
-    NestedStudyToJSON,
-} from './NestedStudy';
-import type { NestedResource } from './NestedResource';
+    StudyFromJSON,
+    StudyFromJSONTyped,
+    StudyToJSON,
+} from './Study';
+import type { Variable } from './Variable';
 import {
-    NestedResourceFromJSON,
-    NestedResourceFromJSONTyped,
-    NestedResourceToJSON,
-} from './NestedResource';
+    VariableFromJSON,
+    VariableFromJSONTyped,
+    VariableToJSON,
+} from './Variable';
+import type { MechanismType } from './MechanismType';
+import {
+    MechanismTypeFromJSON,
+    MechanismTypeFromJSONTyped,
+    MechanismTypeToJSON,
+} from './MechanismType';
+import type { Topic } from './Topic';
+import {
+    TopicFromJSON,
+    TopicFromJSONTyped,
+    TopicToJSON,
+} from './Topic';
 
 /**
  * Mechanistic finding.
@@ -58,40 +70,40 @@ export interface MechanisticFinding {
     summary?: string | null;
     /**
      * 
-     * @type {NestedResource}
+     * @type {Topic}
      * @memberof MechanisticFinding
      */
-    topic1?: NestedResource | null;
+    topic1?: Topic | null;
     /**
      * 
-     * @type {NestedResource}
+     * @type {Topic}
      * @memberof MechanisticFinding
      */
-    topic2?: NestedResource | null;
+    topic2?: Topic | null;
     /**
      * Source variable of the finding
-     * @type {NestedResource}
+     * @type {Variable}
      * @memberof MechanisticFinding
      */
-    variable1?: NestedResource;
+    variable1?: Variable;
     /**
      * Target variable of the finding
-     * @type {NestedResource}
+     * @type {Variable}
      * @memberof MechanisticFinding
      */
-    variable2?: NestedResource;
+    variable2?: Variable;
     /**
      * Study supporting the finding
-     * @type {NestedStudy}
+     * @type {Study}
      * @memberof MechanisticFinding
      */
-    study?: NestedStudy;
+    study?: Study;
     /**
      * 
-     * @type {string}
+     * @type {MechanismType}
      * @memberof MechanisticFinding
      */
-    mechanismType?: string | null;
+    mechanismType?: MechanismType | null;
 }
 
 
@@ -126,12 +138,12 @@ export function MechanisticFindingFromJSONTyped(json: any, ignoreDiscriminator: 
         'flagged': json['flagged'] == null ? undefined : json['flagged'],
         'findingType': json['finding_type'] == null ? undefined : json['finding_type'],
         'summary': json['summary'] == null ? undefined : json['summary'],
-        'topic1': json['topic_1'] == null ? undefined : NestedResourceFromJSON(json['topic_1']),
-        'topic2': json['topic_2'] == null ? undefined : NestedResourceFromJSON(json['topic_2']),
-        'variable1': json['variable_1'] == null ? undefined : NestedResourceFromJSON(json['variable_1']),
-        'variable2': json['variable_2'] == null ? undefined : NestedResourceFromJSON(json['variable_2']),
-        'study': json['study'] == null ? undefined : NestedStudyFromJSON(json['study']),
-        'mechanismType': json['mechanism_type'] == null ? undefined : json['mechanism_type'],
+        'topic1': json['topic_1'] == null ? undefined : TopicFromJSON(json['topic_1']),
+        'topic2': json['topic_2'] == null ? undefined : TopicFromJSON(json['topic_2']),
+        'variable1': json['variable_1'] == null ? undefined : VariableFromJSON(json['variable_1']),
+        'variable2': json['variable_2'] == null ? undefined : VariableFromJSON(json['variable_2']),
+        'study': json['study'] == null ? undefined : StudyFromJSON(json['study']),
+        'mechanismType': json['mechanism_type'] == null ? undefined : MechanismTypeFromJSON(json['mechanism_type']),
     };
 }
 
@@ -145,12 +157,12 @@ export function MechanisticFindingToJSON(value?: MechanisticFinding | null): any
         'flagged': value['flagged'],
         'finding_type': value['findingType'],
         'summary': value['summary'],
-        'topic_1': NestedResourceToJSON(value['topic1']),
-        'topic_2': NestedResourceToJSON(value['topic2']),
-        'variable_1': NestedResourceToJSON(value['variable1']),
-        'variable_2': NestedResourceToJSON(value['variable2']),
-        'study': NestedStudyToJSON(value['study']),
-        'mechanism_type': value['mechanismType'],
+        'topic_1': TopicToJSON(value['topic1']),
+        'topic_2': TopicToJSON(value['topic2']),
+        'variable_1': VariableToJSON(value['variable1']),
+        'variable_2': VariableToJSON(value['variable2']),
+        'study': StudyToJSON(value['study']),
+        'mechanism_type': MechanismTypeToJSON(value['mechanismType']),
     };
 }
 

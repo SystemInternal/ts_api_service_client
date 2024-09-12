@@ -64,10 +64,10 @@ export interface Study {
     journal?: string | null;
     /**
      * 
-     * @type {string}
+     * @type {Date}
      * @memberof Study
      */
-    publishDate?: string | null;
+    publishDate?: Date | null;
     /**
      * 
      * @type {string}
@@ -130,7 +130,7 @@ export function StudyFromJSONTyped(json: any, ignoreDiscriminator: boolean): Stu
         'title': json['title'] == null ? undefined : json['title'],
         'authors': json['authors'] == null ? undefined : ((json['authors'] as Array<any>).map(AuthorFromJSON)),
         'journal': json['journal'] == null ? undefined : json['journal'],
-        'publishDate': json['publish_date'] == null ? undefined : json['publish_date'],
+        'publishDate': json['publish_date'] == null ? undefined : (new Date(json['publish_date'])),
         'population': json['population'] == null ? undefined : json['population'],
         'sampleSize': json['sample_size'] == null ? undefined : json['sample_size'],
         'summary': json['summary'] == null ? undefined : json['summary'],
@@ -152,7 +152,7 @@ export function StudyToJSON(value?: Study | null): any {
         'title': value['title'],
         'authors': value['authors'] == null ? undefined : ((value['authors'] as Array<any>).map(AuthorToJSON)),
         'journal': value['journal'],
-        'publish_date': value['publishDate'],
+        'publish_date': value['publishDate'] == null ? undefined : ((value['publishDate'] as any).toISOString().substring(0,10)),
         'population': value['population'],
         'sample_size': value['sampleSize'],
         'summary': value['summary'],

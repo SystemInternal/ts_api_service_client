@@ -13,12 +13,12 @@
  */
 
 import { mapValues } from '../runtime';
-import type { NestedResource } from './NestedResource';
+import type { Topic } from './Topic';
 import {
-    NestedResourceFromJSON,
-    NestedResourceFromJSONTyped,
-    NestedResourceToJSON,
-} from './NestedResource';
+    TopicFromJSON,
+    TopicFromJSONTyped,
+    TopicToJSON,
+} from './Topic';
 
 /**
  * Variable.
@@ -46,10 +46,10 @@ export interface Variable {
     numStudies?: number | null;
     /**
      * 
-     * @type {NestedResource}
+     * @type {Topic}
      * @memberof Variable
      */
-    topic?: NestedResource | null;
+    topic?: Topic | null;
 }
 
 /**
@@ -73,7 +73,7 @@ export function VariableFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'id': json['id'],
         'name': json['name'] == null ? undefined : json['name'],
         'numStudies': json['num_studies'] == null ? undefined : json['num_studies'],
-        'topic': json['topic'] == null ? undefined : NestedResourceFromJSON(json['topic']),
+        'topic': json['topic'] == null ? undefined : TopicFromJSON(json['topic']),
     };
 }
 
@@ -86,7 +86,7 @@ export function VariableToJSON(value?: Variable | null): any {
         'id': value['id'],
         'name': value['name'],
         'num_studies': value['numStudies'],
-        'topic': NestedResourceToJSON(value['topic']),
+        'topic': TopicToJSON(value['topic']),
     };
 }
 

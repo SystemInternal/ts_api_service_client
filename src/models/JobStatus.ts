@@ -21,7 +21,7 @@ export const JobStatus = {
     Accepted: 'accepted',
     Clustering: 'clustering',
     ClusteringFailed: 'clustering_failed',
-    ClusteringFailedNoStatements: 'clustering_failed_no_statements',
+    ClusteringFailedNoClusters: 'clustering_failed_no_clusters',
     Synthesizing: 'synthesizing',
     SynthesisNotExists: 'synthesis_not_exists',
     SynthesisSubmitted: 'synthesis_submitted',
