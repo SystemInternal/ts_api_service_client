@@ -40,6 +40,7 @@ export * from './StatisticalFinding';
 export * from './Study';
 export * from './SuggestedPubmedSearch';
 export * from './Synthesis';
+export * from './SynthesisSummary';
 export * from './Topic';
 export * from './TopicCategory';
 export * from './TopicPath';

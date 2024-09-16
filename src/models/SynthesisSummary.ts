@@ -13,56 +13,58 @@
  */
 
 import { mapValues } from '../runtime';
-import type { SynthesisSummary } from './SynthesisSummary';
-import {
-    SynthesisSummaryFromJSON,
-    SynthesisSummaryFromJSONTyped,
-    SynthesisSummaryToJSON,
-} from './SynthesisSummary';
-
 /**
- * Synthesis response.
+ * Synthesis summary.
  * @export
- * @interface Synthesis
+ * @interface SynthesisSummary
  */
-export interface Synthesis {
+export interface SynthesisSummary {
     /**
-     * Thematic summaries of the findings.
-     * @type {Array<SynthesisSummary>}
-     * @memberof Synthesis
+     * Theme of the summary
+     * @type {string}
+     * @memberof SynthesisSummary
      */
-    summaries: Array<SynthesisSummary>;
+    theme: string;
+    /**
+     * Summary of the theme
+     * @type {string}
+     * @memberof SynthesisSummary
+     */
+    summary: string;
 }
 
 /**
- * Check if a given object implements the Synthesis interface.
+ * Check if a given object implements the SynthesisSummary interface.
  */
-export function instanceOfSynthesis(value: object): value is Synthesis {
-    if (!('summaries' in value) || value['summaries'] === undefined) return false;
+export function instanceOfSynthesisSummary(value: object): value is SynthesisSummary {
+    if (!('theme' in value) || value['theme'] === undefined) return false;
+    if (!('summary' in value) || value['summary'] === undefined) return false;
     return true;
 }
 
-export function SynthesisFromJSON(json: any): Synthesis {
-    return SynthesisFromJSONTyped(json, false);
+export function SynthesisSummaryFromJSON(json: any): SynthesisSummary {
+    return SynthesisSummaryFromJSONTyped(json, false);
 }
 
-export function SynthesisFromJSONTyped(json: any, ignoreDiscriminator: boolean): Synthesis {
+export function SynthesisSummaryFromJSONTyped(json: any, ignoreDiscriminator: boolean): SynthesisSummary {
     if (json == null) {
         return json;
     }
     return {
         
-        'summaries': ((json['summaries'] as Array<any>).map(SynthesisSummaryFromJSON)),
+        'theme': json['theme'],
+        'summary': json['summary'],
     };
 }
 
-export function SynthesisToJSON(value?: Synthesis | null): any {
+export function SynthesisSummaryToJSON(value?: SynthesisSummary | null): any {
     if (value == null) {
         return value;
     }
     return {
         
-        'summaries': ((value['summaries'] as Array<any>).map(SynthesisSummaryToJSON)),
+        'theme': value['theme'],
+        'summary': value['summary'],
     };
 }
 
