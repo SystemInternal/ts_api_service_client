@@ -57,11 +57,23 @@ export interface PubmedSearchSynthesisJob {
      */
     userQuery: string;
     /**
-     * Pubmed query the user query resolved to
+     * Pubmed query used for synthesis
      * @type {string}
      * @memberof PubmedSearchSynthesisJob
      */
     pubmedQuery: string;
+    /**
+     * Translation of pubmed query from the pubmed api
+     * @type {string}
+     * @memberof PubmedSearchSynthesisJob
+     */
+    pubmedQueryTranslation?: string;
+    /**
+     * Number of results from pubmed query
+     * @type {number}
+     * @memberof PubmedSearchSynthesisJob
+     */
+    numPubmedResults?: number;
     /**
      * 
      * @type {Date}
@@ -105,6 +117,8 @@ export function PubmedSearchSynthesisJobFromJSONTyped(json: any, ignoreDiscrimin
         'updatedAt': (new Date(json['updated_at'])),
         'userQuery': json['user_query'],
         'pubmedQuery': json['pubmed_query'],
+        'pubmedQueryTranslation': json['pubmed_query_translation'] == null ? undefined : json['pubmed_query_translation'],
+        'numPubmedResults': json['num_pubmed_results'] == null ? undefined : json['num_pubmed_results'],
         'clusteringFinished': json['clustering_finished'] == null ? undefined : (new Date(json['clustering_finished'])),
         'synthesisFinished': json['synthesis_finished'] == null ? undefined : (new Date(json['synthesis_finished'])),
     };
@@ -122,6 +136,8 @@ export function PubmedSearchSynthesisJobToJSON(value?: PubmedSearchSynthesisJob 
         'updated_at': ((value['updatedAt']).toISOString()),
         'user_query': value['userQuery'],
         'pubmed_query': value['pubmedQuery'],
+        'pubmed_query_translation': value['pubmedQueryTranslation'],
+        'num_pubmed_results': value['numPubmedResults'],
         'clustering_finished': value['clusteringFinished'] == null ? undefined : ((value['clusteringFinished'] as any).toISOString()),
         'synthesis_finished': value['synthesisFinished'] == null ? undefined : ((value['synthesisFinished'] as any).toISOString()),
     };
