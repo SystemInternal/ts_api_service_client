@@ -33,29 +33,29 @@ export interface Relationship {
      */
     id: string;
     /**
-     * Number of findings on relationship
+     * 
      * @type {number}
      * @memberof Relationship
      */
-    numFindings: number;
+    numFindings?: number | null;
     /**
-     * Number of studies supporting relationship
+     * 
      * @type {number}
      * @memberof Relationship
      */
-    numStudies: number;
+    numStudies?: number | null;
     /**
-     * Number of significant findings on relationship
+     * 
      * @type {number}
      * @memberof Relationship
      */
-    numSignificantFindings: number;
+    numSignificantFindings?: number | null;
     /**
-     * Highest cited study supporting relationship
+     * 
      * @type {number}
      * @memberof Relationship
      */
-    highestCited?: number;
+    highestCited?: number | null;
     /**
      * 
      * @type {number}
@@ -63,29 +63,29 @@ export interface Relationship {
      */
     medianEffectSize?: number | null;
     /**
-     * Date relationship was last updated
+     * 
      * @type {Date}
      * @memberof Relationship
      */
-    lastUpdated: Date;
+    lastUpdated?: Date | null;
     /**
-     * Whether or not the relationship is supported by an experimental trial
+     * 
      * @type {boolean}
      * @memberof Relationship
      */
-    hasExperimentalTrial: boolean;
+    hasExperimentalTrial?: boolean | null;
     /**
-     * Unique identifier of the source topic
+     * 
      * @type {Topic}
      * @memberof Relationship
      */
-    sourceTopic: Topic;
+    sourceTopic?: Topic | null;
     /**
-     * Unique identifier of the target topic
+     * 
      * @type {Topic}
      * @memberof Relationship
      */
-    targetTopic: Topic;
+    targetTopic?: Topic | null;
 }
 
 /**
@@ -93,13 +93,6 @@ export interface Relationship {
  */
 export function instanceOfRelationship(value: object): value is Relationship {
     if (!('id' in value) || value['id'] === undefined) return false;
-    if (!('numFindings' in value) || value['numFindings'] === undefined) return false;
-    if (!('numStudies' in value) || value['numStudies'] === undefined) return false;
-    if (!('numSignificantFindings' in value) || value['numSignificantFindings'] === undefined) return false;
-    if (!('lastUpdated' in value) || value['lastUpdated'] === undefined) return false;
-    if (!('hasExperimentalTrial' in value) || value['hasExperimentalTrial'] === undefined) return false;
-    if (!('sourceTopic' in value) || value['sourceTopic'] === undefined) return false;
-    if (!('targetTopic' in value) || value['targetTopic'] === undefined) return false;
     return true;
 }
 
@@ -114,15 +107,15 @@ export function RelationshipFromJSONTyped(json: any, ignoreDiscriminator: boolea
     return {
         
         'id': json['id'],
-        'numFindings': json['num_findings'],
-        'numStudies': json['num_studies'],
-        'numSignificantFindings': json['num_significant_findings'],
+        'numFindings': json['num_findings'] == null ? undefined : json['num_findings'],
+        'numStudies': json['num_studies'] == null ? undefined : json['num_studies'],
+        'numSignificantFindings': json['num_significant_findings'] == null ? undefined : json['num_significant_findings'],
         'highestCited': json['highest_cited'] == null ? undefined : json['highest_cited'],
         'medianEffectSize': json['median_effect_size'] == null ? undefined : json['median_effect_size'],
-        'lastUpdated': (new Date(json['last_updated'])),
-        'hasExperimentalTrial': json['has_experimental_trial'],
-        'sourceTopic': TopicFromJSON(json['source_topic']),
-        'targetTopic': TopicFromJSON(json['target_topic']),
+        'lastUpdated': json['last_updated'] == null ? undefined : (new Date(json['last_updated'])),
+        'hasExperimentalTrial': json['has_experimental_trial'] == null ? undefined : json['has_experimental_trial'],
+        'sourceTopic': json['source_topic'] == null ? undefined : TopicFromJSON(json['source_topic']),
+        'targetTopic': json['target_topic'] == null ? undefined : TopicFromJSON(json['target_topic']),
     };
 }
 
@@ -138,7 +131,7 @@ export function RelationshipToJSON(value?: Relationship | null): any {
         'num_significant_findings': value['numSignificantFindings'],
         'highest_cited': value['highestCited'],
         'median_effect_size': value['medianEffectSize'],
-        'last_updated': ((value['lastUpdated']).toISOString()),
+        'last_updated': value['lastUpdated'] == null ? undefined : ((value['lastUpdated'] as any).toISOString()),
         'has_experimental_trial': value['hasExperimentalTrial'],
         'source_topic': TopicToJSON(value['sourceTopic']),
         'target_topic': TopicToJSON(value['targetTopic']),
