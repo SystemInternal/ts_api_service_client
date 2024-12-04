@@ -20,6 +20,7 @@ import type {
   ListResponseStatisticalFinding,
   ListResponseStudy,
   Relationship,
+  Sign,
 } from '../models/index';
 import {
     HTTPValidationErrorFromJSON,
@@ -32,9 +33,15 @@ import {
     ListResponseStudyToJSON,
     RelationshipFromJSON,
     RelationshipToJSON,
+    SignFromJSON,
+    SignToJSON,
 } from '../models/index';
 
 export interface GetRelationshipByIdRequest {
+    relationshipId: string;
+}
+
+export interface GetRelationshipSignRequest {
     relationshipId: string;
 }
 
@@ -111,6 +118,45 @@ export class RelationshipsApi extends runtime.BaseAPI {
      */
     async getRelationshipById(requestParameters: GetRelationshipByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Relationship> {
         const response = await this.getRelationshipByIdRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Get a relationship by its ID.
+     * [BETA] Get a relationship sign
+     */
+    async getRelationshipSignRaw(requestParameters: GetRelationshipSignRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Sign>> {
+        if (requestParameters['relationshipId'] == null) {
+            throw new runtime.RequiredError(
+                'relationshipId',
+                'Required parameter "relationshipId" was null or undefined when calling getRelationshipSign().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["x-api-key"] = await this.configuration.apiKey("x-api-key"); // APIKeyHeader authentication
+        }
+
+        const response = await this.request({
+            path: `/v0/relationships/{relationship_id}/calculations/sign`.replace(`{${"relationship_id"}}`, encodeURIComponent(String(requestParameters['relationshipId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => SignFromJSON(jsonValue));
+    }
+
+    /**
+     * Get a relationship by its ID.
+     * [BETA] Get a relationship sign
+     */
+    async getRelationshipSign(requestParameters: GetRelationshipSignRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Sign> {
+        const response = await this.getRelationshipSignRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
