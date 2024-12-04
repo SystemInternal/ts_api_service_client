@@ -122,8 +122,8 @@ export class RelationshipsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get a relationship by its ID.
-     * [BETA] Get a relationship sign
+     * Get a relationship sign by its ID.
+     * [BETA] Get a relationship\'s sign based on its supporting findings
      */
     async getRelationshipSignRaw(requestParameters: GetRelationshipSignRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Sign>> {
         if (requestParameters['relationshipId'] == null) {
@@ -152,8 +152,8 @@ export class RelationshipsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get a relationship by its ID.
-     * [BETA] Get a relationship sign
+     * Get a relationship sign by its ID.
+     * [BETA] Get a relationship\'s sign based on its supporting findings
      */
     async getRelationshipSign(requestParameters: GetRelationshipSignRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Sign> {
         const response = await this.getRelationshipSignRaw(requestParameters, initOverrides);
