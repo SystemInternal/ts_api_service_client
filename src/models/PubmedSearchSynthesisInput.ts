@@ -37,6 +37,12 @@ export interface PubmedSearchSynthesisInput {
      * @memberof PubmedSearchSynthesisInput
      */
     autoTranslate?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PubmedSearchSynthesisInput
+     */
+    scoreRelevance?: boolean | null;
 }
 
 /**
@@ -60,6 +66,7 @@ export function PubmedSearchSynthesisInputFromJSONTyped(json: any, ignoreDiscrim
         'query': json['query'],
         'pubmedQuery': json['pubmed_query'] == null ? undefined : json['pubmed_query'],
         'autoTranslate': json['auto_translate'] == null ? undefined : json['auto_translate'],
+        'scoreRelevance': json['score_relevance'] == null ? undefined : json['score_relevance'],
     };
 }
 
@@ -72,6 +79,7 @@ export function PubmedSearchSynthesisInputToJSON(value?: PubmedSearchSynthesisIn
         'query': value['query'],
         'pubmed_query': value['pubmedQuery'],
         'auto_translate': value['autoTranslate'],
+        'score_relevance': value['scoreRelevance'],
     };
 }
 

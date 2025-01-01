@@ -13,6 +13,12 @@
  */
 
 import { mapValues } from '../runtime';
+import type { SynthesisScores } from './SynthesisScores';
+import {
+    SynthesisScoresFromJSON,
+    SynthesisScoresFromJSONTyped,
+    SynthesisScoresToJSON,
+} from './SynthesisScores';
 import type { SynthesisSummary } from './SynthesisSummary';
 import {
     SynthesisSummaryFromJSON,
@@ -32,6 +38,12 @@ export interface Synthesis {
      * @memberof Synthesis
      */
     summaries: Array<SynthesisSummary>;
+    /**
+     * 
+     * @type {Array<SynthesisScores>}
+     * @memberof Synthesis
+     */
+    scores?: Array<SynthesisScores> | null;
 }
 
 /**
@@ -53,6 +65,7 @@ export function SynthesisFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     return {
         
         'summaries': ((json['summaries'] as Array<any>).map(SynthesisSummaryFromJSON)),
+        'scores': json['scores'] == null ? undefined : ((json['scores'] as Array<any>).map(SynthesisScoresFromJSON)),
     };
 }
 
@@ -63,6 +76,7 @@ export function SynthesisToJSON(value?: Synthesis | null): any {
     return {
         
         'summaries': ((value['summaries'] as Array<any>).map(SynthesisSummaryToJSON)),
+        'scores': value['scores'] == null ? undefined : ((value['scores'] as Array<any>).map(SynthesisScoresToJSON)),
     };
 }
 

@@ -53,6 +53,7 @@ src/models/StatisticalFinding.ts
 src/models/Study.ts
 src/models/SuggestedPubmedSearch.ts
 src/models/Synthesis.ts
+src/models/SynthesisScores.ts
 src/models/SynthesisSummary.ts
 src/models/Topic.ts
 src/models/TopicCategory.ts
