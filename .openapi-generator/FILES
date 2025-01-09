@@ -30,6 +30,7 @@ src/models/Link.ts
 src/models/ListResponseMechanisticFinding.ts
 src/models/ListResponseRelationship.ts
 src/models/ListResponseStatement.ts
+src/models/ListResponseStatementScore.ts
 src/models/ListResponseStatisticalFinding.ts
 src/models/ListResponseStudy.ts
 src/models/ListResponseTopic.ts
@@ -48,6 +49,7 @@ src/models/PubmedSearchTranslationInput.ts
 src/models/Relationship.ts
 src/models/Sign.ts
 src/models/Statement.ts
+src/models/StatementScore.ts
 src/models/StatisticType.ts
 src/models/StatisticalFinding.ts
 src/models/Study.ts

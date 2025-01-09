@@ -18,6 +18,7 @@ import type {
   HTTPValidationError,
   ListResponseMechanisticFinding,
   ListResponseStatement,
+  ListResponseStatementScore,
   ListResponseStatisticalFinding,
   ListResponseStudy,
   PubmedSearchSynthesisInput,
@@ -33,6 +34,8 @@ import {
     ListResponseMechanisticFindingToJSON,
     ListResponseStatementFromJSON,
     ListResponseStatementToJSON,
+    ListResponseStatementScoreFromJSON,
+    ListResponseStatementScoreToJSON,
     ListResponseStatisticalFindingFromJSON,
     ListResponseStatisticalFindingToJSON,
     ListResponseStudyFromJSON,
@@ -62,6 +65,13 @@ export interface GetMechanisticFindingsFromPubmedSearchRequest {
 
 export interface GetPubmedSearchSynthesisByIdRequest {
     jobId: string;
+}
+
+export interface GetScoredCitationsInSynthesisFromPubmedSearchRequest {
+    jobId: string;
+    includeTotal?: boolean | null;
+    offset?: number;
+    limit?: number;
 }
 
 export interface GetStatementsFromPubmedSearchRequest {
@@ -213,6 +223,57 @@ export class SynthesisApi extends runtime.BaseAPI {
      */
     async getPubmedSearchSynthesisById(requestParameters: GetPubmedSearchSynthesisByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PubmedSearchSynthesisJob> {
         const response = await this.getPubmedSearchSynthesisByIdRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Get statements from pubmed search synthesis.
+     * Get cited statements with relevance scores from pubmed search synthesis
+     */
+    async getScoredCitationsInSynthesisFromPubmedSearchRaw(requestParameters: GetScoredCitationsInSynthesisFromPubmedSearchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListResponseStatementScore>> {
+        if (requestParameters['jobId'] == null) {
+            throw new runtime.RequiredError(
+                'jobId',
+                'Required parameter "jobId" was null or undefined when calling getScoredCitationsInSynthesisFromPubmedSearch().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['includeTotal'] != null) {
+            queryParameters['include_total'] = requestParameters['includeTotal'];
+        }
+
+        if (requestParameters['offset'] != null) {
+            queryParameters['offset'] = requestParameters['offset'];
+        }
+
+        if (requestParameters['limit'] != null) {
+            queryParameters['limit'] = requestParameters['limit'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["x-api-key"] = await this.configuration.apiKey("x-api-key"); // APIKeyHeader authentication
+        }
+
+        const response = await this.request({
+            path: `/v0/synthesis/pubmed_search/{job_id}/scored_citations`.replace(`{${"job_id"}}`, encodeURIComponent(String(requestParameters['jobId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ListResponseStatementScoreFromJSON(jsonValue));
+    }
+
+    /**
+     * Get statements from pubmed search synthesis.
+     * Get cited statements with relevance scores from pubmed search synthesis
+     */
+    async getScoredCitationsInSynthesisFromPubmedSearch(requestParameters: GetScoredCitationsInSynthesisFromPubmedSearchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListResponseStatementScore> {
+        const response = await this.getScoredCitationsInSynthesisFromPubmedSearchRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
