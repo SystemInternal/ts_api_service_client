@@ -3,6 +3,7 @@
 README.md
 package.json
 src/apis/GraphApi.ts
+src/apis/GuidelinesApi.ts
 src/apis/MechanisticFindingsApi.ts
 src/apis/RelationshipsApi.ts
 src/apis/StatisticalFindingsApi.ts
@@ -24,6 +25,11 @@ src/models/FindingType.ts
 src/models/Flag.ts
 src/models/FlagInput.ts
 src/models/Graph.ts
+src/models/GuidelineGrades.ts
+src/models/GuidelinePollingStatus.ts
+src/models/GuidelineSynthesis.ts
+src/models/GuidelineSynthesisIn.ts
+src/models/GuidelineSynthesisOut.ts
 src/models/HTTPValidationError.ts
 src/models/JobStatus.ts
 src/models/Link.ts
@@ -46,6 +52,7 @@ src/models/PostCypherResponse.ts
 src/models/PubmedSearchSynthesisInput.ts
 src/models/PubmedSearchSynthesisJob.ts
 src/models/PubmedSearchTranslationInput.ts
+src/models/Reference.ts
 src/models/Relationship.ts
 src/models/Sign.ts
 src/models/Statement.ts

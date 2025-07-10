@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './GraphApi';
+export * from './GuidelinesApi';
 export * from './MechanisticFindingsApi';
 export * from './RelationshipsApi';
 export * from './StatisticalFindingsApi';
