@@ -26,6 +26,7 @@ src/models/Flag.ts
 src/models/FlagInput.ts
 src/models/Graph.ts
 src/models/GuidelineGrades.ts
+src/models/GuidelineMetadata.ts
 src/models/GuidelinePollingStatus.ts
 src/models/GuidelineSynthesis.ts
 src/models/GuidelineSynthesisIn.ts

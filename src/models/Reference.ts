@@ -13,6 +13,12 @@
  */
 
 import { mapValues } from '../runtime';
+import type { GuidelineMetadata } from './GuidelineMetadata';
+import {
+    GuidelineMetadataFromJSON,
+    GuidelineMetadataFromJSONTyped,
+    GuidelineMetadataToJSON,
+} from './GuidelineMetadata';
 import type { GuidelineGrades } from './GuidelineGrades';
 import {
     GuidelineGradesFromJSON,
@@ -37,18 +43,6 @@ export interface Reference {
      * @type {string}
      * @memberof Reference
      */
-    guideId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Reference
-     */
-    title: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Reference
-     */
     recommendationText: string;
     /**
      * 
@@ -56,6 +50,12 @@ export interface Reference {
      * @memberof Reference
      */
     grade: Array<GuidelineGrades>;
+    /**
+     * 
+     * @type {GuidelineMetadata}
+     * @memberof Reference
+     */
+    metadata: GuidelineMetadata;
 }
 
 /**
@@ -63,10 +63,9 @@ export interface Reference {
  */
 export function instanceOfReference(value: object): value is Reference {
     if (!('index' in value) || value['index'] === undefined) return false;
-    if (!('guideId' in value) || value['guideId'] === undefined) return false;
-    if (!('title' in value) || value['title'] === undefined) return false;
     if (!('recommendationText' in value) || value['recommendationText'] === undefined) return false;
     if (!('grade' in value) || value['grade'] === undefined) return false;
+    if (!('metadata' in value) || value['metadata'] === undefined) return false;
     return true;
 }
 
@@ -81,10 +80,9 @@ export function ReferenceFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     return {
         
         'index': json['index'],
-        'guideId': json['guide_id'],
-        'title': json['title'],
         'recommendationText': json['recommendation_text'],
         'grade': ((json['grade'] as Array<any>).map(GuidelineGradesFromJSON)),
+        'metadata': GuidelineMetadataFromJSON(json['metadata']),
     };
 }
 
@@ -95,10 +93,9 @@ export function ReferenceToJSON(value?: Reference | null): any {
     return {
         
         'index': value['index'],
-        'guide_id': value['guideId'],
-        'title': value['title'],
         'recommendation_text': value['recommendationText'],
         'grade': ((value['grade'] as Array<any>).map(GuidelineGradesToJSON)),
+        'metadata': GuidelineMetadataToJSON(value['metadata']),
     };
 }
 

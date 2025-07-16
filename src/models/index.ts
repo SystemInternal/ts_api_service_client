@@ -13,6 +13,7 @@ export * from './Flag';
 export * from './FlagInput';
 export * from './Graph';
 export * from './GuidelineGrades';
+export * from './GuidelineMetadata';
 export * from './GuidelinePollingStatus';
 export * from './GuidelineSynthesis';
 export * from './GuidelineSynthesisIn';
