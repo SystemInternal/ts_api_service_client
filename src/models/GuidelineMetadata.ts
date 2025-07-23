@@ -30,7 +30,7 @@ export interface GuidelineMetadata {
      * @type {string}
      * @memberof GuidelineMetadata
      */
-    title: string;
+    documentTitle: string;
     /**
      * 
      * @type {Array<string>}
@@ -56,7 +56,7 @@ export interface GuidelineMetadata {
  */
 export function instanceOfGuidelineMetadata(value: object): value is GuidelineMetadata {
     if (!('guideId' in value) || value['guideId'] === undefined) return false;
-    if (!('title' in value) || value['title'] === undefined) return false;
+    if (!('documentTitle' in value) || value['documentTitle'] === undefined) return false;
     if (!('authoringSocieties' in value) || value['authoringSocieties'] === undefined) return false;
     if (!('link' in value) || value['link'] === undefined) return false;
     if (!('publishDate' in value) || value['publishDate'] === undefined) return false;
@@ -74,7 +74,7 @@ export function GuidelineMetadataFromJSONTyped(json: any, ignoreDiscriminator: b
     return {
         
         'guideId': json['guide_id'],
-        'title': json['title'],
+        'documentTitle': json['document_title'],
         'authoringSocieties': json['authoring_societies'],
         'link': json['link'],
         'publishDate': json['publish_date'],
@@ -88,7 +88,7 @@ export function GuidelineMetadataToJSON(value?: GuidelineMetadata | null): any {
     return {
         
         'guide_id': value['guideId'],
-        'title': value['title'],
+        'document_title': value['documentTitle'],
         'authoring_societies': value['authoringSocieties'],
         'link': value['link'],
         'publish_date': value['publishDate'],
