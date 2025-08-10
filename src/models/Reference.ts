@@ -27,7 +27,7 @@ import {
 } from './GuidelineGrades';
 
 /**
- * Reference
+ * Synthesis reference.
  * @export
  * @interface Reference
  */

@@ -14,17 +14,11 @@
 
 import { mapValues } from '../runtime';
 /**
- * GuidelineMetadata
+ * Metadata for a guideline recommendation.
  * @export
  * @interface GuidelineMetadata
  */
 export interface GuidelineMetadata {
-    /**
-     * 
-     * @type {string}
-     * @memberof GuidelineMetadata
-     */
-    guideId: string;
     /**
      * 
      * @type {string}
@@ -55,7 +49,6 @@ export interface GuidelineMetadata {
  * Check if a given object implements the GuidelineMetadata interface.
  */
 export function instanceOfGuidelineMetadata(value: object): value is GuidelineMetadata {
-    if (!('guideId' in value) || value['guideId'] === undefined) return false;
     if (!('documentTitle' in value) || value['documentTitle'] === undefined) return false;
     if (!('authoringSocieties' in value) || value['authoringSocieties'] === undefined) return false;
     if (!('link' in value) || value['link'] === undefined) return false;
@@ -73,7 +66,6 @@ export function GuidelineMetadataFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'guideId': json['guide_id'],
         'documentTitle': json['document_title'],
         'authoringSocieties': json['authoring_societies'],
         'link': json['link'],
@@ -87,7 +79,6 @@ export function GuidelineMetadataToJSON(value?: GuidelineMetadata | null): any {
     }
     return {
         
-        'guide_id': value['guideId'],
         'document_title': value['documentTitle'],
         'authoring_societies': value['authoringSocieties'],
         'link': value['link'],

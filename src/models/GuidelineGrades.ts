@@ -14,7 +14,7 @@
 
 import { mapValues } from '../runtime';
 /**
- * GuidelineGrades
+ * Guideline recommendation grades.
  * @export
  * @interface GuidelineGrades
  */

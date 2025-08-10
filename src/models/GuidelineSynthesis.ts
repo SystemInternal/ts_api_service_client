@@ -21,7 +21,7 @@ import {
 } from './Reference';
 
 /**
- * GuidelineSynthesis
+ * Guideline synthesis output.
  * @export
  * @interface GuidelineSynthesis
  */
