@@ -1,6 +1,11 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './Author';
+export * from './ClusterInfo';
+export * from './ClusterMember';
+export * from './ClusterSearchResponse';
+export * from './ClusterStudiesResponse';
+export * from './ClusterStudy';
 export * from './CypherError';
 export * from './CypherNodeSchema';
 export * from './CypherProperty';
@@ -12,6 +17,7 @@ export * from './FindingType';
 export * from './Flag';
 export * from './FlagInput';
 export * from './Graph';
+export * from './GroundingRoute';
 export * from './GuidelineGrades';
 export * from './GuidelineMetadata';
 export * from './GuidelinePollingStatus';
@@ -59,3 +65,5 @@ export * from './TopicRole';
 export * from './ValidationError';
 export * from './ValidationErrorLocInner';
 export * from './Variable';
+export * from './VariableCluster';
+export * from './VariableClusterDetail';

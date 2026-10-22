@@ -3,6 +3,7 @@
 export * from './GraphApi';
 export * from './GuidelinesApi';
 export * from './MechanisticFindingsApi';
+export * from './OVIApi';
 export * from './RelationshipsApi';
 export * from './StatisticalFindingsApi';
 export * from './StudiesApi';

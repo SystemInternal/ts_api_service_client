@@ -5,6 +5,7 @@ package.json
 src/apis/GraphApi.ts
 src/apis/GuidelinesApi.ts
 src/apis/MechanisticFindingsApi.ts
+src/apis/OVIApi.ts
 src/apis/RelationshipsApi.ts
 src/apis/StatisticalFindingsApi.ts
 src/apis/StudiesApi.ts
@@ -14,6 +15,11 @@ src/apis/VariablesApi.ts
 src/apis/index.ts
 src/index.ts
 src/models/Author.ts
+src/models/ClusterInfo.ts
+src/models/ClusterMember.ts
+src/models/ClusterSearchResponse.ts
+src/models/ClusterStudiesResponse.ts
+src/models/ClusterStudy.ts
 src/models/CypherError.ts
 src/models/CypherNodeSchema.ts
 src/models/CypherProperty.ts
@@ -25,6 +31,7 @@ src/models/FindingType.ts
 src/models/Flag.ts
 src/models/FlagInput.ts
 src/models/Graph.ts
+src/models/GroundingRoute.ts
 src/models/GuidelineGrades.ts
 src/models/GuidelineMetadata.ts
 src/models/GuidelinePollingStatus.ts
@@ -72,6 +79,8 @@ src/models/TopicRole.ts
 src/models/ValidationError.ts
 src/models/ValidationErrorLocInner.ts
 src/models/Variable.ts
+src/models/VariableCluster.ts
+src/models/VariableClusterDetail.ts
 src/models/index.ts
 src/runtime.ts
 tsconfig.esm.json
