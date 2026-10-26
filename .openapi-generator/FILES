@@ -81,6 +81,7 @@ src/models/ValidationErrorLocInner.ts
 src/models/Variable.ts
 src/models/VariableCluster.ts
 src/models/VariableClusterDetail.ts
+src/models/VariableTopic.ts
 src/models/index.ts
 src/runtime.ts
 tsconfig.esm.json

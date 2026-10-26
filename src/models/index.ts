@@ -67,3 +67,4 @@ export * from './ValidationErrorLocInner';
 export * from './Variable';
 export * from './VariableCluster';
 export * from './VariableClusterDetail';
+export * from './VariableTopic';

@@ -13,12 +13,12 @@
  */
 
 import { mapValues } from '../runtime';
-import type { Topic } from './Topic';
+import type { VariableTopic } from './VariableTopic';
 import {
-    TopicFromJSON,
-    TopicFromJSONTyped,
-    TopicToJSON,
-} from './Topic';
+    VariableTopicFromJSON,
+    VariableTopicFromJSONTyped,
+    VariableTopicToJSON,
+} from './VariableTopic';
 
 /**
  * Variable.
@@ -46,10 +46,10 @@ export interface Variable {
     numStudies?: number | null;
     /**
      * 
-     * @type {Topic}
+     * @type {VariableTopic}
      * @memberof Variable
      */
-    topic?: Topic | null;
+    topic?: VariableTopic | null;
 }
 
 /**
@@ -73,7 +73,7 @@ export function VariableFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'id': json['id'],
         'name': json['name'] == null ? undefined : json['name'],
         'numStudies': json['num_studies'] == null ? undefined : json['num_studies'],
-        'topic': json['topic'] == null ? undefined : TopicFromJSON(json['topic']),
+        'topic': json['topic'] == null ? undefined : VariableTopicFromJSON(json['topic']),
     };
 }
 
@@ -86,7 +86,7 @@ export function VariableToJSON(value?: Variable | null): any {
         'id': value['id'],
         'name': value['name'],
         'num_studies': value['numStudies'],
-        'topic': TopicToJSON(value['topic']),
+        'topic': VariableTopicToJSON(value['topic']),
     };
 }
 
