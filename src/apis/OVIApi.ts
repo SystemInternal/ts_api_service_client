@@ -50,6 +50,12 @@ export interface FetchVariableClusterV0OviVariablesVariableIdClusterGetRequest {
     variableId: string;
 }
 
+export interface FetchVariableStudiesV0OviVariablesVariableIdStudiesGetRequest {
+    variableId: string;
+    offset?: number;
+    limit?: number;
+}
+
 /**
  * 
  */
@@ -201,6 +207,53 @@ export class OVIApi extends runtime.BaseAPI {
      */
     async fetchVariableClusterV0OviVariablesVariableIdClusterGet(requestParameters: FetchVariableClusterV0OviVariablesVariableIdClusterGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ClusterInfo> {
         const response = await this.fetchVariableClusterV0OviVariablesVariableIdClusterGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Get citation-ranked studies for the variable itself (its statistical and mechanistic findings), paged and counted server-side like the cluster\'s.
+     * Fetch Variable Studies
+     */
+    async fetchVariableStudiesV0OviVariablesVariableIdStudiesGetRaw(requestParameters: FetchVariableStudiesV0OviVariablesVariableIdStudiesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ClusterStudiesResponse>> {
+        if (requestParameters['variableId'] == null) {
+            throw new runtime.RequiredError(
+                'variableId',
+                'Required parameter "variableId" was null or undefined when calling fetchVariableStudiesV0OviVariablesVariableIdStudiesGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['offset'] != null) {
+            queryParameters['offset'] = requestParameters['offset'];
+        }
+
+        if (requestParameters['limit'] != null) {
+            queryParameters['limit'] = requestParameters['limit'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["x-api-key"] = await this.configuration.apiKey("x-api-key"); // APIKeyHeader authentication
+        }
+
+        const response = await this.request({
+            path: `/v0/ovi/variables/{variable_id}/studies`.replace(`{${"variable_id"}}`, encodeURIComponent(String(requestParameters['variableId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ClusterStudiesResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Get citation-ranked studies for the variable itself (its statistical and mechanistic findings), paged and counted server-side like the cluster\'s.
+     * Fetch Variable Studies
+     */
+    async fetchVariableStudiesV0OviVariablesVariableIdStudiesGet(requestParameters: FetchVariableStudiesV0OviVariablesVariableIdStudiesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ClusterStudiesResponse> {
+        const response = await this.fetchVariableStudiesV0OviVariablesVariableIdStudiesGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
